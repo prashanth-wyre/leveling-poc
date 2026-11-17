@@ -1,0 +1,1433 @@
+{
+  "package": "32.90",
+  "name": "Landscaping and Irrigation",
+  "source_workbook_tab": "32.90",
+  "cmgc_estimate": {
+    "total": 220269.0,
+    "lines": [
+      {
+        "description": "Flagpole",
+        "qty": 1.0,
+        "unit": "ea",
+        "value": 18979.93
+      },
+      {
+        "description": "Backfilling & Grading",
+        "qty": 1.0,
+        "unit": "ls",
+        "value": 6853.86
+      },
+      {
+        "description": "Drainage Rock at Site Planter / Retaining Walls",
+        "qty": 1.0,
+        "unit": "ls",
+        "value": 2583.38
+      },
+      {
+        "description": "Silva Cell Modular Suspended Pavement System",
+        "qty": 2.0,
+        "unit": "ea",
+        "value": 29656.13
+      },
+      {
+        "description": "Brick Pavers",
+        "qty": 1140.0,
+        "unit": "sf",
+        "value": 36061.86
+      },
+      {
+        "description": "Site Bench",
+        "qty": 2.0,
+        "unit": "ea",
+        "value": 9600.68
+      },
+      {
+        "description": "Bike Racks",
+        "qty": 9.0,
+        "unit": "ea",
+        "value": 3795.99
+      },
+      {
+        "description": "New Irrigation",
+        "qty": 13250.0,
+        "unit": "sf",
+        "value": 19660.04
+      },
+      {
+        "description": "Irrigation Sleeves",
+        "qty": 1.0,
+        "unit": "ls",
+        "value": 10544.4
+      },
+      {
+        "description": "Tree Protection Fence",
+        "qty": 120.0,
+        "unit": "lf",
+        "value": 5061.31
+      },
+      {
+        "description": "Additional Maintenance",
+        "qty": 1.0,
+        "unit": "yr",
+        "value": 4006.87
+      },
+      {
+        "description": "Importing of New Topsoil",
+        "qty": 1.0,
+        "unit": "ls",
+        "value": 2267.05
+      },
+      {
+        "description": "Mineral Mulch",
+        "qty": 19.0,
+        "unit": "cy",
+        "value": 5272.2
+      },
+      {
+        "description": "Ground Cover & Wood Mulch",
+        "qty": 4662.0,
+        "unit": "sf",
+        "value": 4539.37
+      },
+      {
+        "description": "Weed Barrier Fabric",
+        "qty": 242.0,
+        "unit": ".sf",
+        "value": 2108.88
+      },
+      {
+        "description": "Sod",
+        "qty": 1658.0,
+        "unit": "sf",
+        "value": 1346.52
+      },
+      {
+        "description": "Seed Stabilization",
+        "qty": 1.0,
+        "unit": "ls",
+        "value": 10312.0
+      },
+      {
+        "description": "Ornamental Grass / Perennial",
+        "qty": 122.0,
+        "unit": "ea",
+        "value": 4681.72
+      },
+      {
+        "description": "Landscape Edger",
+        "qty": 1.0,
+        "unit": "ls",
+        "value": 474.5
+      },
+      {
+        "description": "Shrub",
+        "qty": 168.0,
+        "unit": "ea",
+        "value": 11514.49
+      },
+      {
+        "description": "New Trees",
+        "qty": 45.0,
+        "unit": "ea",
+        "value": 30947.82
+      }
+    ]
+  },
+  "formulas": {
+    "base_bid_value": "sub_bid_as_submitted + gc_plug_total",
+    "subcontract_value": "base_bid_value + textura",
+    "total_package_value": "subcontract_value + sales_tax + sdi",
+    "variance": "total_package_value - cmgc_estimate.total"
+  },
+  "bidders": [
+    {
+      "company": "The Tree And Landscape Company",
+      "workbook_block": "D",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 750000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": null
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "Tree and Landscape Co - 32.90 Bid Form.xlsx",
+          "format": "xlsx",
+          "date": "2025-11-18",
+          "role": "current bid",
+          "total_as_written": 366791.49
+        }
+      ],
+      "responsive": true,
+      "clarification": {
+        "sent": "2025-11-19",
+        "responded": true,
+        "summary": "Bench 4.7 not found on drawings, not priced. Silva Cell priced at 6 trees."
+      },
+      "lines": [
+        {
+          "workbook_row": 37,
+          "scope_item": "0.3 - Flag Pole",
+          "bidder_description": "0.3 - Flag Pole",
+          "qty": 1.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 9944.86
+        },
+        {
+          "workbook_row": 38,
+          "scope_item": "4.1 - Park Bench with Backrest and Dividers",
+          "bidder_description": "4.1 - Park Bench with Backrest and Dividers",
+          "qty": 1.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 26175.43
+        },
+        {
+          "workbook_row": 39,
+          "scope_item": "4.2 - Park Bench with Backrest and Integrated Table \nand USB Charging",
+          "bidder_description": "4.2 - Park Bench with Backrest and Integrated Table",
+          "qty": 2.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 12913.5
+        },
+        {
+          "workbook_row": 40,
+          "scope_item": "4.3 \u2013 Park Stool",
+          "bidder_description": "4.3 - Park Stool",
+          "qty": 11.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 22836.58
+        },
+        {
+          "workbook_row": 41,
+          "scope_item": "4.4 \u2013 Stone Bench",
+          "bidder_description": "4.4 - Stone Bench",
+          "qty": 9.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 17895.04
+        },
+        {
+          "workbook_row": 42,
+          "scope_item": "4.5 \u2013 Bike Rack",
+          "bidder_description": "4.5 - Bike Rack",
+          "qty": 7.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 6081.8
+        },
+        {
+          "workbook_row": 43,
+          "scope_item": "4.6 \u2013 Litter Receptacle",
+          "bidder_description": "4.6 - Litter Receptacle",
+          "qty": 2.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 7912.96
+        },
+        {
+          "workbook_row": 48,
+          "scope_item": "0.6 - Silva Cell Field System",
+          "bidder_description": "0.6 - Silva Cell Field System",
+          "qty": 6.0,
+          "unit": "TREES",
+          "unit_price": 4082.22,
+          "amount": 24493.31
+        },
+        {
+          "workbook_row": 50,
+          "scope_item": "5.1 - Deciduous Trees",
+          "bidder_description": "5.1 - Deciduous Trees",
+          "qty": 40.0,
+          "unit": null,
+          "unit_price": null,
+          "amount": 35642.47
+        },
+        {
+          "workbook_row": 51,
+          "scope_item": "5.13 - Evergreen Trees",
+          "bidder_description": "5.13 - Evergreen Trees",
+          "qty": 6.0,
+          "unit": null,
+          "unit_price": null,
+          "amount": 11515.0
+        },
+        {
+          "workbook_row": 52,
+          "scope_item": "5.4 - Shrubs",
+          "bidder_description": "5.4 - Shrubs",
+          "qty": 190.0,
+          "unit": null,
+          "unit_price": null,
+          "amount": 15147.5
+        },
+        {
+          "workbook_row": 53,
+          "scope_item": "5.5 - Grasses/Perennials/Vines",
+          "bidder_description": "5.5 - Grasses / Perennials / Vines",
+          "qty": 192.0,
+          "unit": null,
+          "unit_price": null,
+          "amount": 7694.95
+        },
+        {
+          "workbook_row": 54,
+          "scope_item": "5.6 - Mineral Mulch over Weed Barrier Fabric",
+          "bidder_description": "5.6 - Mineral Mulch over Weed Barrier Fabric",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 10296.97
+        },
+        {
+          "workbook_row": 55,
+          "scope_item": "5.7 - Mexican Beach Cobble",
+          "bidder_description": "5.7 - Mexican Beach Cobble",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 736.72
+        },
+        {
+          "workbook_row": 56,
+          "scope_item": "5.8 - Wood Mulch",
+          "bidder_description": "5.8 - Wood Mulch",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 7566.88
+        },
+        {
+          "workbook_row": 57,
+          "scope_item": "5.11 - Sod",
+          "bidder_description": "5.11 - Sod",
+          "qty": 4300.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 13056.1
+        },
+        {
+          "workbook_row": 58,
+          "scope_item": "5.12 - Landscape Edger",
+          "bidder_description": "5.12 - Landscape Edger",
+          "qty": 40.0,
+          "unit": "LF",
+          "unit_price": null,
+          "amount": 1648.4
+        },
+        {
+          "workbook_row": 62,
+          "scope_item": "Irrigation System",
+          "bidder_description": "Irrigation System",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 42940.63
+        },
+        {
+          "workbook_row": 63,
+          "scope_item": "Irrigation Sleeving",
+          "bidder_description": "Irrigation Sleeving",
+          "qty": 160.0,
+          "unit": "LF",
+          "unit_price": null,
+          "amount": 8374.4
+        },
+        {
+          "workbook_row": 67,
+          "scope_item": "1.1 \u2013 Unit Pavers",
+          "bidder_description": "1.1 - Unit Pavers",
+          "qty": 2415.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 74171.31
+        },
+        {
+          "workbook_row": 72,
+          "scope_item": "5.9 \u2013 Tree Protection Fence",
+          "bidder_description": "5.9 - Tree Protection Fence",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 9746.68
+        },
+        {
+          "workbook_row": 79,
+          "scope_item": "Soil amendments & fertilizers as needed",
+          "bidder_description": "Soil amendments and fertilizers as needed",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included"
+        },
+        {
+          "workbook_row": 80,
+          "scope_item": "Seed stabilization",
+          "bidder_description": "Seed stabilization",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "No Hydroseed on project"
+        },
+        {
+          "workbook_row": 81,
+          "scope_item": "Topsoil",
+          "bidder_description": "Topsoil",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "included"
+        },
+        {
+          "workbook_row": 83,
+          "scope_item": "Backfilling & Grading of topsoil",
+          "bidder_description": "Backfilling and grading of topsoil",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included"
+        }
+      ],
+      "tax_treatment": "excluded",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [],
+      "exclusions": [
+        "4.7 Park Bench with Dividers - not located on drawings",
+        "One year additional maintenance",
+        "Drainage rock at site planter / retaining walls",
+        "Seed stabilization / hydroseed",
+        "Sales tax"
+      ],
+      "warranty": {
+        "offered": [
+          "1-year plant replacement warranty, excluding winter kill and wildlife browse",
+          "1-year irrigation warranty",
+          "2-year warranty on unit pavers"
+        ],
+        "meets_minimum": false
+      },
+      "bid_validity_days": 60,
+      "addenda_acknowledged": [
+        "Addendum 01"
+      ],
+      "expected_flags": [
+        "Park Bench 4.7 not priced - $15,000 inferred CM/GC plug",
+        "Silva Cell priced at 6 trees ($24,493) - $60,000 Silva Cell contingency inferred CM/GC plug",
+        "Additional maintenance year and drainage rock excluded",
+        "Plant warranty excludes winter kill (below minimum)",
+        "Bike racks: 7 (Trail Creek prices 6; DD estimate carried 9)"
+      ],
+      "sub_bid_as_submitted": 366791.49,
+      "gc_plugs": [
+        {
+          "row": 44,
+          "scope_item": "4.7 \u2013 Park Bench with Dividers",
+          "amt": 15000.0,
+          "basis": "inferred from workbook values"
+        },
+        {
+          "row": 49,
+          "scope_item": "Silva Cell Contingency",
+          "amt": 60000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 75000.0,
+      "base_bid_value": 441791.49,
+      "textura": 974.08,
+      "subcontract_value": 442765.57,
+      "sales_tax": 0.0,
+      "sdi": 6420.1,
+      "total_package_value": 449185.68,
+      "variance": 228916.68,
+      "variance_pct": 103.9
+    },
+    {
+      "company": "Wyoming Landscape Maintenance",
+      "workbook_block": "I",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 750000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": null
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "WLM Proposal - Teton County Justice Center Landscape.pdf",
+          "format": "pdf",
+          "date": "2025-11-17",
+          "role": "current bid",
+          "total_as_written": 546684.63
+        }
+      ],
+      "responsive": true,
+      "clarification": null,
+      "lines": [
+        {
+          "workbook_row": 37,
+          "scope_item": "0.3 - Flag Pole",
+          "bidder_description": "Flag Pole",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 22600.32
+        },
+        {
+          "workbook_row": 38,
+          "scope_item": "4.1 - Park Bench with Backrest and Dividers",
+          "bidder_description": "Park Bench with Backrest and Dividers",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 5007.99
+        },
+        {
+          "workbook_row": 39,
+          "scope_item": "4.2 - Park Bench with Backrest and Integrated Table \nand USB Charging",
+          "bidder_description": "Park Bench with Backrest and Integrated Table",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 10488.58
+        },
+        {
+          "workbook_row": 40,
+          "scope_item": "4.3 \u2013 Park Stool",
+          "bidder_description": "Park Stool",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 19490.56
+        },
+        {
+          "workbook_row": 41,
+          "scope_item": "4.4 \u2013 Stone Bench",
+          "bidder_description": "Stone Bench",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 12141.19
+        },
+        {
+          "workbook_row": 42,
+          "scope_item": "4.5 \u2013 Bike Rack",
+          "bidder_description": "Bike Rack",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 13266.6
+        },
+        {
+          "workbook_row": 43,
+          "scope_item": "4.6 \u2013 Litter Receptacle",
+          "bidder_description": "Trash receptacles",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 5672.74
+        },
+        {
+          "workbook_row": 44,
+          "scope_item": "4.7 \u2013 Park Bench with Dividers",
+          "bidder_description": "Park Bench with Dividers",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 4141.79
+        },
+        {
+          "workbook_row": 48,
+          "scope_item": "0.6 - Silva Cell Field System",
+          "bidder_description": "Silva Cell Field System",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 59656.88
+        },
+        {
+          "workbook_row": 50,
+          "scope_item": "5.1 - Deciduous Trees",
+          "bidder_description": "Deciduous Trees",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 49070.41
+        },
+        {
+          "workbook_row": 51,
+          "scope_item": "5.13 - Evergreen Trees",
+          "bidder_description": "Evergreen Trees",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 9699.4
+        },
+        {
+          "workbook_row": 52,
+          "scope_item": "5.4 - Shrubs",
+          "bidder_description": "Shrubs",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 12550.23
+        },
+        {
+          "workbook_row": 53,
+          "scope_item": "5.5 - Grasses/Perennials/Vines",
+          "bidder_description": "Ornamental grasses, perennials and vines",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 46986.09
+        },
+        {
+          "workbook_row": 54,
+          "scope_item": "5.6 - Mineral Mulch over Weed Barrier Fabric",
+          "bidder_description": "Mineral Mulch over Weed Barrier Fabric",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 5483.83
+        },
+        {
+          "workbook_row": 55,
+          "scope_item": "5.7 - Mexican Beach Cobble",
+          "bidder_description": "Mexican Beach Cobble",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 1983.48
+        },
+        {
+          "workbook_row": 56,
+          "scope_item": "5.8 - Wood Mulch",
+          "bidder_description": "Wood Mulch",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 7931.45
+        },
+        {
+          "workbook_row": 57,
+          "scope_item": "5.11 - Sod",
+          "bidder_description": "Turf sod",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 29127.31
+        },
+        {
+          "workbook_row": 58,
+          "scope_item": "5.12 - Landscape Edger",
+          "bidder_description": "Landscape Edger",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 940.0
+        },
+        {
+          "workbook_row": 62,
+          "scope_item": "Irrigation System",
+          "bidder_description": "Irrigation system, complete",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 66922.37
+        },
+        {
+          "workbook_row": 63,
+          "scope_item": "Irrigation Sleeving",
+          "bidder_description": "Irrigation Sleeving",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included"
+        },
+        {
+          "workbook_row": 67,
+          "scope_item": "1.1 \u2013 Unit Pavers",
+          "bidder_description": "Unit Pavers",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 148718.97
+        },
+        {
+          "workbook_row": 68,
+          "scope_item": "1.4 \u2013 Herrinbone Brick Pattern",
+          "bidder_description": "Herringbone Brick Pattern",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included above"
+        },
+        {
+          "workbook_row": 69,
+          "scope_item": "1.5 \u2013 Edge restraint at columns",
+          "bidder_description": "Edge Restraint at Columns",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included with Mexican cobble"
+        },
+        {
+          "workbook_row": 72,
+          "scope_item": "5.9 \u2013 Tree Protection Fence",
+          "bidder_description": "Tree Protection Fence",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 1717.0
+        },
+        {
+          "workbook_row": 75,
+          "scope_item": "Supervision & Mobilization",
+          "bidder_description": "Supervision and Mobilization",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 13087.44
+        },
+        {
+          "workbook_row": 80,
+          "scope_item": "Seed stabilization",
+          "bidder_description": "Seed stabilization",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "No Hydroseed on project"
+        }
+      ],
+      "tax_treatment": "silent",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [],
+      "exclusions": [
+        "Seed stabilization / hydroseed",
+        "Winter watering",
+        "Rock excavation",
+        "Additional maintenance beyond the warranty period"
+      ],
+      "warranty": {
+        "offered": [
+          "2-year plant replacement warranty",
+          "2-year irrigation warranty including winterization and spring start-up",
+          "2-year warranty on unit pavers"
+        ],
+        "meets_minimum": true
+      },
+      "bid_validity_days": 60,
+      "addenda_acknowledged": [
+        "Addendum 01"
+      ],
+      "expected_flags": [
+        "Highest bid",
+        "No quantities given",
+        "Unit pavers ($148,719) more than double other bidders",
+        "Adds its own Supervision and Mobilization line ($13,087.44)",
+        "Warranty exceeds minimum",
+        "Tax status not stated"
+      ],
+      "sub_bid_as_submitted": 546684.63,
+      "gc_plugs": [],
+      "gc_plug_total": 0,
+      "base_bid_value": 546684.63,
+      "textura": 1205.36,
+      "subcontract_value": 547889.99,
+      "sales_tax": 0.0,
+      "sdi": 7944.4,
+      "total_package_value": 555834.39,
+      "variance": 335565.39,
+      "variance_pct": 152.3
+    },
+    {
+      "company": "Trail Creek Nursery Inc.",
+      "workbook_block": "N",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 1000000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": null
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "Trail Creek Nursery bid - TCJC landscape & irrigation.docx",
+          "format": "docx",
+          "date": "2025-11-18",
+          "role": "current bid",
+          "total_as_written": 277000.0
+        }
+      ],
+      "responsive": true,
+      "clarification": {
+        "sent": "2025-11-19",
+        "responded": true,
+        "summary": "All confirmed included. Silva Cell design not final; contingency recommended."
+      },
+      "lines": [
+        {
+          "workbook_row": 37,
+          "scope_item": "0.3 - Flag Pole",
+          "bidder_description": "Flag Pole (legend item 0.3)",
+          "qty": 1.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 3200.0
+        },
+        {
+          "workbook_row": 38,
+          "scope_item": "4.1 - Park Bench with Backrest and Dividers",
+          "bidder_description": "Park Bench with Backrest and Dividers (legend item 4.1)",
+          "qty": 1.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 5366.0
+        },
+        {
+          "workbook_row": 39,
+          "scope_item": "4.2 - Park Bench with Backrest and Integrated Table \nand USB Charging",
+          "bidder_description": "Park Bench with Backrest and Integrated Table (legend item 4.2)",
+          "qty": 2.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 14360.0
+        },
+        {
+          "workbook_row": 40,
+          "scope_item": "4.3 \u2013 Park Stool",
+          "bidder_description": "Park Stool (legend item 4.3)",
+          "qty": 11.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 19074.0
+        },
+        {
+          "workbook_row": 41,
+          "scope_item": "4.4 \u2013 Stone Bench",
+          "bidder_description": "Stone Bench (legend item 4.4)",
+          "qty": 9.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 9000.0
+        },
+        {
+          "workbook_row": 42,
+          "scope_item": "4.5 \u2013 Bike Rack",
+          "bidder_description": "Bike Rack (legend item 4.5)",
+          "qty": 6.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 3600.0
+        },
+        {
+          "workbook_row": 43,
+          "scope_item": "4.6 \u2013 Litter Receptacle",
+          "bidder_description": "Litter Receptacle (legend item 4.6)",
+          "qty": 2.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 5632.0
+        },
+        {
+          "workbook_row": 44,
+          "scope_item": "4.7 \u2013 Park Bench with Dividers",
+          "bidder_description": "Park Bench with Dividers (legend item 4.7)",
+          "qty": 1.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 5548.0
+        },
+        {
+          "workbook_row": 45,
+          "scope_item": "Global trade fee, Shipping & Handling",
+          "bidder_description": "Global trade fee, shipping and handling",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 11031.0
+        },
+        {
+          "workbook_row": 48,
+          "scope_item": "0.6 - Silva Cell Field System",
+          "bidder_description": "Silva Cell Field System (legend item 0.6)",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 28125.0
+        },
+        {
+          "workbook_row": 50,
+          "scope_item": "5.1 - Deciduous Trees",
+          "bidder_description": "Deciduous Trees (legend item 5.1)",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 25300.0
+        },
+        {
+          "workbook_row": 51,
+          "scope_item": "5.13 - Evergreen Trees",
+          "bidder_description": "Evergreen Trees (legend item 5.13)",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 5700.0
+        },
+        {
+          "workbook_row": 52,
+          "scope_item": "5.4 - Shrubs",
+          "bidder_description": "Shrubs (legend item 5.4)",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 12800.0
+        },
+        {
+          "workbook_row": 53,
+          "scope_item": "5.5 - Grasses/Perennials/Vines",
+          "bidder_description": "Grasses / Perennials / Vines (legend item 5.5)",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 3740.0
+        },
+        {
+          "workbook_row": 54,
+          "scope_item": "5.6 - Mineral Mulch over Weed Barrier Fabric",
+          "bidder_description": "Mineral Mulch over Weed Barrier Fabric (legend item 5.6)",
+          "qty": 21.0,
+          "unit": "CY",
+          "unit_price": null,
+          "amount": 2730.0
+        },
+        {
+          "workbook_row": 55,
+          "scope_item": "5.7 - Mexican Beach Cobble",
+          "bidder_description": "Mexican Beach Cobble (legend item 5.7)",
+          "qty": 3.0,
+          "unit": "CY",
+          "unit_price": null,
+          "amount": 600.0
+        },
+        {
+          "workbook_row": 56,
+          "scope_item": "5.8 - Wood Mulch",
+          "bidder_description": "Wood Mulch (legend item 5.8)",
+          "qty": 45.0,
+          "unit": "CY",
+          "unit_price": null,
+          "amount": 4725.0
+        },
+        {
+          "workbook_row": 57,
+          "scope_item": "5.11 - Sod",
+          "bidder_description": "Sod (legend item 5.11)",
+          "qty": 4000.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 3000.0
+        },
+        {
+          "workbook_row": 58,
+          "scope_item": "5.12 - Landscape Edger",
+          "bidder_description": "Landscape Edger (legend item 5.12)",
+          "qty": 40.0,
+          "unit": "LF",
+          "unit_price": null,
+          "amount": 600.0
+        },
+        {
+          "workbook_row": 62,
+          "scope_item": "Irrigation System",
+          "bidder_description": "Irrigation System",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 18145.0
+        },
+        {
+          "workbook_row": 63,
+          "scope_item": "Irrigation Sleeving",
+          "bidder_description": "Irrigation Sleeving",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 3500.0
+        },
+        {
+          "workbook_row": 67,
+          "scope_item": "1.1 \u2013 Unit Pavers",
+          "bidder_description": "Unit Pavers (legend item 1.1)",
+          "qty": 2150.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 64500.0
+        },
+        {
+          "workbook_row": 68,
+          "scope_item": "1.4 \u2013 Herrinbone Brick Pattern",
+          "bidder_description": "Herringbone Brick Pattern (legend item 1.4)",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included Above"
+        },
+        {
+          "workbook_row": 69,
+          "scope_item": "1.5 \u2013 Edge restraint at columns",
+          "bidder_description": "Edge Restraint at Columns (legend item 1.5)",
+          "qty": 68.0,
+          "unit": "LF",
+          "unit_price": null,
+          "amount": 1224.0
+        },
+        {
+          "workbook_row": 72,
+          "scope_item": "5.9 \u2013 Tree Protection Fence",
+          "bidder_description": "Tree Protection Fence (legend item 5.9)",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 4500.0
+        },
+        {
+          "workbook_row": 76,
+          "scope_item": "Mobilization and Grading",
+          "bidder_description": "Mobilization and Grading",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 17000.0
+        },
+        {
+          "workbook_row": 78,
+          "scope_item": "1 yr addtl maintenance",
+          "bidder_description": "One (1) year additional maintenance",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 4000.0
+        },
+        {
+          "workbook_row": 79,
+          "scope_item": "Soil amendments & fertilizers as needed",
+          "bidder_description": "Soil amendments and fertilizers as needed",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included in price"
+        },
+        {
+          "workbook_row": 80,
+          "scope_item": "Seed stabilization",
+          "bidder_description": "Seed stabilization",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included in price"
+        },
+        {
+          "workbook_row": 81,
+          "scope_item": "Topsoil",
+          "bidder_description": "Topsoil",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included in line items"
+        },
+        {
+          "workbook_row": 82,
+          "scope_item": "Drainage rock at site planter/retaining walls",
+          "bidder_description": "Drainage rock at site planter / retaining walls",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included in Bid"
+        },
+        {
+          "workbook_row": 83,
+          "scope_item": "Backfilling & Grading of topsoil",
+          "bidder_description": "Backfilling and grading of topsoil",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included in bid under fine grade"
+        }
+      ],
+      "tax_treatment": "excluded",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [],
+      "exclusions": [
+        "Sales tax",
+        "Silva Cell quantities beyond those priced"
+      ],
+      "warranty": {
+        "offered": [
+          "1-year plant replacement warranty from Substantial Completion, no exclusions",
+          "1-year irrigation warranty including first winterization and spring start-up",
+          "2-year warranty on unit pavers",
+          "Manufacturer's standard warranty on site furnishings (3 years)"
+        ],
+        "meets_minimum": true
+      },
+      "bid_validity_days": 60,
+      "addenda_acknowledged": [
+        "Addendum 01"
+      ],
+      "expected_flags": [
+        "Adds its own lines: shipping and handling ($11,031), mobilization and grading ($17,000), additional maintenance year ($4,000)",
+        "$60,000 Silva Cell contingency is a CM/GC plug (workbook category 52)",
+        "Bike racks: 6 vs 7 by another bidder",
+        "Lowest leveled total; recommended in workbook"
+      ],
+      "sub_bid_as_submitted": 277000.0,
+      "gc_plugs": [
+        {
+          "row": 49,
+          "scope_item": "Silva Cell Contingency",
+          "amt": 60000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 60000.0,
+      "base_bid_value": 337000.0,
+      "textura": 743.03,
+      "subcontract_value": 337743.03,
+      "sales_tax": 0.0,
+      "sdi": 4897.27,
+      "total_package_value": 342640.31,
+      "variance": 122371.31,
+      "variance_pct": 55.6
+    },
+    {
+      "company": "Outback Landscape",
+      "workbook_block": "S",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 1000000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": null
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "OUTBACK LANDSCAPE - TCJC ESTIMATE.xlsx",
+          "format": "xlsx",
+          "date": "2025-11-18",
+          "role": "current bid",
+          "total_as_written": 459361.41
+        }
+      ],
+      "responsive": true,
+      "clarification": null,
+      "lines": [
+        {
+          "workbook_row": 37,
+          "scope_item": "0.3 - Flag Pole",
+          "bidder_description": "FLAG POLE",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 12740.88
+        },
+        {
+          "workbook_row": 38,
+          "scope_item": "4.1 - Park Bench with Backrest and Dividers",
+          "bidder_description": "PARK BENCH WITH BACKREST AND DIVIDERS",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 10527.23
+        },
+        {
+          "workbook_row": 39,
+          "scope_item": "4.2 - Park Bench with Backrest and Integrated Table \nand USB Charging",
+          "bidder_description": "PARK BENCH WITH BACKREST AND INTEGRATED TABLE",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 15324.05
+        },
+        {
+          "workbook_row": 40,
+          "scope_item": "4.3 \u2013 Park Stool",
+          "bidder_description": "PARK STOOL",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 32817.56
+        },
+        {
+          "workbook_row": 41,
+          "scope_item": "4.4 \u2013 Stone Bench",
+          "bidder_description": "STONE BENCH",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 23846.66
+        },
+        {
+          "workbook_row": 42,
+          "scope_item": "4.5 \u2013 Bike Rack",
+          "bidder_description": "BIKE RACK",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 11255.38
+        },
+        {
+          "workbook_row": 43,
+          "scope_item": "4.6 \u2013 Litter Receptacle",
+          "bidder_description": "LITTER RECEPTACLE",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 11849.28
+        },
+        {
+          "workbook_row": 44,
+          "scope_item": "4.7 \u2013 Park Bench with Dividers",
+          "bidder_description": "PARK BENCH WITH DIVIDERS",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 9451.72
+        },
+        {
+          "workbook_row": 48,
+          "scope_item": "0.6 - Silva Cell Field System",
+          "bidder_description": "SILVA CELL FIELD SYSTEM",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 94120.44
+        },
+        {
+          "workbook_row": 50,
+          "scope_item": "5.1 - Deciduous Trees",
+          "bidder_description": "DECIDUOUS TREES",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 27954.39
+        },
+        {
+          "workbook_row": 51,
+          "scope_item": "5.13 - Evergreen Trees",
+          "bidder_description": "EVERGREEN TREES",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 8408.36
+        },
+        {
+          "workbook_row": 52,
+          "scope_item": "5.4 - Shrubs",
+          "bidder_description": "SHRUBS",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 16178.49
+        },
+        {
+          "workbook_row": 53,
+          "scope_item": "5.5 - Grasses/Perennials/Vines",
+          "bidder_description": "GRASSES / PERENNIALS / VINES",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 7117.0
+        },
+        {
+          "workbook_row": 54,
+          "scope_item": "5.6 - Mineral Mulch over Weed Barrier Fabric",
+          "bidder_description": "MINERAL MULCH OVER WEED BARRIER FABRIC",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 7883.23
+        },
+        {
+          "workbook_row": 55,
+          "scope_item": "5.7 - Mexican Beach Cobble",
+          "bidder_description": "MEXICAN BEACH COBBLE",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 2833.17
+        },
+        {
+          "workbook_row": 56,
+          "scope_item": "5.8 - Wood Mulch",
+          "bidder_description": "WOOD MULCH",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 9629.73
+        },
+        {
+          "workbook_row": 57,
+          "scope_item": "5.11 - Sod",
+          "bidder_description": "SOD",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 5640.87
+        },
+        {
+          "workbook_row": 58,
+          "scope_item": "5.12 - Landscape Edger",
+          "bidder_description": "LANDSCAPE EDGER",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 2133.61
+        },
+        {
+          "workbook_row": 62,
+          "scope_item": "Irrigation System",
+          "bidder_description": "IRRIGATION SYSTEM",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 63222.29
+        },
+        {
+          "workbook_row": 63,
+          "scope_item": "Irrigation Sleeving",
+          "bidder_description": "IRRIGATION SLEEVING",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 5246.98
+        },
+        {
+          "workbook_row": 67,
+          "scope_item": "1.1 \u2013 Unit Pavers",
+          "bidder_description": "UNIT PAVERS",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 14636.18
+        },
+        {
+          "workbook_row": 68,
+          "scope_item": "1.4 \u2013 Herrinbone Brick Pattern",
+          "bidder_description": "HERRINGBONE BRICK PATTERN",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 58543.91
+        },
+        {
+          "workbook_row": 69,
+          "scope_item": "1.5 \u2013 Edge restraint at columns",
+          "bidder_description": "EDGE RESTRAINT AT COLUMNS",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 500.0
+        },
+        {
+          "workbook_row": 72,
+          "scope_item": "5.9 \u2013 Tree Protection Fence",
+          "bidder_description": "TREE PROTECTION FENCE",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 7500.0
+        },
+        {
+          "workbook_row": 80,
+          "scope_item": "Seed stabilization",
+          "bidder_description": "SEED STABILIZATION",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "No Hydroseed on project"
+        }
+      ],
+      "tax_treatment": "silent",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [],
+      "exclusions": [
+        "Textura or other payment system fees",
+        "Hydroseed",
+        "Winter watering"
+      ],
+      "warranty": {
+        "offered": [
+          "1-year warranty on trees and shrubs",
+          "90-day warranty on sod",
+          "1-year irrigation warranty",
+          "1-year warranty on pavers"
+        ],
+        "meets_minimum": false
+      },
+      "bid_validity_days": 30,
+      "addenda_acknowledged": [],
+      "expected_flags": [
+        "Herringbone pattern priced as its own line ($58,543.91); others include it in unit pavers",
+        "States Textura fees are not included; workbook still adds $1,012.82",
+        "Silva Cell ($94,120) far above other bidders",
+        "Sod (90 days) and paver (1 year) warranties below minimum",
+        "No quantities; no addendum acknowledgement; 30-day validity"
+      ],
+      "sub_bid_as_submitted": 459361.41,
+      "gc_plugs": [],
+      "gc_plug_total": 0,
+      "base_bid_value": 459361.41,
+      "textura": 1012.82,
+      "subcontract_value": 460374.23,
+      "sales_tax": 0.0,
+      "sdi": 6675.43,
+      "total_package_value": 467049.66,
+      "variance": 246780.66,
+      "variance_pct": 112.0
+    }
+  ],
+  "recommended_bidder": "Trail Creek Nursery Inc.",
+  "award_amount": 342640.31,
+  "rationale": "Lowest responsive, responsible bidder on Total Package Value ($342,640.31).",
+  "ranking_by_total_package_value": [
+    {
+      "company": "Trail Creek Nursery Inc.",
+      "total_package_value": 342640.31,
+      "responsive": true
+    },
+    {
+      "company": "The Tree And Landscape Company",
+      "total_package_value": 449185.68,
+      "responsive": true
+    },
+    {
+      "company": "Outback Landscape",
+      "total_package_value": 467049.66,
+      "responsive": true
+    },
+    {
+      "company": "Wyoming Landscape Maintenance",
+      "total_package_value": 555834.39,
+      "responsive": true
+    }
+  ],
+  "provenance": {
+    "from_workbook": "line amounts, quantities, unit prices, base bid value, Textura, SDI, sales tax, subcontract value, total package value, alternates, recommended bidder, UNRESPONSIVE marks, predicted safety incidents",
+    "inferred": "which lines are the bid and which are CM/GC plugs, for bidders other than the recommended one (the workbook only codes cost categories for the recommended bidder)",
+    "synthetic": [
+      "warranty",
+      "prequalification.status",
+      "prequalification.single_project_limit",
+      "prequalification.sdi_enrolled",
+      "clarification",
+      "bid validity, addenda, labor rates and mark-ups in the bid documents",
+      "bid dates and references",
+      "the split of Rodac into an original quote and a revised bid"
+    ]
+  }
+}

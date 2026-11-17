@@ -1,0 +1,30 @@
+# Plugging policy for the 20-bidder packages. SYNTHETIC.
+version: 1
+defaults:
+  plug_when:
+  - excluded
+  - not_priced
+  method: average_of_bidders
+  fallback:
+  - gc_estimate
+  comparable_pool:
+    exclude_self: true
+    exclude_unresponsive: true
+    min_pool: 2
+    outlier_trim_pct: 50
+    outlier_trim_min_pool: 3
+quantity_normalization:
+  convert_to: gc_unit
+  threshold_pct: 5.0
+  over_threshold: reextend_unit_rate_at_gc_quantity
+  within_threshold: carry_as_bid
+packages:
+  '32.90':
+    allowances_all_bidders: []
+    items: {}
+  '33.00':
+    allowances_all_bidders: []
+    items: {}
+  '32.13':
+    allowances_all_bidders: []
+    items: {}

@@ -1,0 +1,1283 @@
+{
+  "package": "09.67",
+  "name": "Fluid-Applied Flooring",
+  "note": "SYNTHETIC. GC scope items and quantities are from the TCJC workbook; bidders are fictional and their prices are designed (mostly real workbook unit rates re-quoted at altered quantities and units; some rates are invented to create specific cases).",
+  "rates": {
+    "textura_pct_of_base_bid": 0.2205,
+    "sdi_pct_of_subcontract_value": 1.45
+  },
+  "formulas": {
+    "base_bid_value": "bid_as_submitted + quantity_adjustments + plug_total + allowance_total",
+    "subcontract_value": "base_bid_value + textura",
+    "total_package_value": "subcontract_value + sdi"
+  },
+  "gc_items": [
+    {
+      "key": "PSC1",
+      "desc": "PSC-1 polished concrete",
+      "unit": "SF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 3819.0,
+      "rate": 18.1029,
+      "estimate": 69134.85
+    },
+    {
+      "key": "RN1",
+      "desc": "RN-1 resinous flooring with integral cove base",
+      "unit": "SF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 2813.0,
+      "rate": 12.3736,
+      "estimate": 34807.05
+    },
+    {
+      "key": "RN2",
+      "desc": "RN-2 resinous flooring with integral cove base",
+      "unit": "SF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 780.0,
+      "rate": 12.3736,
+      "estimate": 9651.44
+    },
+    {
+      "key": "SC1",
+      "desc": "SC-1 sealed concrete",
+      "unit": "SF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 4740.0,
+      "rate": 2.5778,
+      "estimate": 12218.97
+    },
+    {
+      "key": "SC2",
+      "desc": "SC-2 sealed concrete with liquid densifier",
+      "unit": "SF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 8790.0,
+      "rate": 2.5779,
+      "estimate": 22659.75
+    },
+    {
+      "key": "SC4",
+      "desc": "SC-4 sealed concrete with static dissipative sealant",
+      "unit": "SF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 1433.0,
+      "rate": 5.1557,
+      "estimate": 7388.09
+    },
+    {
+      "key": "TC1",
+      "desc": "TC-1 traffic coating",
+      "unit": "SF",
+      "depth": null,
+      "source": "synthetic",
+      "qty": 7430.0,
+      "rate": 8.0,
+      "estimate": 59440.0
+    },
+    {
+      "key": "MOIST",
+      "desc": "Moisture testing",
+      "unit": "LS",
+      "depth": null,
+      "source": "synthetic",
+      "qty": null,
+      "rate": null,
+      "estimate": 5000.0
+    },
+    {
+      "key": "TOP",
+      "desc": "Cement topping slab at detention showers (34/AD53)",
+      "unit": "LS",
+      "depth": null,
+      "source": "synthetic",
+      "qty": null,
+      "rate": null,
+      "estimate": 10000.0
+    }
+  ],
+  "plug_rules": {
+    "PSC1": "average_of_bidders -> gc_estimate",
+    "RN1": "average_of_bidders -> gc_estimate",
+    "RN2": "average_of_bidders -> gc_estimate",
+    "SC1": "average_of_bidders -> gc_estimate",
+    "SC2": "average_of_bidders -> gc_estimate",
+    "SC4": "average_of_bidders -> gc_estimate",
+    "TC1": "ai_market_price -> median_of_bidders -> gc_estimate",
+    "MOIST": "min_of_bidders (minimum pool 1) -> gc_estimate",
+    "TOP": "average_of_bidders -> gc_estimate"
+  },
+  "ai_status": "PENDING: 4 item(s) have no snapshot and no credentials are set; fallback methods used",
+  "bidders": [
+    {
+      "company": "Granite Peak Floor Coatings",
+      "document": "Granite Peak - Proposal Fluid Applied Flooring.pdf",
+      "format": "pdf",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "PSC1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 4975.0,
+            "unit": "SF",
+            "unit_price": 15.0,
+            "amount": 74625.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 3819.0,
+            "unit": "SF"
+          },
+          "converted_qty": 4975.0,
+          "conversion": "same unit",
+          "variance_pct": 30.27,
+          "unit_rate_in_gc_unit": 15.0,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 57285.0,
+          "adjustment": -17340.0
+        },
+        {
+          "item": "RN1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 2813.0,
+            "unit": "SF",
+            "unit_price": 13.5,
+            "amount": 37975.5,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 2813.0,
+            "unit": "SF"
+          },
+          "converted_qty": 2813.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 13.5,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 37975.5,
+          "adjustment": 0.0
+        },
+        {
+          "item": "RN2",
+          "status": "priced",
+          "as_bid": {
+            "qty": 780.0,
+            "unit": "SF",
+            "unit_price": 18.0,
+            "amount": 14040.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 780.0,
+            "unit": "SF"
+          },
+          "converted_qty": 780.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 18.0,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 14040.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SC1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 4740.0,
+            "unit": "SF",
+            "unit_price": 3.5,
+            "amount": 16590.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 4740.0,
+            "unit": "SF"
+          },
+          "converted_qty": 4740.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 3.5,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 16590.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SC2",
+          "status": "priced",
+          "as_bid": {
+            "qty": 8790.0,
+            "unit": "SF",
+            "unit_price": 3.5,
+            "amount": 30765.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 8790.0,
+            "unit": "SF"
+          },
+          "converted_qty": 8790.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 3.5,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 30765.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SC4",
+          "status": "priced",
+          "as_bid": {
+            "qty": 1433.0,
+            "unit": "SF",
+            "unit_price": 3.5,
+            "amount": 5015.5,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1433.0,
+            "unit": "SF"
+          },
+          "converted_qty": 1433.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 3.5,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 5015.5,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TC1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 7452.0,
+            "unit": "SF",
+            "unit_price": 8.5,
+            "amount": 63342.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 7430.0,
+            "unit": "SF"
+          },
+          "converted_qty": 7452.0,
+          "conversion": "same unit",
+          "variance_pct": 0.3,
+          "unit_rate_in_gc_unit": 8.5,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 63342.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "MOIST",
+          "status": "included",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": "Included",
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "included in other lines - no value",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TOP",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 10500.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 10500.0,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 252853.0,
+      "quantity_adjustments": -17340.0,
+      "plugs": [],
+      "plug_total": 0.0,
+      "allowances": [
+        {
+          "name": "Polished concrete touch-ups",
+          "amount": 25000
+        },
+        {
+          "name": "Joint sealer at sealed concrete",
+          "amount": 32000
+        }
+      ],
+      "allowance_total": 57000.0,
+      "base_bid_value": 292513.0,
+      "textura": 644.99,
+      "subcontract_value": 293157.99,
+      "sdi": 4250.79,
+      "total_package_value": 297408.78,
+      "expected_flags": [
+        "PSC1: quantity +30.3% vs GC takeoff after converting SF - re-extended, -17,340.00"
+      ]
+    },
+    {
+      "company": "Northfork Polishing & Resinous",
+      "document": "Northfork - 09.67 Bid Form.xlsx",
+      "format": "xlsx",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "PSC1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 3250.0,
+            "unit": "SF",
+            "unit_price": 20.79,
+            "amount": 67567.5,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 3819.0,
+            "unit": "SF"
+          },
+          "converted_qty": 3250.0,
+          "conversion": "same unit",
+          "variance_pct": -14.9,
+          "unit_rate_in_gc_unit": 20.79,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 79397.01,
+          "adjustment": 11829.51
+        },
+        {
+          "item": "RN1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 2813.0,
+            "unit": "SF",
+            "unit_price": 44.35,
+            "amount": 124756.55,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 2813.0,
+            "unit": "SF"
+          },
+          "converted_qty": 2813.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 44.35,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 124756.55,
+          "adjustment": 0.0
+        },
+        {
+          "item": "RN2",
+          "status": "priced",
+          "as_bid": {
+            "qty": 780.0,
+            "unit": "SF",
+            "unit_price": 49.15,
+            "amount": 38337.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 780.0,
+            "unit": "SF"
+          },
+          "converted_qty": 780.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 49.15,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 38337.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SC1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 4656.0,
+            "unit": "SF",
+            "unit_price": 7.47,
+            "amount": 34780.32,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 4740.0,
+            "unit": "SF"
+          },
+          "converted_qty": 4656.0,
+          "conversion": "same unit",
+          "variance_pct": -1.77,
+          "unit_rate_in_gc_unit": 7.47,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 34780.32,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SC2",
+          "status": "priced",
+          "as_bid": {
+            "qty": 8588.0,
+            "unit": "SF",
+            "unit_price": 5.05,
+            "amount": 43369.4,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 8790.0,
+            "unit": "SF"
+          },
+          "converted_qty": 8588.0,
+          "conversion": "same unit",
+          "variance_pct": -2.3,
+          "unit_rate_in_gc_unit": 5.05,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 43369.4,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SC4",
+          "status": "priced",
+          "as_bid": {
+            "qty": 1451.0,
+            "unit": "SF",
+            "unit_price": 11.65,
+            "amount": 16904.15,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1433.0,
+            "unit": "SF"
+          },
+          "converted_qty": 1451.0,
+          "conversion": "same unit",
+          "variance_pct": 1.26,
+          "unit_rate_in_gc_unit": 11.65,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 16904.15,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TC1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 7413.0,
+            "unit": "SF",
+            "unit_price": 13.91,
+            "amount": 103114.83,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 7430.0,
+            "unit": "SF"
+          },
+          "converted_qty": 7413.0,
+          "conversion": "same unit",
+          "variance_pct": -0.23,
+          "unit_rate_in_gc_unit": 13.91,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 103114.83,
+          "adjustment": 0.0
+        },
+        {
+          "item": "MOIST",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 5000.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 5000.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TOP",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 433829.75,
+      "quantity_adjustments": 11829.51,
+      "plugs": [
+        {
+          "item": "TOP",
+          "reason": "excluded by bidder",
+          "method_requested": "average_of_bidders",
+          "method_used": "gc_estimate",
+          "attempts": [
+            {
+              "method": "average_of_bidders",
+              "result": "skipped: only 1 comparable price(s), 2 required"
+            },
+            {
+              "method": "gc_estimate",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Granite Peak Floor Coatings",
+              "value": 10500.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "GC lump sum estimate",
+          "value": 10000.0
+        }
+      ],
+      "plug_total": 10000.0,
+      "allowances": [
+        {
+          "name": "Polished concrete touch-ups",
+          "amount": 25000
+        },
+        {
+          "name": "Joint sealer at sealed concrete",
+          "amount": 32000
+        }
+      ],
+      "allowance_total": 57000.0,
+      "base_bid_value": 512659.26,
+      "textura": 1130.41,
+      "subcontract_value": 513789.67,
+      "sdi": 7449.95,
+      "total_package_value": 521239.62,
+      "expected_flags": [
+        "PSC1: quantity -14.9% vs GC takeoff after converting SF - re-extended, +11,829.51",
+        "TOP: excluded by bidder - plugged $10,000.00 by gc_estimate"
+      ]
+    },
+    {
+      "company": "Sagebrush Surfaces",
+      "document": "Sagebrush_Surfaces_TCJC_SY_pricing.xlsx",
+      "format": "xlsx",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "PSC1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 424.0,
+            "unit": "SY",
+            "unit_price": 243.81,
+            "amount": 103375.44,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 3819.0,
+            "unit": "SF"
+          },
+          "converted_qty": 3816.0,
+          "conversion": "SY x 9 = SF",
+          "variance_pct": -0.08,
+          "unit_rate_in_gc_unit": 27.09,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 103375.44,
+          "adjustment": 0.0
+        },
+        {
+          "item": "RN1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 313.0,
+            "unit": "SY",
+            "unit_price": 249.08,
+            "amount": 77962.04,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 2813.0,
+            "unit": "SF"
+          },
+          "converted_qty": 2817.0,
+          "conversion": "SY x 9 = SF",
+          "variance_pct": 0.14,
+          "unit_rate_in_gc_unit": 27.6756,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 77962.04,
+          "adjustment": 0.0
+        },
+        {
+          "item": "RN2",
+          "status": "priced",
+          "as_bid": {
+            "qty": 87.0,
+            "unit": "SY",
+            "unit_price": 234.12,
+            "amount": 20368.44,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 780.0,
+            "unit": "SF"
+          },
+          "converted_qty": 783.0,
+          "conversion": "SY x 9 = SF",
+          "variance_pct": 0.38,
+          "unit_rate_in_gc_unit": 26.0133,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 20368.44,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SC1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 527.0,
+            "unit": "SY",
+            "unit_price": 24.84,
+            "amount": 13090.68,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 4740.0,
+            "unit": "SF"
+          },
+          "converted_qty": 4743.0,
+          "conversion": "SY x 9 = SF",
+          "variance_pct": 0.06,
+          "unit_rate_in_gc_unit": 2.76,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 13090.68,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SC2",
+          "status": "priced",
+          "as_bid": {
+            "qty": 977.0,
+            "unit": "SY",
+            "unit_price": 44.6,
+            "amount": 43574.2,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 8790.0,
+            "unit": "SF"
+          },
+          "converted_qty": 8793.0,
+          "conversion": "SY x 9 = SF",
+          "variance_pct": 0.03,
+          "unit_rate_in_gc_unit": 4.9556,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 43574.2,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SC4",
+          "status": "priced",
+          "as_bid": {
+            "qty": 159.0,
+            "unit": "SY",
+            "unit_price": 60.86,
+            "amount": 9676.74,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1433.0,
+            "unit": "SF"
+          },
+          "converted_qty": 1431.0,
+          "conversion": "SY x 9 = SF",
+          "variance_pct": -0.14,
+          "unit_rate_in_gc_unit": 6.7622,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 9676.74,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TC1",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 7430.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "MOIST",
+          "status": "included",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": "Included",
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "included in other lines - no value",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TOP",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 268047.54,
+      "quantity_adjustments": 0.0,
+      "plugs": [
+        {
+          "item": "TC1",
+          "reason": "excluded by bidder",
+          "method_requested": "ai_market_price",
+          "method_used": "median_of_bidders",
+          "attempts": [
+            {
+              "method": "ai_market_price",
+              "result": "skipped: no AI price available (no API key or snapshot)"
+            },
+            {
+              "method": "median_of_bidders",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Granite Peak Floor Coatings",
+              "value": 63342.0,
+              "unit_rate": 8.5
+            },
+            {
+              "bidder": "Northfork Polishing & Resinous",
+              "value": 103114.83,
+              "unit_rate": 13.91
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "median of $63,342.00, $103,114.83",
+          "value": 83228.42
+        },
+        {
+          "item": "TOP",
+          "reason": "excluded by bidder",
+          "method_requested": "average_of_bidders",
+          "method_used": "gc_estimate",
+          "attempts": [
+            {
+              "method": "average_of_bidders",
+              "result": "skipped: only 1 comparable price(s), 2 required"
+            },
+            {
+              "method": "gc_estimate",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Granite Peak Floor Coatings",
+              "value": 10500.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "GC lump sum estimate",
+          "value": 10000.0
+        }
+      ],
+      "plug_total": 93228.42,
+      "allowances": [
+        {
+          "name": "Polished concrete touch-ups",
+          "amount": 25000
+        },
+        {
+          "name": "Joint sealer at sealed concrete",
+          "amount": 32000
+        }
+      ],
+      "allowance_total": 57000.0,
+      "base_bid_value": 418275.96,
+      "textura": 922.3,
+      "subcontract_value": 419198.26,
+      "sdi": 6078.37,
+      "total_package_value": 425276.63,
+      "expected_flags": [
+        "TC1: excluded by bidder - plugged $83,228.42 by median_of_bidders",
+        "TOP: excluded by bidder - plugged $10,000.00 by gc_estimate"
+      ]
+    },
+    {
+      "company": "Bighorn Industrial Floors",
+      "document": "Bighorn floors quote.docx",
+      "format": "docx",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "PSC1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 3819.0,
+            "unit": "SF",
+            "unit_price": 14.0,
+            "amount": 53466.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 3819.0,
+            "unit": "SF"
+          },
+          "converted_qty": 3819.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 14.0,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 53466.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "RN1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 2374.0,
+            "unit": "SF",
+            "unit_price": 16.5,
+            "amount": 39171.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 2813.0,
+            "unit": "SF"
+          },
+          "converted_qty": 2374.0,
+          "conversion": "same unit",
+          "variance_pct": -15.61,
+          "unit_rate_in_gc_unit": 16.5,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 46414.5,
+          "adjustment": 7243.5
+        },
+        {
+          "item": "RN2",
+          "status": "priced",
+          "as_bid": {
+            "qty": 641.0,
+            "unit": "SF",
+            "unit_price": 19.0,
+            "amount": 12179.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 780.0,
+            "unit": "SF"
+          },
+          "converted_qty": 641.0,
+          "conversion": "same unit",
+          "variance_pct": -17.82,
+          "unit_rate_in_gc_unit": 19.0,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 14820.0,
+          "adjustment": 2641.0
+        },
+        {
+          "item": "SC1",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 38000.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 4740.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": 8.0169,
+          "action": "lump sum without quantity - flag only",
+          "leveled_value": 38000.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SC2",
+          "status": "included",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": "Included",
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 8790.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "included in other lines - no value",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SC4",
+          "status": "included",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": "Included",
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1433.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "included in other lines - no value",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TC1",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 7430.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "MOIST",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TOP",
+          "status": "omitted",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - not priced",
+          "leveled_value": null,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 142816.0,
+      "quantity_adjustments": 9884.5,
+      "plugs": [
+        {
+          "item": "TC1",
+          "reason": "excluded by bidder",
+          "method_requested": "ai_market_price",
+          "method_used": "median_of_bidders",
+          "attempts": [
+            {
+              "method": "ai_market_price",
+              "result": "skipped: no AI price available (no API key or snapshot)"
+            },
+            {
+              "method": "median_of_bidders",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Granite Peak Floor Coatings",
+              "value": 63342.0,
+              "unit_rate": 8.5
+            },
+            {
+              "bidder": "Northfork Polishing & Resinous",
+              "value": 103114.83,
+              "unit_rate": 13.91
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "median of $63,342.00, $103,114.83",
+          "value": 83228.42
+        },
+        {
+          "item": "MOIST",
+          "reason": "excluded by bidder",
+          "method_requested": "min_of_bidders",
+          "method_used": "min_of_bidders",
+          "attempts": [
+            {
+              "method": "min_of_bidders",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Northfork Polishing & Resinous",
+              "value": 5000.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "min of $5,000.00",
+          "value": 5000.0
+        },
+        {
+          "item": "TOP",
+          "reason": "not priced",
+          "method_requested": "average_of_bidders",
+          "method_used": "gc_estimate",
+          "attempts": [
+            {
+              "method": "average_of_bidders",
+              "result": "skipped: only 1 comparable price(s), 2 required"
+            },
+            {
+              "method": "gc_estimate",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Granite Peak Floor Coatings",
+              "value": 10500.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "GC lump sum estimate",
+          "value": 10000.0
+        }
+      ],
+      "plug_total": 98228.42,
+      "allowances": [
+        {
+          "name": "Polished concrete touch-ups",
+          "amount": 25000
+        },
+        {
+          "name": "Joint sealer at sealed concrete",
+          "amount": 32000
+        }
+      ],
+      "allowance_total": 57000.0,
+      "base_bid_value": 307928.92,
+      "textura": 678.98,
+      "subcontract_value": 308607.9,
+      "sdi": 4474.81,
+      "total_package_value": 313082.71,
+      "expected_flags": [
+        "RN1: quantity -15.6% vs GC takeoff after converting SF - re-extended, +7,243.50",
+        "RN2: quantity -17.8% vs GC takeoff after converting SF - re-extended, +2,641.00",
+        "SC1: lump sum with no quantity - cannot check against GC takeoff",
+        "TC1: excluded by bidder - plugged $83,228.42 by median_of_bidders",
+        "MOIST: excluded by bidder - plugged $5,000.00 by min_of_bidders",
+        "TOP: not priced - plugged $10,000.00 by gc_estimate"
+      ]
+    }
+  ],
+  "recommended_bidder": "Granite Peak Floor Coatings",
+  "ranking": [
+    {
+      "company": "Granite Peak Floor Coatings",
+      "total_package_value": 297408.78
+    },
+    {
+      "company": "Bighorn Industrial Floors",
+      "total_package_value": 313082.71
+    },
+    {
+      "company": "Sagebrush Surfaces",
+      "total_package_value": 425276.63
+    },
+    {
+      "company": "Northfork Polishing & Resinous",
+      "total_package_value": 521239.62
+    }
+  ],
+  "sensitivity_by_plug_method": {
+    "policy as written": {
+      "recommended_bidder": "Granite Peak Floor Coatings",
+      "totals": {
+        "Granite Peak Floor Coatings": 297408.78,
+        "Northfork Polishing & Resinous": 521239.62,
+        "Sagebrush Surfaces": 425276.63,
+        "Bighorn Industrial Floors": 313082.71
+      }
+    },
+    "gc_estimate": {
+      "recommended_bidder": "Bighorn Industrial Floors",
+      "totals": {
+        "Granite Peak Floor Coatings": 297408.78,
+        "Northfork Polishing & Resinous": 521239.62,
+        "Sagebrush Surfaces": 401090.07,
+        "Bighorn Industrial Floors": 288896.15
+      }
+    },
+    "min_of_bidders": {
+      "recommended_bidder": "Bighorn Industrial Floors",
+      "totals": {
+        "Granite Peak Floor Coatings": 297408.78,
+        "Northfork Polishing & Resinous": 521748.0,
+        "Sagebrush Surfaces": 405565.74,
+        "Bighorn Industrial Floors": 293371.83
+      }
+    },
+    "average_of_bidders": {
+      "recommended_bidder": "Granite Peak Floor Coatings",
+      "totals": {
+        "Granite Peak Floor Coatings": 297408.78,
+        "Northfork Polishing & Resinous": 521748.0,
+        "Sagebrush Surfaces": 425785.0,
+        "Bighorn Industrial Floors": 313591.09
+      }
+    },
+    "median_of_bidders": {
+      "recommended_bidder": "Granite Peak Floor Coatings",
+      "totals": {
+        "Granite Peak Floor Coatings": 297408.78,
+        "Northfork Polishing & Resinous": 521748.0,
+        "Sagebrush Surfaces": 425785.0,
+        "Bighorn Industrial Floors": 313591.09
+      }
+    },
+    "max_of_bidders": {
+      "recommended_bidder": "Granite Peak Floor Coatings",
+      "totals": {
+        "Granite Peak Floor Coatings": 297408.78,
+        "Northfork Polishing & Resinous": 521748.0,
+        "Sagebrush Surfaces": 446004.25,
+        "Bighorn Industrial Floors": 333810.34
+      }
+    }
+  }
+}

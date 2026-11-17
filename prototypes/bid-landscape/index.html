@@ -1,0 +1,1130 @@
+<meta charset="utf-8">
+<title>Bid Landscape Options</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+/* Layout: one control strip, a shared legend, then a single wide chart stage that the concept tabs swap; notes and a comparison beneath. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --surface-2: #eef0f4; --ink: #10151d; --ink-2: #49515e; --muted: #7d8592;
+  --grid: #e2e5ea; --axis: #c3c8d1; --accent: #d9530e; --accent-soft: #fdebe0; --ring: rgba(16, 21, 29, .12);
+  /* diverging scale: blue = below the reference, grey = near it, red = above */
+  --d0: #1c5cab; --d1: #5598e7; --d2: #b7d3f6; --d3: #e7e9ed; --d4: #f6c1bb; --d5: #e66767; --d6: #b02a2a;
+  --t0: #ffffff; --t1: #0b1220; --t2: #0b1220; --t3: #0b1220; --t4: #0b1220; --t5: #0b1220; --t6: #ffffff;
+  --plug-bg: #fbe7b3; --plug-ink: #b97a00; --priced: #9aa1ad; --gc-a: #c9ced6; --gc-b: #dfe2e8;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1116; --surface: #161a21; --surface-2: #20252e; --ink: #eef0f3; --ink-2: #c2c7cf; --muted: #8b919c;
+    --grid: #2a3039; --axis: #3d444f; --accent: #f0803f; --accent-soft: #3a2415; --ring: rgba(255, 255, 255, .14);
+    --d0: #6da7ec; --d1: #256abf; --d2: #173d6e; --d3: #343a43; --d4: #5e2424; --d5: #c03d3d; --d6: #f08a8a;
+    --t0: #0b1220; --t1: #ffffff; --t2: #ffffff; --t3: #eef0f3; --t4: #ffffff; --t5: #ffffff; --t6: #0b1220;
+    --plug-bg: #4a3a12; --plug-ink: #e0a020; --priced: #707784; --gc-a: #4a515c; --gc-b: #363c46;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1116; --surface: #161a21; --surface-2: #20252e; --ink: #eef0f3; --ink-2: #c2c7cf; --muted: #8b919c;
+  --grid: #2a3039; --axis: #3d444f; --accent: #f0803f; --accent-soft: #3a2415; --ring: rgba(255, 255, 255, .14);
+  --d0: #6da7ec; --d1: #256abf; --d2: #173d6e; --d3: #343a43; --d4: #5e2424; --d5: #c03d3d; --d6: #f08a8a;
+  --t0: #0b1220; --t1: #ffffff; --t2: #ffffff; --t3: #eef0f3; --t4: #ffffff; --t5: #ffffff; --t6: #0b1220;
+  --plug-bg: #4a3a12; --plug-ink: #e0a020; --priced: #707784; --gc-a: #4a515c; --gc-b: #363c46;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.45; }
+.wrap { max-width: 1280px; margin: 0 auto; padding-block: 28px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 18px; }
+h1 { font-size: 24px; line-height: 1.2; margin: 0; font-weight: 650; letter-spacing: -.01em; text-wrap: balance; }
+h2 { font-size: 16px; margin: 0; font-weight: 650; }
+p { margin: 0; }
+.lede { color: var(--ink-2); max-width: 78ch; }
+.sample { color: var(--muted); font-size: 12.5px; }
+.panel { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; }
+.controls { display: flex; flex-wrap: wrap; gap: 14px 26px; padding: 14px 16px; align-items: flex-end; }
+.ctl { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.ctl > label, .ctl > .lab { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+.ctl select { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--axis); border-radius: 7px; padding: 6px 8px; max-width: 100%; }
+.nrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.nrow input[type=range] { width: 220px; max-width: 60vw; accent-color: var(--accent); }
+.nrow output { font-variant-numeric: tabular-nums; font-weight: 650; font-size: 18px; min-width: 2ch; text-align: right; }
+.seg { display: inline-flex; border: 1px solid var(--axis); border-radius: 7px; overflow: hidden; }
+.seg button { font: inherit; border: 0; background: var(--surface); color: var(--ink-2); padding: 6px 10px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--axis); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+button:focus-visible, select:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.summary { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--ink-2); font-size: 13px; }
+.summary b { color: var(--ink); font-weight: 650; }
+.note-fallback { color: var(--accent); }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tabs button { font: inherit; cursor: pointer; border: 1px solid var(--axis); background: var(--surface); color: var(--ink-2); border-radius: 999px; padding: 7px 14px; display: flex; gap: 8px; align-items: baseline; }
+.tabs button .k { font-weight: 700; color: var(--muted); font-size: 12px; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.tabs button[aria-selected="true"] .k { color: var(--surface); opacity: .7; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; font-size: 12px; color: var(--ink-2); padding: 10px 16px; }
+.scale { display: flex; align-items: center; gap: 8px; }
+.scale .sw { display: flex; }
+.scale .sw i { width: 22px; height: 12px; display: block; }
+.scale .sw i + i { margin-left: 2px; }
+.key { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.key svg { flex: none; }
+.stagehead { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; padding: 14px 16px 0; }
+.stagehead .what { color: var(--ink-2); max-width: 82ch; min-width: 0; }
+.stage { padding: 8px 16px 14px; overflow-x: auto; min-width: 0; }
+.stage svg { display: block; }
+.stage text { font-family: var(--sans); fill: var(--ink-2); }
+.d0 { fill: var(--d0); } .d1 { fill: var(--d1); } .d2 { fill: var(--d2); } .d3 { fill: var(--d3); } .d4 { fill: var(--d4); } .d5 { fill: var(--d5); } .d6 { fill: var(--d6); }
+.t0 { fill: var(--t0) !important; } .t1 { fill: var(--t1) !important; } .t2 { fill: var(--t2) !important; } .t3 { fill: var(--t3) !important; } .t4 { fill: var(--t4) !important; } .t5 { fill: var(--t5) !important; } .t6 { fill: var(--t6) !important; }
+.s0 { stroke: var(--d0); } .s1 { stroke: var(--d1); } .s2 { stroke: var(--d1); opacity: .6; } .s3 { stroke: var(--muted); } .s4 { stroke: var(--d5); opacity: .6; } .s5 { stroke: var(--d5); } .s6 { stroke: var(--d6); }
+.plug { fill: url(#plug-hatch); }
+.incl { fill: var(--surface-2); }
+.dimmed { opacity: .32; }
+.faded { opacity: .5; }
+.nq { fill-opacity: .42; }
+.plug.nq { fill-opacity: .72; }
+.tip .tnote { margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(128, 128, 128, .45); max-width: 260px; line-height: 1.35; }
+.fo { font: 12.5px/1.45 var(--sans); color: var(--ink-2); height: 100%; overflow-y: auto; }
+.fo .fo-t { font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.fo p { margin: 0; }
+.detail { position: fixed; z-index: 20; top: calc(12px + env(safe-area-inset-top, 0px)); right: calc(12px + env(safe-area-inset-right, 0px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); width: min(360px, calc(100vw - 24px)); background: var(--surface); border: 1px solid var(--ring); border-radius: 12px; box-shadow: 0 12px 44px rgba(0, 0, 0, .26); padding: 16px 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.detail .dh { display: flex; justify-content: space-between; gap: 12px; align-self: stretch; }
+.detail h3 { margin: 0; font-size: 17px; line-height: 1.25; }
+.detail h4 { margin: 6px 0 0; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.detail .dsub { color: var(--ink-2); }
+.detail .dx { font: inherit; font-size: 20px; line-height: 1; border: 1px solid var(--axis); background: var(--surface); color: var(--ink); border-radius: 8px; width: 32px; height: 32px; cursor: pointer; flex: none; }
+.detail .badge { font-size: 12px; padding: 2px 9px; border-radius: 999px; border: 1px dashed var(--axis); color: var(--ink-2); }
+.detail .badge.q { background: var(--ink); color: var(--surface); border: 1px solid var(--ink); }
+.detail table.facts { border-collapse: collapse; align-self: stretch; font-size: 12.5px; }
+.detail table.facts td { padding: 4px 0; border-bottom: 1px solid var(--grid); vertical-align: top; }
+.detail table.facts td:first-child { color: var(--muted); padding-right: 14px; white-space: nowrap; }
+.detail table.facts td:last-child { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.detail ul { margin: 0; padding-left: 18px; color: var(--ink-2); }
+.detail .flagline { color: var(--accent); font-weight: 600; }
+@media (min-width: 1000px) { body.with-panel .wrap { margin-right: 384px; margin-left: 0; max-width: none; } }
+@media (max-width: 640px) { .detail { top: auto; left: calc(8px + env(safe-area-inset-left, 0px)); right: calc(8px + env(safe-area-inset-right, 0px)); bottom: calc(8px + env(safe-area-inset-bottom, 0px)); width: auto; max-height: 64vh; } }
+.sublab { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; margin: 6px 0 8px; }
+svg.focus-item .seg-i { opacity: .16; }
+svg.focus-item .seg-i.hl { opacity: 1; }
+.fp-grid { display: grid; gap: 10px; }
+.fp { border: 1px solid var(--ring); border-radius: 8px; padding: 8px 8px 6px; min-width: 0; background: var(--surface); cursor: pointer; }
+.fp.sel { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+.fp.keycard { cursor: default; border-style: dashed; }
+.fp .h1 { display: flex; gap: 6px; align-items: baseline; font-size: 12px; min-width: 0; }
+.fp .code { font-weight: 700; color: var(--ink); flex: none; }
+.fp .nm { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.fp .h2 { display: flex; justify-content: space-between; gap: 6px; font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fp .h2 b { color: var(--ink); font-weight: 650; }
+.fp .tot { height: 4px; display: flex; gap: 1px; margin: 4px 0 6px; }
+.fp .tot i { display: block; height: 4px; border-radius: 1px; }
+.fp-band { fill: transparent; }
+.fp-band.on { fill: var(--ink); opacity: .1; }
+.tip { position: fixed; z-index: 30; pointer-events: none; background: var(--ink); color: var(--surface); border-radius: 8px; padding: 8px 10px; font-size: 12px; max-width: 280px; box-shadow: 0 6px 20px rgba(0, 0, 0, .25); }
+.tip .tt { font-weight: 650; margin-bottom: 2px; }
+.tip .sub { opacity: .75; margin-bottom: 4px; }
+.tip table { border-collapse: collapse; }
+.tip td { padding: 1px 0; vertical-align: top; }
+.tip td:first-child { opacity: .75; padding-right: 12px; }
+.tip td:last-child { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px 26px; padding: 14px 16px; }
+.notes h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 4px; font-weight: 600; }
+.notes p { color: var(--ink-2); }
+details.panel > summary { cursor: pointer; padding: 12px 16px; font-weight: 600; }
+.tablewrap { overflow-x: auto; padding: 0 16px 14px; }
+table.data { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+table.data th, table.data td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+table.data th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+table.data td.num, table.data th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.cmp td, table.cmp th { white-space: normal; vertical-align: top; }
+.rate { display: inline-block; font-size: 11.5px; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--axis); color: var(--ink-2); }
+.rate.s { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.rate.w { color: var(--muted); border-style: dashed; }
+.cmpwrap { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+@media (max-width: 640px) { h1 { font-size: 20px; } .controls { gap: 12px 18px; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="plug-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="5" height="5" style="fill:var(--plug-bg)"></rect>
+      <rect width="1.6" height="5" style="fill:var(--plug-ink)"></rect>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:8px">
+    <h1>Bid landscape: who qualified, and how every bid compares</h1>
+    <p class="lede">The chosen design puts the leveling map above the heat grid and separates the bidders who qualify under the award policy from those who do not. Move the slider from 1 to 50 subcontractors to see it scale. The concepts that were not chosen stay as tabs for reference.</p>
+    <p class="sample">Sample data. The first four bidders of the 16-item scope come from the plugging scenario set; all other bidders, and the whole 40-item scope, are generated. Company names are fictional. Totals are bid + quantity adjustments + plugs, before fees and insurance. Qualification here uses five sample rules: answered clarifications, prequalified, priced at least 90% of the scope, warranty meets the minimum, safety score within the limit. The written analysis is templated placeholder text standing in for generated analysis.</p>
+  </header>
+
+  <section class="panel controls" aria-label="Controls">
+    <div class="ctl">
+      <label for="n">Subcontractors</label>
+      <div class="nrow">
+        <input type="range" id="n" min="1" max="50" value="15">
+        <output id="nout" for="n">15</output>
+        <div class="seg" id="presets" role="group" aria-label="Preset counts">
+          <button type="button" data-n="1">1</button><button type="button" data-n="5">5</button><button type="button" data-n="15">15</button><button type="button" data-n="30">30</button><button type="button" data-n="50">50</button>
+        </div>
+      </div>
+    </div>
+    <div class="ctl">
+      <span class="lab">Scope size</span>
+      <div class="seg" id="scope" role="group" aria-label="Scope size">
+        <button type="button" data-v="small" aria-pressed="true">16 items</button><button type="button" data-v="large" aria-pressed="false">40 items</button>
+      </div>
+    </div>
+    <div class="ctl">
+      <span class="lab">Show</span>
+      <div class="seg" id="show" role="group" aria-label="Which bidders to show">
+        <button type="button" data-v="all" aria-pressed="true">All bidders</button><button type="button" data-v="qual" aria-pressed="false">Qualified only</button>
+      </div>
+    </div>
+    <div class="ctl">
+      <label for="ref">Compare each item against</label>
+      <select id="ref"><option value="median">Median of bidders</option><option value="gc">GC estimate</option><option value="low">Lowest bid</option></select>
+    </div>
+    <div class="ctl">
+      <label for="sort">Order bidders by</label>
+      <select id="sort"><option value="qual">Qualified first</option><option value="lev">Leveled total</option><option value="asbid">Total as bid</option><option value="sim">Similar pricing pattern</option></select>
+    </div>
+  </section>
+
+  <div class="summary" id="summary" aria-live="polite"></div>
+
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Visualization concepts"></nav>
+
+  <section class="panel" id="stagepanel">
+    <div class="legend" id="legend"></div>
+    <div class="stagehead"><p class="what" id="what"></p><div id="viewopts"></div></div>
+    <div class="stage" id="stage"></div>
+    <div class="notes" id="notes"></div>
+  </section>
+
+  <details class="panel" id="tbl">
+    <summary>Bidder table for the current selection</summary>
+    <div class="tablewrap"><table class="data" id="btable"></table></div>
+  </details>
+
+  <section class="panel cmpwrap">
+    <h2>How the five concepts compared</h2>
+    <div style="overflow-x:auto"><table class="data cmp" id="cmp"></table></div>
+    <p class="lede">Chosen: the leveling map (E) as a strip above the heat grid (A). The map carries the award picture and the grid carries the scope-item detail, with the same rows and columns as the existing Bid Level table.</p>
+  </section>
+</div>
+<aside class="detail" id="detail" aria-label="Data point analysis" hidden></aside>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+(function () {
+'use strict';
+var SVGNS = 'http://www.w3.org/2000/svg';
+var HAS_DOM = typeof document !== 'undefined';
+
+// ---------------------------------------------------------------- data
+function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function rnorm(r) { var u = 0; while (u === 0) u = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * r()); }
+
+var RAW = {
+  small: { label: 'Landscaping and irrigation', sections: [
+    ['Site furnishings', [['Flag pole', 18979.93], ['Park bench with dividers', 4800.34], ['Bike racks', 3795.99]]],
+    ['Planting', [['Silva Cell field system', 29656.13], ['Trees', 30947.82], ['Shrubs', 11514.49], ['Grasses and perennials', 4681.72], ['Mineral mulch', 5272.20], ['Wood mulch', 4969.74], ['Sod', 3356.56]]],
+    ['Irrigation', [['Irrigation system', 19660.04], ['Irrigation sleeving', 10544.40]]],
+    ['Paving', [['Unit pavers', 60166.37]]],
+    ['General', [['Tree protection fence', 5061.31], ['Drainage rock', 2583.38], ['Additional maintenance year', 4006.87]]]] },
+  large: { label: 'Structural steel and metals', sections: [
+    ['Structural framing', [['W-shape columns', 182000], ['Wide-flange beams and girders', 410000], ['HSS columns', 64000], ['Braced frame members', 118000], ['Moment frame connections', 96000], ['Roof framing', 142000], ['Transfer girders', 88000], ['Base plates and anchor rods', 37000], ['Embeds and bearing plates', 29000]]],
+    ['Joists and deck', [['Open-web steel joists', 124000], ['Joist girders', 58000], ['3 in. composite floor deck', 136000], ['1-1/2 in. roof deck', 74000], ['Low roof deck', 21000], ['Deck closures and pour stops', 18000], ['Shear studs', 26000]]],
+    ['Stairs and rails', [['Egress stair 1', 46000], ['Egress stair 2', 46000], ['Detention stair', 68000], ['Guardrails', 39000], ['Handrails', 17000], ['Roof access ladder', 6500], ['Ship ladder and hatch frame', 9000]]],
+    ['Miscellaneous metals', [['Lintels', 22000], ['Elevator pit ladder and sump frames', 7500], ['Elevator hoist beams', 12000], ['Bollards', 14000], ['Canopy framing', 52000], ['Mechanical screen framing', 44000], ['Roof equipment supports', 31000], ['Sally port door frames', 27000], ['Trench and area drain frames', 8000]]],
+    ['Engineering and general', [['Shop drawings and connection design', 61000], ['BIM coordination', 24000], ['Shop primer', 33000], ['Galvanizing', 41000], ['Field touch-up', 9000], ['Mobilization and crane', 78000], ['Erection safety and deck protection', 28000], ['Field bolting and inspection support', 36000]]]] }
+};
+// Leveled values from samples/tcjc_plugging/answer_key/32.90_landscaping.json: [status, leveled value, amount as bid]
+var REAL = [
+  { name: 'Aspen Hollow Landscapes', cells: [['ok', 9944.86], ['plug', 4844.9], ['adj', 7819.47, 6081.81], ['ok', 24493.31], ['ok', 47157.36], ['adj', 13392.96, 15146.8], ['adj', 4889.76, 7695.36], ['ok', 10301.04], ['ok', 7525.17], ['ok', 12544.47], ['ok', 42940.63], ['ok', 8374.4], ['adj', 58410.42, 66026.5], ['ok', 9746.7], ['plug', 2583.38], ['plug', 6500]] },
+  { name: 'Elkhorn Grounds & Irrigation', cells: [['ok', 22600.32], ['ok', 4141.79], ['ok', 13266.63], ['plug', 26309.22], ['ok', 58770], ['ok', 12549.6], ['ok', 46985.86], ['ok', 5483.78], ['ok', 7911.2], ['ok', 29137.65], ['ok', 66922.37], ['incl'], ['ok', 148718.97], ['ok', 1717.2], ['plug', 2583.38], ['plug', 6500]] },
+  { name: 'Cutthroat Creek Nursery', cells: [['ok', 3200], ['ok', 5548], ['adj', 5400, 3600], ['ok', 28125.12], ['adj', 31000.05, 27555.6], ['ok', 12799.92], ['ok', 3740.52], ['adj', 2470, 2730], ['adj', 4976.4, 3317.6], ['ok', 3000], ['ok', 18145], ['ok', 3499.44], ['adj', 57060, 64530], ['ok', 4500], ['incl'], ['ok', 4000]] },
+  { name: 'Wind River Site Works', cells: [['ok', 12740.88], ['ok', 9451.72], ['ok', 11255.4], ['ok', 94120.56], ['ok', 36362.7], ['adj', 16178.4, 14445], ['ok', 7117.48], ['ok', 7883.29], ['ok', 9576.72], ['ok', 5895.6], ['ok', 63222.29], ['ok', 5246.64], ['plug', 57735.21], ['ok', 7500], ['ok', 3200], ['ok', 6500]] }
+];
+var NAME_A = ['Ridgeline', 'Sawtooth', 'Bitterroot', 'Larkspur', 'Granite Basin', 'Yellowpine', 'Juniper Flat', 'Red Butte', 'Stillwater', 'Paintbrush', 'Lodgepole', 'Antelope Draw', 'Cottonwood', 'Sagehen', 'Clearwater', 'Hoback', 'Snowmelt', 'Tamarack', 'Highline', 'Bluebird', 'Ironwood', 'Marmot Pass', 'Greys River', 'Buffalo Fork', 'Wapiti', 'Shoshone', 'Arrowleaf'];
+var NAME_B = { small: ['Landscapes', 'Nursery', 'Grounds', 'Site Works', 'Irrigation & Turf', 'Landscape Co.', 'Outdoor Works'], large: ['Steel', 'Ironworks', 'Fabricators', 'Structural', 'Metals', 'Steel Erectors', 'Welding & Fab'] };
+
+function code(k) { return k < 26 ? String.fromCharCode(65 + k) : 'A' + String.fromCharCode(65 + k - 26); }
+
+function buildScope(key) {
+  var items = [], secs = [];
+  RAW[key].sections.forEach(function (s, si) {
+    secs.push({ name: s[0], first: items.length, count: s[1].length });
+    s[1].forEach(function (it) { items.push({ i: items.length, name: it[0], est: it[1], sec: si, secName: s[0] }); });
+  });
+  var estTotal = items.reduce(function (a, it) { return a + it.est; }, 0);
+  return { key: key, label: RAW[key].label, items: items, sections: secs, estTotal: estTotal };
+}
+
+function genBidders(sc) {
+  var r = mulberry32(sc.key === 'small' ? 20261116 : 77120541), items = sc.items;
+  var real = sc.key === 'small' ? REAL : [];
+  var market = items.map(function (it, i) {
+    var vals = real.map(function (b) { return b.cells[i]; }).filter(function (c) { return c[0] === 'ok' || c[0] === 'adj'; }).map(function (c) { return c[1]; });
+    var jitter = Math.exp(0.06 + 0.22 * rnorm(r));
+    if (vals.length >= 2) return Math.exp(vals.reduce(function (s, v) { return s + Math.log(v); }, 0) / vals.length);
+    return it.est * jitter;
+  });
+  // some scope items are contested (wide spread), most are tight
+  var contest = items.map(function () { var x = r(); return x < 0.2 ? 2.3 : x < 0.55 ? 1 : 0.55; });
+  var out = real.map(function (b, k) {
+    return { id: k, code: code(k), name: b.name, real: true, responsive: true, profile: 'From the scenario set',
+      cells: b.cells.map(function (c) { return { st: c[0], v: c.length > 1 ? c[1] : null, asbid: c[0] === 'adj' ? c[2] : (c[0] === 'ok' ? c[1] : null), fixed: c[0] === 'plug' }; }) };
+  });
+  var ARCH = [['complete', 34], ['lowgaps', 15], ['high', 12], ['section', 10], ['folded', 11], ['spiky', 11], ['unresp', 7]];
+  var LABEL = { complete: 'Complete bid', lowgaps: 'Low price with scope gaps', high: 'High and complete', section: 'Leaves out a whole section', folded: 'Some items folded into others', spiky: 'Erratic item pricing', unresp: 'Unresponsive' };
+  var used = {}, scale = items.length > 20 ? 2 : 1;
+  out.forEach(function (b) { used[b.name] = 1; });
+  for (var k = out.length; k < 50; k++) {
+    var roll = r() * 100, arch = 'complete', acc = 0;
+    for (var a = 0; a < ARCH.length; a++) { acc += ARCH[a][1]; if (roll < acc) { arch = ARCH[a][0]; break; } }
+    var L = Math.exp(0.09 * rnorm(r)), sigma = 0.085, gaps = 0, responsive = true;
+    if (arch === 'complete') gaps = r() < 0.35 ? 1 : 0;
+    if (arch === 'lowgaps') { L *= 0.87; gaps = (3 + Math.floor(r() * 3)) * scale; }
+    if (arch === 'high') L *= 1.17;
+    if (arch === 'spiky') sigma = 0.2;
+    if (arch === 'unresp') { L *= 0.78; gaps = (4 + Math.floor(r() * 3)) * scale; responsive = false; }
+    var bias = sc.sections.map(function () { return Math.exp(0.07 * rnorm(r)); });
+    var cells = items.map(function (it, i) {
+      var v = Math.round(market[i] * L * bias[it.sec] * Math.exp(Math.min(0.3, sigma * contest[i]) * Math.max(-2, Math.min(2, rnorm(r)))));
+      return { st: 'ok', v: v, asbid: v, fixed: false };
+    });
+    if (arch === 'spiky') { var hitCells = {}; for (var o = 0; o < 2 * scale; o++) { var oi = Math.floor(r() * items.length), f = r() < 0.5 ? 2.2 : 0.45; if (hitCells[oi] || items[oi].est / sc.estTotal > 0.12) continue; hitCells[oi] = 1; cells[oi].v = cells[oi].asbid = Math.round(cells[oi].v * f); } }
+    if (arch === 'section') {
+      var cand = sc.sections.map(function (s, si) { return si; }).filter(function (si) {
+        var s = sc.sections[si], share = 0; for (var q = s.first; q < s.first + s.count; q++) share += items[q].est;
+        return s.count >= 2 && share / sc.estTotal < 0.35; });
+      var pick = sc.sections[cand[Math.floor(r() * cand.length)]];
+      for (var q2 = pick.first; q2 < pick.first + pick.count; q2++) cells[q2] = { st: 'plug', v: null, asbid: null, fixed: false };
+    }
+    if (arch === 'folded') {
+      var big = sc.sections.filter(function (s) { return s.count >= 3; });
+      for (var t = 0; t < Math.min(2, big.length); t++) {
+        var s2 = big[Math.floor(r() * big.length)], idx = [];
+        for (var q3 = s2.first; q3 < s2.first + s2.count; q3++) if (cells[q3].st === 'ok') idx.push(q3);
+        if (idx.length < 3) continue;
+        idx.sort(function (x, y) { return cells[x].v - cells[y].v; });
+        var host = idx[idx.length - 1], nFold = 1 + Math.floor(r() * 2);
+        for (var z = 0; z < nFold; z++) { cells[host].v += cells[idx[z]].v; cells[host].asbid = cells[host].v; cells[idx[z]] = { st: 'incl', v: null, asbid: null, fixed: false }; }
+      }
+    }
+    for (var g = 0, guard = 0; g < gaps && guard < 200; guard++) { var gi = Math.floor(r() * items.length); if (cells[gi].st === 'ok') { cells[gi] = { st: 'plug', v: null, asbid: null, fixed: false }; g++; } }
+    cells.forEach(function (c) { if (c.st === 'ok' && r() < 0.08) { var d = (0.06 + r() * 0.19) * (r() < 0.5 ? -1 : 1); c.st = 'adj'; c.v = Math.round(c.asbid * (1 + d)); } });
+    var nm, tries = 0;
+    do { nm = NAME_A[(k * 7 + 3 + tries) % NAME_A.length] + ' ' + NAME_B[sc.key][(k * 3 + tries) % NAME_B[sc.key].length]; tries++; } while (used[nm]);
+    used[nm] = 1;
+    out.push({ id: k, code: code(k), name: nm, real: false, responsive: responsive, profile: LABEL[arch], cells: cells });
+  }
+  // keep the first few arrivals responsive so small counts are meaningful, then fix ids and codes
+  for (var f2 = 0; f2 < 3; f2++) if (!out[f2].responsive) { var sw = f2 + 1; while (!out[sw].responsive || sw < 3) sw++; var tmp = out[f2]; out[f2] = out[sw]; out[sw] = tmp; }
+  out.forEach(function (b, k2) { b.id = k2; b.code = code(k2); });
+  // policy attributes that do not come from the prices (sample values)
+  var rq = mulberry32(sc.key === 'small' ? 4411 : 9917);
+  out.forEach(function (b) {
+    var p1 = rq(), p2 = rq(), p3 = rq();
+    b.flags = b.real ? { prequal: true, warranty: true, safety: true } : { prequal: p1 > 0.10, warranty: p2 > 0.14, safety: p3 > 0.08 };
+  });
+  return out;
+}
+
+var SC = { small: buildScope('small'), large: buildScope('large') };
+var BID = { small: genBidders(SC.small), large: genBidders(SC.large) };
+
+// ---------------------------------------------------------------- model
+function quant(sorted, p) { if (!sorted.length) return null; var x = (sorted.length - 1) * p, lo = Math.floor(x), hi = Math.ceil(x); return sorted[lo] + (sorted[hi] - sorted[lo]) * (x - lo); }
+function cls(dev) { return dev <= -0.30 ? 0 : dev <= -0.15 ? 1 : dev < -0.05 ? 2 : dev <= 0.05 ? 3 : dev < 0.15 ? 4 : dev < 0.30 ? 5 : 6; }
+
+var COV_MIN = 0.9;   // policy: a bidder must price at least 90% of the scope by value
+function buildModel(st) {
+  var sc = SC[st.scope], items = sc.items, shown = BID[st.scope].slice(0, st.n);
+  var resp = shown.filter(function (b) { return b.responsive; });
+  var fallback = false;
+  var rows = items.map(function (it, i) {
+    var vals = resp.map(function (b) { return b.cells[i]; }).filter(function (c) { return c.st === 'ok' || c.st === 'adj'; }).map(function (c) { return c.v; }).sort(function (a, b) { return a - b; });
+    var med = vals.length ? quant(vals, 0.5) : it.est, ref;
+    if (st.ref === 'gc' || !vals.length) ref = it.est;
+    else if (st.ref === 'low') ref = vals[0];
+    else if (vals.length >= 3) ref = med;
+    else { ref = it.est; fallback = true; }
+    return { vals: vals, n: vals.length, med: med, q1: quant(vals, 0.25), q3: quant(vals, 0.75), min: vals[0], max: vals[vals.length - 1], ref: ref, est: it.est, plug: vals.length >= 2 ? med : it.est };
+  });
+  var bs = shown.map(function (b) {
+    var asbid = 0, adj = 0, plugs = 0, lev = 0, lost = 0;
+    var cells = b.cells.map(function (c, i) {
+      var v = c.v;
+      if (c.st === 'plug') { v = c.fixed ? c.v : rows[i].plug; plugs += v; lost += items[i].est; }
+      else if (c.st === 'incl') v = null;
+      else { asbid += c.asbid; adj += v - c.asbid; }
+      if (v != null) lev += v;
+      var dev = v != null ? v / rows[i].ref - 1 : null;
+      return { st: c.st, v: v, asbid: c.asbid, dev: dev, cls: dev != null ? cls(dev) : null };
+    });
+    var cov = 1 - lost / sc.estTotal, why = [];
+    if (!b.responsive) why.push('Did not answer clarifications');
+    if (!b.flags.prequal) why.push('Not prequalified');
+    if (cov < COV_MIN) why.push('Priced under 90% of scope');
+    if (!b.flags.warranty) why.push('Warranty below minimum');
+    if (!b.flags.safety) why.push('Safety score over limit');
+    return { id: b.id, code: b.code, name: b.name, real: b.real, responsive: b.responsive, profile: b.profile, cells: cells, asbid: asbid, adj: adj, plugs: plugs, lev: lev, cov: cov, why: why, qualified: !why.length, rank: null };
+  });
+  var byLev = function (a, b) { return a.lev - b.lev; }, isQ = function (b) { return b.qualified; }, notQ = function (b) { return !b.qualified; };
+  var ranked = bs.filter(isQ).sort(byLev);
+  ranked.forEach(function (b, k) { b.rank = k + 1; });
+  var disp = st.show === 'qual' ? bs.filter(isQ) : bs.slice(), order = disp.slice();
+  if (st.sort === 'asbid') order.sort(function (a, b) { return a.asbid - b.asbid; });
+  else if (st.sort === 'sim') order = disp.length ? similarityOrder(disp) : [];
+  else if (st.sort === 'lev') order.sort(byLev);
+  else order = disp.filter(isQ).sort(byLev).concat(disp.filter(notQ).sort(byLev));
+  var respLevs = bs.filter(function (b) { return b.responsive; }).map(function (b) { return b.lev; }).sort(function (a, b) { return a - b; });
+  var wsum = rows.reduce(function (a, r) { return a + r.med; }, 0), tally = {};
+  bs.forEach(function (b) { b.why.forEach(function (w) { tally[w] = (tally[w] || 0) + 1; }); });
+  var refTotal = st.ref === 'gc' ? sc.estTotal : st.ref === 'low' ? (respLevs.length ? respLevs[0] : sc.estTotal) : (respLevs.length >= 3 ? quant(respLevs, 0.5) : sc.estTotal);
+  var M = { sc: sc, items: items, rows: rows, all: bs, bidders: disp, order: order, rec: ranked[0] || null, fallback: fallback, estTotal: sc.estTotal,
+    weights: rows.map(function (r) { return r.med / wsum; }), maxLev: disp.length ? Math.max.apply(null, disp.map(function (b) { return b.lev; })) : sc.estTotal,
+    refTotal: refTotal, levSorted: ranked.map(function (b) { return b.lev; }), nQual: ranked.length, nAll: bs.length, grouped: st.sort === 'qual', tally: tally };
+  annotate(M, st);
+  return M;
+}
+// Templated sentences that stand in for the generated analysis. Every cell and every scope item gets text;
+// `flag` marks the ones with something to check, which is what the dot on the chart shows.
+function ordinal(n) { var v = n % 100, sfx = ['th', 'st', 'nd', 'rd']; return n + (sfx[(v - 20) % 10] || sfx[v] || sfx[0]); }
+function m0(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
+function p0(d) { return Math.abs(Math.round(d * 100)) + '%'; }
+function annotate(M, st) {
+  var nAll = M.all.length;
+  M.rows.forEach(function (r, i) {
+    var it = M.items[i], priced = [], plugN = 0, inclN = 0, adjN = 0;
+    M.all.forEach(function (b) { var c = b.cells[i]; if (c.st === 'plug') plugN++; else if (c.st === 'incl') inclN++; else { priced.push({ b: b, v: c.v }); if (c.st === 'adj') adjN++; } });
+    priced.sort(function (a, b) { return a.v - b.v; });
+    r.priced = priced; r.plugN = plugN;
+    r.refName = st.ref === 'gc' ? 'the GC estimate' : st.ref === 'low' ? 'the lowest bid' : (r.n >= 3 ? 'the median' : 'the GC estimate');
+    var iqr = r.n >= 3 ? (r.q3 - r.q1) / r.med : null, level = iqr == null ? null : iqr > 0.3 ? 'Contested' : iqr > 0.14 ? 'Moderate spread' : 'Tight';
+    var heavyPlug = nAll >= 3 && plugN / nAll >= 0.2, sh, full = [];
+    if (!priced.length) sh = 'No bidder priced this item; every value is a plug.';
+    else if (level == null) sh = 'Only ' + priced.length + (priced.length === 1 ? ' priced bid' : ' priced bids') + ', too few to judge the spread.';
+    else sh = level + ': middle half of bids from ' + m0(r.q1) + ' to ' + m0(r.q3) + '.' + (plugN ? ' ' + plugN + ' did not price it.' : '');
+    full.push(priced.length + ' of ' + nAll + (nAll === 1 ? ' bidder' : ' bidders') + ' priced this item' + (plugN ? '; ' + plugN + (plugN === 1 ? ' was' : ' were') + ' plugged by the GC' : '') + (inclN ? '; ' + inclN + ' folded it into another line' : '') + '.');
+    if (priced.length >= 2) full.push('Prices run from ' + m0(priced[0].v) + ' (' + priced[0].b.code + ') to ' + m0(priced[priced.length - 1].v) + ' (' + priced[priced.length - 1].b.code + ')' + (r.n >= 3 ? ', with a median of ' + m0(r.med) : '') + '.');
+    if (r.n >= 3) { var d = it.est / r.med - 1; full.push('The GC estimate of ' + m0(it.est) + ' is ' + p0(d) + (d < 0 ? ' below' : ' above') + ' the median' + (Math.abs(d) > 0.25 ? ', so the estimate looks like the outlier here, not the bids.' : '.')); }
+    var qv = priced.filter(function (x) { return x.b.qualified; });
+    if (qv.length >= 2) full.push('Among the ' + qv.length + ' qualified bidders it runs from ' + m0(qv[0].v) + ' to ' + m0(qv[qv.length - 1].v) + '.');
+    if (M.rec) { var rc = M.rec.cells[i];
+      if (rc.st === 'plug') full.push('The recommended bidder (' + M.rec.code + ') did not price it and carries a plug of ' + m0(rc.v) + '.');
+      else if (rc.v != null) full.push('The recommended bidder (' + M.rec.code + ') is at ' + m0(rc.v) + ', ' + (Math.abs(rc.dev) <= 0.05 ? 'in line with ' : p0(rc.dev) + (rc.dev < 0 ? ' below ' : ' above ')) + r.refName + '.'); }
+    if (adjN) full.push(adjN + (adjN === 1 ? ' bid was' : ' bids were') + ' re-extended to the GC quantity.');
+    var wt = Math.round(M.weights[i] * 100); full.push('The item is ' + (wt >= 1 ? 'about ' + wt + '%' : 'under 1%') + ' of the package by value.');
+    if (level === 'Contested') full.push('To check: whether bidders priced the same scope and quantity.');
+    if (heavyPlug) full.push('To check: whether the documents make this item clear, since a large part of the field left it out.');
+    var hl = !priced.length ? 'No priced bids; all plugs' : level == null ? 'Too few bids to judge' : level === 'Moderate spread' ? 'Moderate' : level;
+    if (r.n >= 3) { var dg = it.est / r.med - 1; if (Math.abs(dg) > 0.15) hl += ' \u00b7 GC est. ' + p0(dg) + (dg < 0 ? ' under' : ' over'); }
+    if (plugN) hl += ' \u00b7 ' + plugN + (plugN === 1 ? ' plug' : ' plugs');
+    r.note = { headline: hl, short: sh, full: full.join(' '), flag: level === 'Contested' || heavyPlug };
+  });
+  M.all.forEach(function (b) { b.cells.forEach(function (c, i) {
+    var r = M.rows[i], n = r.priced.length, k = -1;
+    for (var q = 0; q < n; q++) if (r.priced[q].b === b) k = q;
+    if (c.st === 'incl') { c.note = { short: 'Bidder states this is covered in another line, so there is no separate value.', flag: false, k: k }; return; }
+    if (c.st === 'plug') { var share = c.v / b.lev; c.note = { short: 'Not priced by the bidder. Plugged at ' + m0(c.v) + ', ' + Math.max(1, Math.round(share * 100)) + '% of this bidder’s leveled total.', flag: share >= 0.05, k: k, share: share }; return; }
+    var rel = Math.abs(c.dev) <= 0.05 ? 'In line with ' + r.refName : p0(c.dev) + (c.dev < 0 ? ' below ' : ' above ') + r.refName;
+    var pos = n < 2 ? '.' : k === 0 ? '; the lowest of ' + n + ' priced bids.' : k === n - 1 ? '; the highest of ' + n + ' priced bids.' : '; ' + ordinal(k + 1) + ' lowest of ' + n + ' priced bids.';
+    var lone = n >= 3 && ((k === 0 && (r.priced[1].v - c.v) / r.priced[1].v > 0.15) || (k === n - 1 && (c.v - r.priced[n - 2].v) / r.priced[n - 2].v > 0.15));
+    var bigAdj = c.st === 'adj' && Math.abs(c.v / c.asbid - 1) >= 0.15;
+    c.note = { short: (c.st === 'adj' ? 'Re-extended to the GC quantity (' + (c.v >= c.asbid ? '+' : '-') + m0(Math.abs(c.v - c.asbid)) + '). ' : '') + rel + pos, flag: lone || bigAdj, lone: lone, k: k };
+  }); });
+}
+function cellFull(M, b, i) {
+  var c = b.cells[i], r = M.rows[i], it = M.items[i], n = r.priced.length, k = c.note.k, out = [c.note.short];
+  if (c.st === 'plug') {
+    out.push('This value is the GC’s, not the bidder’s' + (b.real ? ', set by the plugging policy.' : r.n >= 2 ? ': the median of ' + r.n + ' priced bids.' : ': the GC estimate, because too few bidders priced the item.'));
+    if (c.note.flag) out.push('To check: whether the bidder will price it, since the plug is a material part of the total.');
+  } else if (c.st === 'incl') {
+    if (n >= 2) out.push('Other bidders priced it between ' + m0(r.priced[0].v) + ' and ' + m0(r.priced[n - 1].v) + '.');
+    out.push('To check: which line carries it, so that line is not read as overpriced.');
+  } else {
+    var d = c.v / it.est - 1;
+    out.push('Against the GC estimate of ' + m0(it.est) + ' it is ' + (Math.abs(d) <= 0.05 ? 'in line.' : p0(d) + (d < 0 ? ' below.' : ' above.')));
+    if (Math.abs(c.dev) > 0.05) out.push('The gap to ' + r.refName + ' is ' + m0(Math.abs(c.v - r.ref)) + ', about ' + (Math.abs(c.v - r.ref) / b.lev * 100).toFixed(1) + '% of this bidder’s leveled total.');
+    if (c.st === 'adj') out.push('The bid was written as ' + m0(c.asbid) + '. The bidder’s quantity differed from the GC takeoff by more than the policy threshold, so the unit rate was applied to the GC quantity.');
+    if (c.note.lone && k === 0) out.push('It is the lowest price by a clear margin; the next is ' + m0(r.priced[1].v) + ' (' + r.priced[1].b.code + '). To check: that the bidder has the full scope for this item.');
+    if (c.note.lone && k === n - 1) out.push('It is the highest price by a clear margin; the next is ' + m0(r.priced[n - 2].v) + ' (' + r.priced[n - 2].b.code + '). To check: what the bidder has included that others have not.');
+  }
+  if (!b.qualified) out.push('This bidder did not qualify (' + b.why.join('; ').toLowerCase() + '), so the value is context only.');
+  return out.join(' ');
+}
+function similarityOrder(bs) {
+  var vec = bs.map(function (b) { return b.cells.map(function (c) { return c.dev == null || c.st === 'plug' ? 0 : Math.max(-1.1, Math.min(1.1, Math.log(1 + c.dev))); }); });
+  var left = bs.map(function (b, i) { return i; }), cur = 0;
+  bs.forEach(function (b, i) { if (b.lev < bs[cur].lev) cur = i; });
+  var out = [];
+  while (left.length) {
+    left.splice(left.indexOf(cur), 1); out.push(bs[cur]);
+    var best = -1, bd = Infinity;
+    left.forEach(function (j) { var d = 0; for (var q = 0; q < vec[j].length; q++) { var x = vec[j][q] - vec[cur][q]; d += x * x; } if (d < bd) { bd = d; best = j; } });
+    cur = best;
+  }
+  return out;
+}
+if (typeof globalThis !== 'undefined') globalThis.__bidLandscape = { buildModel: buildModel, SC: SC, BID: BID, cls: cls, COV_MIN: COV_MIN, cellFull: cellFull };
+if (!HAS_DOM) return;
+
+// ---------------------------------------------------------------- helpers
+function $(id) { return document.getElementById(id); }
+function el(tag, attrs, parent, text) {
+  var e = document.createElementNS(SVGNS, tag);
+  for (var k in attrs) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+  if (text != null) e.textContent = text;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function h(tag, cls2, parent, text) { var e = document.createElement(tag); if (cls2) e.className = cls2; if (text != null) e.textContent = text; if (parent) parent.appendChild(e); return e; }
+function money(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
+function short(v) { var a = Math.abs(v); return (v < 0 ? '-' : '') + '$' + (a >= 1e6 ? (a / 1e6).toFixed(2) + 'M' : a >= 1e4 ? Math.round(a / 1e3) + 'k' : a >= 1e3 ? (a / 1e3).toFixed(1) + 'k' : Math.round(a)); }
+function pct(d) { return (d >= 0 ? '+' : '') + Math.round(d * 100) + '%'; }
+function trunc(s, n) { return s.length > n ? s.slice(0, Math.max(1, n - 1)) + '…' : s; }
+function topRound(x, y, w, hh, r) { r = Math.min(r, w / 2, hh); return 'M' + x + ',' + (y + hh) + 'V' + (y + r) + 'Q' + x + ',' + y + ' ' + (x + r) + ',' + y + 'H' + (x + w - r) + 'Q' + (x + w) + ',' + y + ' ' + (x + w) + ',' + (y + r) + 'V' + (y + hh) + 'Z'; }
+var REFNAME = { median: 'the median of bidders', gc: 'the GC estimate', low: 'the lowest bid' };
+var STATUS = { ok: 'Priced by bidder', adj: 'Priced; quantity re-extended to GC takeoff', plug: 'Plugged by GC (excluded or not priced)', incl: 'Included in another line' };
+
+var tip = $('tip');
+function showTip(ev, title, sub, rows, note) {
+  tip.textContent = '';
+  h('div', 'tt', tip, title);
+  if (sub) h('div', 'sub', tip, sub);
+  var t = h('table', '', tip);
+  rows.forEach(function (r) { var tr = h('tr', '', t); h('td', '', tr, r[0]); h('td', '', tr, r[1]); });
+  if (note) h('div', 'tnote', tip, note);
+  tip.hidden = false;
+  var pad = 14, w = tip.offsetWidth, hh = tip.offsetHeight, x = ev.clientX + pad, y = ev.clientY + pad;
+  if (x + w > window.innerWidth - 8) x = ev.clientX - w - pad;
+  if (y + hh > window.innerHeight - 8) y = ev.clientY - hh - pad;
+  tip.style.left = Math.max(8, x) + 'px'; tip.style.top = Math.max(8, y) + 'px';
+}
+function hideTip() { tip.hidden = true; }
+function cellTip(ev, M, b, i) {
+  var c = b.cells[i], row = M.rows[i], it = M.items[i], rows = [];
+  if (c.v != null) { rows.push(['Leveled value', money(c.v)]); rows.push(['vs ' + (state.ref === 'median' && row.n < 3 ? 'GC estimate' : REFNAME[state.ref].replace('the ', '')), pct(c.dev)]); }
+  if (c.st === 'adj') rows.push(['As bid', money(c.asbid)]);
+  rows.push(['Status', STATUS[c.st]]);
+  rows.push(['GC estimate', money(it.est)]);
+  if (row.n) rows.push(['Bids priced', row.n + ' (' + short(row.min) + ' to ' + short(row.max) + ')']);
+  showTip(ev, it.name, b.code + '  ' + b.name + (b.qualified ? '  (qualified)' : '  (did not qualify)'), rows, c.note.short);
+}
+function bidderTip(ev, M, b) {
+  var sub = b.qualified ? (b.rank === 1 ? 'Recommended: lowest qualified bidder' : 'Qualified, rank ' + b.rank + ' of ' + M.nQual) : 'Did not qualify: ' + b.why.join('; ');
+  showTip(ev, b.code + '  ' + b.name, sub, [
+    ['Leveled total', money(b.lev)], ['As bid', money(b.asbid)], ['Quantity adjustments', (b.adj >= 0 ? '+' : '-') + money(Math.abs(b.adj))],
+    ['Plugs', money(b.plugs)], ['Scope priced by bidder', Math.round(b.cov * 100) + '%'], ['vs GC estimate', pct(b.lev / M.estTotal - 1)], ['Pattern', b.profile]]);
+}
+
+// ---------------------------------------------------------------- A. heat grid
+function miniLane(svg, M, i, x0, x1, cy) {
+  var r = M.rows[i], lo = Math.log(0.3), hi = Math.log(3.3);
+  var xr = function (ratio) { return x0 + (Math.max(lo, Math.min(hi, Math.log(ratio))) - lo) / (hi - lo) * (x1 - x0); };
+  var refLab = r.refName.replace('the ', '');
+  [[0.5, '-50%'], [1, refLab], [2, '+100%'], [3, '+200%']].forEach(function (t) {
+    el('line', { x1: xr(t[0]), x2: xr(t[0]), y1: cy - 22, y2: cy + 22, stroke: t[0] === 1 ? 'var(--axis)' : 'var(--grid)' }, svg);
+    el('text', { x: xr(t[0]), y: cy - 28, 'text-anchor': 'middle', 'font-size': 10, 'font-weight': t[0] === 1 ? 700 : 400, style: 'fill:var(--' + (t[0] === 1 ? 'ink' : 'muted') + ')' }, svg, t[1]);
+  });
+  if (r.n >= 3) el('rect', { x: xr(r.q1 / r.ref), y: cy - 13, width: Math.max(1, xr(r.q3 / r.ref) - xr(r.q1 / r.ref)), height: 26, style: 'fill:var(--surface)' }, svg);
+  var dots = [];
+  M.bidders.forEach(function (b) {
+    var c = b.cells[i]; if (c.v == null) return; var x = xr(c.v / r.ref);
+    if (c.st === 'plug') el('path', { d: 'M' + x + ',' + (cy - 4.5) + 'l4.5,4.5l-4.5,4.5l-4.5,-4.5Z', fill: 'var(--surface)', stroke: 'var(--plug-ink)', 'stroke-width': 1.5, opacity: b.qualified ? 1 : .5 }, svg);
+    else if (b.qualified) dots.push([x, b]);
+    else el('line', { x1: x, x2: x, y1: cy - 8, y2: cy + 8, 'stroke-width': 2, 'stroke-linecap': 'round', 'class': 's' + c.cls, opacity: .45 }, svg);
+  });
+  dots.forEach(function (d) { el('circle', { cx: d[0], cy: cy, r: M.rec && d[1].id === M.rec.id ? 6 : 4.5, style: 'fill:var(--ink)', stroke: 'var(--surface-2)', 'stroke-width': 2 }, svg); });
+  var gx = xr(r.est / r.ref); el('path', { d: 'M' + gx + ',' + (cy + 15) + 'l4.5,7h-9Z', style: 'fill:var(--ink)' }, svg);
+  el('text', { x: x0, y: cy + 38, 'font-size': 10, style: 'fill:var(--muted)' }, svg, 'Dots: qualified bidders. Ticks: the rest. Diamond: plug. Triangle: GC estimate.');
+}
+function drawHeat(M, host, hooks) {
+  hooks = hooks || {};
+  var W = host.clientWidth, N = M.order.length, items = M.items, narrow = W < 640;
+  var nQ = M.order.filter(function (b) { return b.qualified; }).length, grouped = M.grouped && nQ > 0 && nQ < N, gGap = grouped ? 18 : 0;
+  var left = narrow ? 108 : 214, spreadW = narrow ? 0 : 176, notesW = !narrow && W >= 1100 && state.notes === 'on' ? 244 : 0, right = spreadW + notesW;
+  var cw = Math.max(9, Math.min(104, (W - left - right - 4 - gGap) / N)), gap = cw >= 14 ? 2 : 1, gridW = cw * N + gGap;
+  var X = function (j) { return left + j * cw + (grouped && j >= nQ ? gGap : 0); };
+  var top = 54, barsH = 92, headH = cw >= 70 ? 36 : cw >= 13 ? 22 : 8, y0 = top + barsH + headH + 8;
+  var dense = items.length > 20, base = dense ? 15 : 24, secH = 22, minH = dense ? 4 : 6, totalH = base * items.length;
+  var hs = items.map(function (it, i) { return state.rowMode === 'weight' ? minH + (totalH - minH * items.length) * M.weights[i] : base; });
+  var open = state.openItem != null && state.openItem < items.length ? state.openItem : null, bandH = narrow ? 276 : 160, bandY = 0;
+  var ys = [], y = y0, secY = [];
+  M.sc.sections.forEach(function (s) { secY.push(y); y += secH; for (var i = s.first; i < s.first + s.count; i++) { ys[i] = y; y += hs[i]; if (i === open) { bandY = y + 4; y += bandH + 10; } } y += 4; });
+  var svgW = Math.max(W, left + gridW + right), svgH = y + 8;
+  var svg = el('svg', { width: svgW, height: svgH, viewBox: '0 0 ' + svgW + ' ' + svgH, role: 'img', 'aria-label': 'Heat grid of ' + N + ' bidders by ' + items.length + ' scope items, ' + nQ + ' qualified' }, host);
+
+  // who qualified: group header when grouped, otherwise a one-line count
+  if (grouped) {
+    el('line', { x1: X(0), x2: X(nQ - 1) + cw, y1: 21, y2: 21, stroke: 'var(--ink)', 'stroke-width': 2.5 }, svg);
+    el('text', { x: X(nQ - 1) + cw, y: 13, 'text-anchor': 'end', 'font-size': 12, 'font-weight': 700, style: 'fill:var(--ink)' }, svg, 'Qualified · ' + nQ);
+    el('line', { x1: X(nQ), x2: X(N - 1) + cw, y1: 21, y2: 21, stroke: 'var(--axis)', 'stroke-width': 2.5 }, svg);
+    el('text', { x: X(nQ), y: 13, 'font-size': 12, style: 'fill:var(--muted)' }, svg, (narrow ? 'Not qualified · ' : 'Did not qualify · ') + (N - nQ));
+  } else el('text', { x: left, y: 13, 'font-size': 12, 'font-weight': 700, style: 'fill:var(--ink)' }, svg, nQ === N ? 'All ' + N + ' qualified' : nQ + ' of ' + N + ' qualified' + (nQ ? ' (marked ✓, drawn solid)' : ''));
+
+  // margin bars: leveled total split into priced scope and plugs
+  var maxV = Math.max(M.maxLev, M.estTotal) * 1.04, yb = function (v) { return top + barsH - v / maxV * barsH; };
+  el('line', { x1: left, x2: left + gridW, y1: top + barsH, y2: top + barsH, stroke: 'var(--axis)' }, svg);
+  el('line', { x1: left, x2: left + gridW, y1: yb(M.estTotal), y2: yb(M.estTotal), stroke: 'var(--muted)', 'stroke-width': 1 }, svg);
+  el('text', { x: left - 8, y: yb(M.estTotal) + 4, 'text-anchor': 'end', 'font-size': 11 }, svg, 'GC estimate ' + short(M.estTotal));
+  el('text', { x: left - 8, y: top + barsH + 1, 'text-anchor': 'end', 'font-size': 11, style: 'fill:var(--muted)' }, svg, 'Leveled total');
+  var bw = Math.max(3, Math.min(24, cw - gap - 2));
+  M.order.forEach(function (b, j) {
+    var cx = X(j) + cw / 2, g = el('g', { 'class': b.qualified ? '' : 'faded' }, svg), priced = b.lev - b.plugs, d = topRound(cx - bw / 2, yb(priced), bw, yb(0) - yb(priced), b.plugs > 0 ? 0 : 3);
+    if (b.qualified) el('path', { d: d, style: 'fill:var(--ink-2)' }, g);
+    else el('path', { d: d, fill: 'none', stroke: 'var(--ink-2)', 'stroke-width': 1.3 }, g);
+    if (b.plugs > 0) { var ph = yb(priced) - yb(b.lev) - 2; if (ph > 1) el('path', { d: topRound(cx - bw / 2, yb(b.lev), bw, ph, 3), 'class': 'plug' }, g); }
+    el('line', { x1: cx - bw / 2 - 2, x2: cx + bw / 2 + 2, y1: yb(b.asbid), y2: yb(b.asbid), stroke: 'var(--ink)', 'stroke-width': 1.5 }, g);
+    if (cw >= 44) el('text', { x: cx, y: yb(b.lev) - 5, 'text-anchor': 'middle', 'font-size': 10.5, 'font-weight': b.qualified ? 700 : 400, style: 'font-variant-numeric:tabular-nums;fill:var(--' + (b.qualified ? 'ink' : 'muted') + ')' }, svg, short(b.lev));
+    if (b.qualified) {
+      var mark = M.rec && b.id === M.rec.id ? '★' : '✓';
+      if (cw >= 11 || mark === '★') el('text', { x: cx, y: 40, 'text-anchor': 'middle', 'font-size': mark === '★' ? 14 : 12, 'font-weight': 700, style: 'fill:var(--ink)' }, svg, mark);
+      else el('circle', { cx: cx, cy: 36, r: 2.2, style: 'fill:var(--ink)' }, svg);
+    }
+    var lab = b.qualified ? 'fill:var(--ink)' : 'fill:var(--muted)';
+    if (cw >= 22) el('text', { x: cx, y: top + barsH + 15, 'text-anchor': 'middle', 'font-size': 10.5, 'font-weight': b.qualified ? 700 : 400, style: lab }, svg, b.code);
+    else if (cw >= 13 && (j === 0 || (j + 1) % 5 === 0)) el('text', { x: cx, y: top + barsH + 15, 'text-anchor': 'middle', 'font-size': 10, style: 'fill:var(--muted)' }, svg, String(j + 1));
+    if (cw >= 70) el('text', { x: cx, y: top + barsH + 29, 'text-anchor': 'middle', 'font-size': 10.5, style: lab }, svg, trunc(b.name, Math.floor(cw / 5.9)));
+    el('rect', { x: X(j), y: 24, width: cw, height: top + barsH + headH - 24, fill: 'transparent', 'data-bar': j, style: 'cursor:pointer' }, svg);
+  });
+
+  // rows: section headers, item labels (click to open the scope item analysis)
+  var chars = Math.floor((left - 28) / 6.3);
+  M.sc.sections.forEach(function (s, si) {
+    el('text', { x: 0, y: secY[si] + 15, 'font-size': 11, 'font-weight': 700, style: 'fill:var(--ink);letter-spacing:.04em;text-transform:uppercase' }, svg, trunc(s.name, chars + 6));
+    el('line', { x1: 0, x2: left + gridW, y1: secY[si] + 20.5, y2: secY[si] + 20.5, stroke: 'var(--grid)' }, svg);
+  });
+  items.forEach(function (it, i) {
+    var cy = ys[i] + hs[i] / 2;
+    if (hs[i] >= 10) {
+      el('text', { x: 0, y: cy + 4, 'font-size': 11, style: 'fill:var(--muted)' }, svg, i === open ? '▾' : '▸');
+      el('text', { x: left - 10, y: cy + 4, 'text-anchor': 'end', 'font-size': hs[i] >= 18 ? 12 : 10.5, 'font-weight': i === open ? 700 : 400, style: i === open ? 'fill:var(--ink)' : null }, svg, trunc(it.name, chars));
+    }
+    el('rect', { x: 0, y: ys[i], width: left - 4, height: hs[i], fill: 'transparent', 'data-row': i, style: 'cursor:pointer' }, svg);
+  });
+  // cells: qualified bidders get full solid cells; the rest are faded, and shrink to half height when there is no room for a number
+  var cellsG = el('g', {}, svg), focus = null;
+  M.order.forEach(function (b, j) {
+    var x = X(j) + gap / 2, w = cw - gap, nq = !b.qualified;
+    b.cells.forEach(function (c, i) {
+      var yy = ys[i] + gap / 2, hh = Math.max(1, hs[i] - gap), text = w >= 52 && hh >= 16 && c.v != null;
+      var inset = nq && !(w >= 52 && hh >= 16) && hh >= 6, ry = yy, rh2 = hh;
+      if (inset) { rh2 = Math.max(3, hh * 0.46); ry = yy + (hh - rh2) / 2; }
+      var plain = nq || c.st === 'plug' || c.st === 'incl';
+      var kind = (c.st === 'plug' ? 'plug' : c.st === 'incl' ? 'incl' : 'd' + c.cls) + (nq ? ' nq' : '');
+      var r = el('rect', { x: x, y: ry, width: w, height: rh2, rx: w >= 10 && rh2 >= 8 ? 2 : 0, 'class': kind }, cellsG);
+      if (inset) { r.setAttribute('pointer-events', 'none'); r = el('rect', { x: x, y: yy, width: w, height: hh, fill: 'transparent' }, cellsG); }
+      r.setAttribute('data-b', j); r.setAttribute('data-i', i); r.style.cursor = 'pointer';
+      if (c.st === 'incl' && w >= 12 && hh >= 9) el('line', { x1: x + w / 2 - 3, x2: x + w / 2 + 3, y1: yy + hh / 2, y2: yy + hh / 2, stroke: 'var(--muted)', 'stroke-width': 1.5, 'pointer-events': 'none' }, cellsG);
+      if (c.st === 'adj' && !inset && w >= 9 && hh >= 8) { var q = Math.min(6, w / 2.4, hh / 2); el('path', { d: 'M' + (x + w - q) + ',' + yy + 'H' + (x + w) + 'V' + (yy + q) + 'Z', 'class': nq ? '' : 't' + c.cls, style: nq ? 'fill:var(--ink-2)' : null, 'pointer-events': 'none', opacity: .85 }, cellsG); }
+      // the analysis flagged something to check on this data point
+      if (c.note.flag && hh >= 5) el('circle', { cx: w >= 30 ? x + 7 : x + w / 2, cy: ry + rh2 / 2, r: w >= 12 && rh2 >= 8 ? 2.4 : 1.7, 'class': plain ? '' : 't' + c.cls, style: plain ? 'fill:var(--ink)' : null,
+        stroke: c.st === 'plug' ? 'var(--plug-bg)' : null, 'stroke-width': c.st === 'plug' ? 1.2 : null, 'pointer-events': 'none' }, cellsG);
+      if (text) el('text', { x: x + w - 6, y: yy + hh / 2 + 4, 'text-anchor': 'end', 'font-size': 11, 'font-weight': nq ? 400 : 600, 'class': nq || c.st === 'plug' ? '' : 't' + c.cls,
+        style: 'font-variant-numeric:tabular-nums' + (c.st === 'plug' && !nq ? ';fill:var(--ink);paint-order:stroke;stroke:var(--plug-bg);stroke-width:3px' : nq ? ';fill:var(--ink-2)' : ''), 'pointer-events': 'none' }, cellsG, short(c.v));
+      if (state.cell && state.cell.id === b.id && state.cell.i === i) focus = [x, yy, w, hh];
+    });
+  });
+  if (grouped) el('rect', { x: X(0) - 3.5, y: 27, width: nQ * cw + 7, height: svgH - 30, rx: 6, fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1.5, 'pointer-events': 'none' }, svg);
+
+  // spread column
+  if (spreadW) {
+    var rx0 = left + gridW + 20, rw = spreadW - 40, lo = Math.log(0.4), hi = Math.log(2.5);
+    var xs = function (ratio) { return rx0 + (Math.max(lo, Math.min(hi, Math.log(ratio))) - lo) / (hi - lo) * rw; };
+    el('text', { x: rx0, y: top + barsH + 15, 'font-size': 10.5, 'font-weight': 700, style: 'fill:var(--ink)' }, svg, 'Spread across bidders');
+    [[0.5, '-50%'], [1, 'ref'], [2, '+100%']].forEach(function (t) { el('text', { x: xs(t[0]), y: y0 + 13, 'text-anchor': 'middle', 'font-size': 10, style: 'fill:var(--muted)' }, svg, t[1]); });
+    M.rows.forEach(function (r, i) {
+      var cy = ys[i] + hs[i] / 2;
+      el('line', { x1: xs(1), x2: xs(1), y1: ys[i], y2: ys[i] + hs[i], stroke: 'var(--axis)' }, svg);
+      if (r.n) {
+        el('line', { x1: xs(r.min / r.ref), x2: xs(r.max / r.ref), y1: cy, y2: cy, stroke: 'var(--muted)' }, svg);
+        var bh = Math.max(2, Math.min(8, hs[i] - 4));
+        el('rect', { x: xs(r.q1 / r.ref), y: cy - bh / 2, width: Math.max(1.5, xs(r.q3 / r.ref) - xs(r.q1 / r.ref)), height: bh, style: 'fill:var(--priced)' }, svg);
+        el('line', { x1: xs(r.med / r.ref), x2: xs(r.med / r.ref), y1: cy - bh / 2 - 1.5, y2: cy + bh / 2 + 1.5, stroke: 'var(--ink)', 'stroke-width': 1.5 }, svg);
+      }
+      if (hs[i] >= 9) { var gx = xs(r.est / r.ref); el('path', { d: 'M' + gx + ',' + (cy - 4) + 'l4,4l-4,4l-4,-4Z', fill: 'var(--surface)', stroke: 'var(--ink)', 'stroke-width': 1.1 }, svg); }
+    });
+  }
+  // one-line scope item analysis beside each row
+  if (notesW) {
+    var nx = left + gridW + spreadW + 4, nchars = Math.floor((notesW - 20) / 5.6);
+    el('text', { x: nx + 12, y: top + barsH + 15, 'font-size': 10.5, 'font-weight': 700, style: 'fill:var(--ink)' }, svg, 'Scope item analysis');
+    M.rows.forEach(function (r, i) {
+      if (hs[i] < 11) return; var cy = ys[i] + hs[i] / 2;
+      if (r.note.flag) el('circle', { cx: nx + 4, cy: cy, r: 2.6, style: 'fill:var(--accent)' }, svg);
+      el('text', { x: nx + 12, y: cy + 4, 'font-size': hs[i] >= 18 ? 11 : 10, 'data-row': i, style: 'cursor:pointer;fill:var(--ink-2)' }, svg, trunc(r.note.headline, nchars));
+    });
+  }
+  // opened scope item: full analysis and every bid for the item on one line
+  if (open != null) {
+    el('rect', { x: 0, y: bandY, width: svgW, height: bandH, rx: 8, style: 'fill:var(--surface-2)' }, svg);
+    var textW = narrow ? svgW - 24 : Math.min(600, svgW * 0.5), textH = narrow ? 168 : bandH - 16;
+    var fo = el('foreignObject', { x: 12, y: bandY + 8, width: textW, height: textH }, svg), div = document.createElement('div');
+    div.className = 'fo'; h('div', 'fo-t', div, items[open].name + ': scope item analysis'); h('p', '', div, M.rows[open].note.full); fo.appendChild(div);
+    miniLane(svg, M, open, narrow ? 24 : 12 + textW + 40, svgW - 28, narrow ? bandY + 8 + textH + 44 : bandY + bandH / 2 + 4);
+  }
+  // selection frame, focused data point, linked column highlight, hover outline
+  var selJ = M.order.findIndex(function (b) { return b.id === state.sel; });
+  if (selJ >= 0) el('rect', { x: X(selJ) + 1, y: 28.5, width: cw - 2, height: svgH - 33, rx: 3, fill: 'none', stroke: 'var(--accent)', 'stroke-width': 2, 'pointer-events': 'none' }, svg);
+  if (focus) el('rect', { x: focus[0] - 1.5, y: focus[1] - 1.5, width: focus[2] + 3, height: focus[3] + 3, rx: 3, fill: 'none', stroke: 'var(--accent)', 'stroke-width': 3, 'pointer-events': 'none' }, svg);
+  var colHL = el('rect', { y: 28.5, width: cw, height: svgH - 33, rx: 3, style: 'fill:var(--ink)', 'fill-opacity': .07, stroke: 'var(--ink)', 'stroke-width': 1, 'pointer-events': 'none', visibility: 'hidden' }, svg);
+  var hov = el('rect', { fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1.5, 'pointer-events': 'none', visibility: 'hidden' }, svg), lastId = null;
+  function tell(id) { if (id !== lastId) { lastId = id; if (hooks.onHover) hooks.onHover(id); } }
+  svg.addEventListener('pointermove', function (ev) {
+    var t = ev.target, d = t.dataset || {};
+    if (d.i != null) { var b = M.order[+d.b]; ['x', 'y', 'width', 'height'].forEach(function (a) { hov.setAttribute(a, t.getAttribute(a)); }); hov.setAttribute('visibility', 'visible'); cellTip(ev, M, b, +d.i); tell(b.id); }
+    else if (d.bar != null) { hov.setAttribute('visibility', 'hidden'); bidderTip(ev, M, M.order[+d.bar]); tell(M.order[+d.bar].id); }
+    else if (d.row != null) { hov.setAttribute('visibility', 'hidden'); var rr = M.rows[+d.row]; showTip(ev, items[+d.row].name, 'Scope item. Click for the full analysis.', [['Priced by', rr.priced.length + ' of ' + M.all.length], ['Median', rr.n ? money(rr.med) : '–'], ['GC estimate', money(rr.est)]], rr.note.short); tell(null); }
+    else { hov.setAttribute('visibility', 'hidden'); hideTip(); tell(null); }
+  });
+  svg.addEventListener('pointerleave', function () { hov.setAttribute('visibility', 'hidden'); hideTip(); tell(null); });
+  svg.addEventListener('click', function (ev) {
+    var d = ev.target.dataset || {};
+    if (d.row != null) { state.openItem = state.openItem === +d.row ? null : +d.row; render(); }
+    else if (d.i != null) { var b = M.order[+d.b], same = state.cell && state.cell.id === b.id && state.cell.i === +d.i; state.cell = same ? null : { id: b.id, i: +d.i }; render(); }
+    else if (d.bar != null) toggleSel(M.order[+d.bar].id);
+  });
+  return { highlight: function (id) {
+    var j = M.order.findIndex(function (b) { return b.id === id; });
+    if (j < 0) { colHL.setAttribute('visibility', 'hidden'); return; }
+    colHL.setAttribute('x', X(j)); colHL.setAttribute('visibility', 'visible');
+  } };
+}
+
+// ---------------------------------------------------------------- B. spread lanes
+function drawLanes(M, host) {
+  var W = host.clientWidth, items = M.items, narrow = W < 640, left = narrow ? 108 : 214, wbar = narrow ? 0 : 54;
+  var x0 = left + wbar + 12, plotW = Math.max(120, W - x0 - 18), lo = Math.log(0.3), hi = Math.log(3.3);
+  var xr = function (ratio) { return x0 + (Math.max(lo, Math.min(hi, Math.log(ratio))) - lo) / (hi - lo) * plotW; };
+  var dense = items.length > 20, lh = dense ? 17 : 27, secH = 22, top = 34, totH = 40;
+  var ys = [], y = top + totH + 10, secY = [];
+  M.sc.sections.forEach(function (s) { secY.push(y); y += secH; for (var i = s.first; i < s.first + s.count; i++) { ys[i] = y; y += lh; } y += 4; });
+  var svgH = y + 6, svg = el('svg', { width: W, height: svgH, viewBox: '0 0 ' + W + ' ' + svgH, role: 'img', 'aria-label': 'Spread of bids for each scope item' }, host);
+  var refLab = state.ref === 'gc' ? 'GC est.' : state.ref === 'low' ? 'lowest' : 'median';
+  [[0.5, '-50%'], [0.75, '-25%'], [1, refLab], [1.5, '+50%'], [2, '+100%'], [3, '+200%']].forEach(function (t) {
+    if (narrow && (t[0] === 0.75 || t[0] === 1.5)) return;
+    el('line', { x1: xr(t[0]), x2: xr(t[0]), y1: top - 6, y2: svgH - 4, stroke: t[0] === 1 ? 'var(--axis)' : 'var(--grid)' }, svg);
+    el('text', { x: xr(t[0]), y: top - 12, 'text-anchor': 'middle', 'font-size': 10.5, 'font-weight': t[0] === 1 ? 700 : 400, style: t[0] === 1 ? 'fill:var(--ink)' : 'fill:var(--muted)' }, svg, t[1]);
+  });
+  if (wbar) el('text', { x: left + 4, y: top - 12, 'font-size': 10.5, style: 'fill:var(--muted)' }, svg, '$ weight');
+  var chars = Math.floor((left - 18) / 6.3), wmax = Math.max.apply(null, M.weights);
+
+  // total lane
+  var ty = top + totH / 2;
+  el('text', { x: left - 10, y: ty + 4, 'text-anchor': 'end', 'font-size': 12, 'font-weight': 700, style: 'fill:var(--ink)' }, svg, 'Leveled total');
+  el('line', { x1: 0, x2: W, y1: top + totH + 4.5, y2: top + totH + 4.5, stroke: 'var(--axis)' }, svg);
+  M.sc.sections.forEach(function (s, si) {
+    el('text', { x: 0, y: secY[si] + 15, 'font-size': 11, 'font-weight': 700, style: 'fill:var(--ink);letter-spacing:.04em;text-transform:uppercase' }, svg, trunc(s.name, chars + 4));
+  });
+  var pos = M.bidders.map(function () { return []; }), bix = {};
+  M.bidders.forEach(function (b, k) { bix[b.id] = k; });
+  function tick(b, x, cy, hh, c, st) {
+    var g = b.qualified ? svg : dimG;
+    if (st === 'plug') el('path', { d: 'M' + x + ',' + (cy - 4.5) + 'l4.5,4.5l-4.5,4.5l-4.5,-4.5Z', fill: 'var(--surface)', stroke: 'var(--plug-ink)', 'stroke-width': 1.5 }, g);
+    else el('line', { x1: x, x2: x, y1: cy - hh / 2, y2: cy + hh / 2, 'stroke-width': 2, 'stroke-linecap': 'round', 'class': 's' + c }, g);
+  }
+  var dimG = el('g', { 'class': 'dimmed' }, svg);
+  M.bidders.forEach(function (b) { var x = xr(b.lev / M.refTotal); tick(b, x, ty, 20, cls(b.lev / M.refTotal - 1), 'ok'); pos[bix[b.id]].total = [x, ty]; });
+  if (state.ref !== 'gc') { var gx = xr(M.estTotal / M.refTotal); el('path', { d: 'M' + gx + ',' + (ty + 13) + 'l4.5,7h-9Z', style: 'fill:var(--ink)' }, svg); }
+  items.forEach(function (it, i) {
+    var r = M.rows[i], cy = ys[i] + lh / 2;
+    el('text', { x: left - 10, y: cy + 4, 'text-anchor': 'end', 'font-size': dense ? 10.5 : 12 }, svg, trunc(it.name, chars));
+    if (wbar) el('rect', { x: left + 4, y: cy - 3, width: Math.max(1.5, (wbar - 8) * M.weights[i] / wmax), height: 6, rx: 1, style: 'fill:var(--priced)' }, svg);
+    if (r.n >= 3) el('rect', { x: xr(r.q1 / r.ref), y: cy - lh * .36, width: Math.max(1, xr(r.q3 / r.ref) - xr(r.q1 / r.ref)), height: lh * .72, style: 'fill:var(--surface-2)' }, svg);
+  });
+  var marks = el('g', {}, svg); dimG = el('g', { 'class': 'dimmed' }, svg);
+  var keep = svg; svg = marks;
+  items.forEach(function (it, i) {
+    var r = M.rows[i], cy = ys[i] + lh / 2;
+    M.bidders.forEach(function (b) { var c = b.cells[i]; if (c.v == null) return; var x = xr(c.v / r.ref); tick(b, x, cy, lh * .58, c.cls, c.st); pos[bix[b.id]][i] = [x, cy]; });
+    if (state.ref !== 'gc') { var gx2 = xr(r.est / r.ref); el('path', { d: 'M' + gx2 + ',' + (cy + lh * .3) + 'l3.5,5.5h-7Z', style: 'fill:var(--ink)' }, keep); }
+  });
+  svg = keep;
+  // profile of one bidder
+  var prof = el('g', { 'pointer-events': 'none' }, svg);
+  function profile(id) {
+    prof.textContent = '';
+    var k = bix[id]; if (k == null) return;
+    var b = M.bidders[k], pts = [pos[k].total];
+    items.forEach(function (it, i) { if (pos[k][i]) pts.push(pos[k][i]); });
+    el('polyline', { points: pts.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' '), fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1.75, 'stroke-linejoin': 'round' }, prof);
+    pts.forEach(function (p) { el('circle', { cx: p[0], cy: p[1], r: 4, style: 'fill:var(--ink)', stroke: 'var(--surface)', 'stroke-width': 2 }, prof); });
+    var lx = pts[0][0], right2 = lx < W - 200, lbl = trunc(b.code + '  ' + b.name, narrow ? 18 : 30) + '  ' + short(b.lev);
+    el('text', { x: lx + (right2 ? 9 : -9), y: ty - 9, 'text-anchor': right2 ? 'start' : 'end', 'font-size': 11.5, 'font-weight': 700, style: 'fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:4px' }, prof, lbl);
+  }
+  var baseSel = state.sel != null && bix[state.sel] != null ? state.sel : (M.rec ? M.rec.id : M.bidders[0].id);
+  profile(baseSel);
+  // hover: nearest tick in the lane under the pointer
+  var hit = el('rect', { x: x0 - 6, y: top, width: plotW + 12, height: svgH - top, fill: 'transparent', style: 'cursor:pointer' }, svg), last = null;
+  function nearest(ev) {
+    var bb = svg.getBoundingClientRect(), px = ev.clientX - bb.left, py = ev.clientY - bb.top, lane = 'total';
+    if (py > top + totH + 4) { lane = -1; var bd = Infinity; items.forEach(function (it, i) { var d = Math.abs(ys[i] + lh / 2 - py); if (d < bd) { bd = d; lane = i; } }); }
+    var best = null, bx = Infinity;
+    M.bidders.forEach(function (b, k) { var p = pos[k][lane]; if (!p) return; var d = Math.abs(p[0] - px); if (d < bx) { bx = d; best = b; } });
+    return best && bx < 28 ? { b: best, lane: lane } : null;
+  }
+  hit.addEventListener('pointermove', function (ev) {
+    var n = nearest(ev);
+    if (!n) { if (last != null) { profile(baseSel); last = null; } hideTip(); return; }
+    if (last !== n.b.id) { profile(n.b.id); last = n.b.id; }
+    if (n.lane === 'total') bidderTip(ev, M, n.b); else cellTip(ev, M, n.b, n.lane);
+  });
+  hit.addEventListener('pointerleave', function () { profile(baseSel); last = null; hideTip(); });
+  hit.addEventListener('click', function (ev) { var n = nearest(ev); if (n) toggleSel(n.b.id); });
+}
+
+// ---------------------------------------------------------------- C. skyline
+function drawSkyline(M, host) {
+  var W = host.clientWidth, N = M.order.length, items = M.items, share = state.skyMode === 'share';
+  var left = 52, gcGap = 12, top = 30, plotH = 400, bottom = 30;
+  var cw = Math.max(9, Math.min(76, (W - left - gcGap - 10) / (N + 1))), svgW = Math.max(W, left + gcGap + cw * (N + 1) + 10), svgH = top + plotH + bottom;
+  var svg = el('svg', { width: svgW, height: svgH, viewBox: '0 0 ' + svgW + ' ' + svgH, role: 'img', 'aria-label': 'Stacked bid totals for ' + N + ' bidders' }, host);
+  var maxV = Math.max(M.maxLev, M.estTotal) * 1.03, base = top + plotH, bw = cw - (cw >= 14 ? 4 : 1.5);
+  var ticks = share ? [0, .25, .5, .75, 1] : niceTicks(maxV, 5);
+  ticks.forEach(function (t) {
+    var yy = base - (share ? t : t / maxV) * plotH;
+    el('line', { x1: left, x2: svgW - 6, y1: yy, y2: yy, stroke: t === 0 ? 'var(--axis)' : 'var(--grid)' }, svg);
+    el('text', { x: left - 8, y: yy + 4, 'text-anchor': 'end', 'font-size': 10.5, style: 'fill:var(--muted);font-variant-numeric:tabular-nums' }, svg, share ? Math.round(t * 100) + '%' : short(t).replace('.00M', 'M'));
+  });
+  function column(x, vals, kinds, total, g) {
+    var denom = share ? total : maxV, yTop = base - total / denom * plotH, yy = yTop;
+    items.forEach(function (it, i) {
+      if (vals[i] == null) return;
+      var hh = vals[i] / denom * plotH, secStart = i > 0 && items[i - 1].sec !== it.sec, gp = hh > 3 ? (secStart ? 2 : 1) : 0;
+      el('rect', { x: x, y: yy + gp, width: bw, height: Math.max(.6, hh - gp), 'class': 'seg-i ' + kinds[i], 'data-i': i, 'data-col': g.getAttribute('data-col') }, g);
+      yy += hh;
+    });
+    return yTop;
+  }
+  // GC estimate column
+  var gg = el('g', { 'data-col': 'gc' }, svg);
+  var gtop = column(left + 2, items.map(function (it) { return it.est; }), items.map(function () { return ''; }), M.estTotal, gg);
+  Array.prototype.forEach.call(gg.querySelectorAll('rect'), function (r) { r.setAttribute('style', 'fill:var(--gc-' + (items[+r.dataset.i].sec % 2 ? 'b' : 'a') + ')'); });
+  el('text', { x: left + 2 + bw / 2, y: base + 15, 'text-anchor': 'middle', 'font-size': 10.5, 'font-weight': 700, style: 'fill:var(--ink)' }, svg, cw >= 26 ? 'GC est.' : 'GC');
+  if (!share) el('line', { x1: left + 2, x2: svgW - 6, y1: gtop, y2: gtop, stroke: 'var(--muted)' }, svg);
+  M.order.forEach(function (b, j) {
+    var x = left + gcGap + (j + 1) * cw + (cw - bw) / 2, g = el('g', { 'class': b.qualified ? '' : 'dimmed', 'data-col': j }, svg);
+    var yTop = column(x, b.cells.map(function (c) { return c.v; }), b.cells.map(function (c) { return c.st === 'plug' ? 'plug' : 'd' + c.cls; }), b.lev, g);
+    var cx = x + bw / 2;
+    if (!share) el('line', { x1: x - 2, x2: x + bw + 2, y1: base - b.asbid / maxV * plotH, y2: base - b.asbid / maxV * plotH, stroke: 'var(--ink)', 'stroke-width': 1.5, 'pointer-events': 'none' }, svg);
+    if (cw >= 44) el('text', { x: cx, y: yTop - 6, 'text-anchor': 'middle', 'font-size': 10.5, style: 'font-variant-numeric:tabular-nums' }, svg, short(b.lev));
+    if (M.rec && b.id === M.rec.id) el('text', { x: cx, y: (cw >= 44 ? yTop - 19 : yTop - 5), 'text-anchor': 'middle', 'font-size': 13, style: 'fill:var(--ink)' }, svg, '★');
+    if (cw >= 22) el('text', { x: cx, y: base + 15, 'text-anchor': 'middle', 'font-size': 10.5, 'font-weight': 700, style: 'fill:var(--ink)' }, svg, b.code);
+    else if (cw >= 13 && (j === 0 || (j + 1) % 5 === 0)) el('text', { x: cx, y: base + 15, 'text-anchor': 'middle', 'font-size': 10, style: 'fill:var(--muted)' }, svg, String(j + 1));
+    if (b.id === state.sel) el('rect', { x: x - 1, y: base + 20, width: bw + 2, height: 3, style: 'fill:var(--ink)' }, svg);
+  });
+  svg.addEventListener('pointermove', function (ev) {
+    var d = ev.target.dataset || {};
+    if (d.i == null) { clear(); return; }
+    if (svg.getAttribute('data-hl') !== d.i) {
+      Array.prototype.forEach.call(svg.querySelectorAll('.seg-i.hl'), function (r) { r.classList.remove('hl'); });
+      Array.prototype.forEach.call(svg.querySelectorAll('.seg-i[data-i="' + d.i + '"]'), function (r) { r.classList.add('hl'); });
+      svg.classList.add('focus-item'); svg.setAttribute('data-hl', d.i);
+    }
+    if (d.col === 'gc') showTip(ev, items[+d.i].name, 'GC estimate', [['Estimate', money(items[+d.i].est)], ['Share of estimate', Math.round(items[+d.i].est / M.estTotal * 100) + '%'], ['Section', items[+d.i].secName]]);
+    else cellTip(ev, M, M.order[+d.col], +d.i);
+  });
+  function clear() { svg.classList.remove('focus-item'); svg.removeAttribute('data-hl'); hideTip(); }
+  svg.addEventListener('pointerleave', clear);
+  svg.addEventListener('click', function (ev) { var d = ev.target.dataset || {}; if (d.col != null && d.col !== 'gc') toggleSel(M.order[+d.col].id); });
+  h('p', 'sample', host, 'Stack order, top to bottom: ' + M.sc.sections.map(function (s) { return s.name; }).join(', ') + '. Hover a segment to light up the same scope item in every bid.').style.marginTop = '6px';
+}
+function niceTicks(max, n) { var raw = max / n, mag = Math.pow(10, Math.floor(Math.log10(raw))), step = [1, 2, 2.5, 5, 10].map(function (m) { return m * mag; }).filter(function (s) { return s >= raw; })[0], out = []; for (var v = 0; v <= max; v += step) out.push(v); return out; }
+
+// ---------------------------------------------------------------- D. fingerprints
+function drawPrints(M, host) {
+  var W = host.clientWidth, N = M.order.length, items = M.items, dense = items.length > 20;
+  var minW = N <= 6 ? 210 : N <= 20 ? 150 : 116, rh = dense ? (N <= 8 ? 8 : N <= 20 ? 4.5 : 3.5) : (N <= 8 ? 13 : N <= 20 ? 8 : 6), secGap = 5;
+  var cols = Math.max(1, Math.min(N + 1, Math.floor((W + 10) / (minW + 10))));
+  while (cols > 2 && (N + 1) % cols === 1) cols--;   // never leave one card alone on the last row
+  var grid = h('div', 'fp-grid', host); grid.style.gridTemplateColumns = 'repeat(' + cols + ', minmax(0, 1fr))';
+  var ys = [], y = 2; M.sc.sections.forEach(function (s) { for (var i = s.first; i < s.first + s.count; i++) { ys[i] = y; y += rh; } y += secGap; });
+  var bodyH = y, lim = Math.log(3);
+  function body(parent, w) { return el('svg', { width: '100%', height: bodyH, viewBox: '0 0 ' + w + ' ' + bodyH, preserveAspectRatio: 'none' }, parent); }
+  // key card
+  var key = h('div', 'fp keycard', grid), k1 = h('div', 'h1', key); h('span', 'code', k1, 'Key'); h('span', 'nm', k1, 'scope items');
+  var k2 = h('div', 'h2', key); h('span', '', k2, 'below'); h('span', '', k2, 'above');
+  h('div', 'tot', key);
+  var ks = el('svg', { width: '100%', height: bodyH }, key), kchars = Math.max(8, Math.floor(((W + 10) / cols - 10 - 30) / 5.4));
+  M.sc.sections.forEach(function (s) {
+    var a = ys[s.first], b2 = ys[s.first + s.count - 1] + rh;
+    el('line', { x1: 2, x2: 2, y1: a + 1, y2: b2 - 1, stroke: 'var(--axis)', 'stroke-width': 2 }, ks);
+    if (rh >= 12) for (var i = s.first; i < s.first + s.count; i++) el('text', { x: 9, y: ys[i] + rh - 3, 'font-size': 10, style: 'fill:var(--ink-2)' }, ks, trunc(items[i].name, kchars));
+    else if (b2 - a >= 11) el('text', { x: 9, y: (a + b2) / 2 + 3.5, 'font-size': 10, style: 'fill:var(--ink-2)' }, ks, trunc(s.name, kchars));
+  });
+  M.order.forEach(function (b) {
+    var card = h('div', 'fp' + (b.id === state.sel ? ' sel' : ''), grid); card.tabIndex = 0; card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', b.name + ', leveled total ' + money(b.lev));
+    if (!b.qualified) card.style.opacity = .5;
+    var h1 = h('div', 'h1', card); h('span', 'code', h1, (M.rec && b.id === M.rec.id ? '★ ' : '') + b.code); h('span', 'nm', h1, b.name);
+    var h2 = h('div', 'h2', card); h('span', '', h2, b.qualified ? '✓ #' + b.rank : 'not qualified'); h('b', '', h2, short(b.lev));
+    var tot = h('div', 'tot', card), a = h('i', '', tot), p = h('i', '', tot);
+    a.style.width = ((b.lev - b.plugs) / M.maxLev * 100) + '%'; a.style.background = 'var(--priced)';
+    p.style.width = (b.plugs / M.maxLev * 100) + '%'; p.style.background = 'var(--plug-ink)';
+    var w = 100, svg = body(card, w), mid = w / 2;
+    el('line', { x1: mid, x2: mid, y1: 0, y2: bodyH, stroke: 'var(--axis)', 'stroke-width': .6, 'vector-effect': 'non-scaling-stroke' }, svg);
+    b.cells.forEach(function (c, i) {
+      var yy = ys[i], hh = Math.max(1.6, rh - (rh >= 7 ? 2 : 1));
+      if (c.st === 'plug') el('rect', { x: mid - 2.5, y: yy, width: 5, height: hh, style: 'fill:var(--plug-ink)' }, svg);
+      else if (c.st === 'incl') el('rect', { x: mid - .8, y: yy + hh / 2 - .8, width: 1.6, height: 1.6, style: 'fill:var(--muted)' }, svg);
+      else {
+        var t = Math.max(-lim, Math.min(lim, Math.log(1 + c.dev))) / lim * (mid - 2), bx = t >= 0 ? mid : mid + t;
+        el('rect', { x: c.cls === 3 ? mid - 1 : bx, y: yy, width: c.cls === 3 ? 2 : Math.max(1.5, Math.abs(t)), height: hh, 'class': c.cls === 3 ? '' : 'd' + (c.cls === 2 ? 1 : c.cls === 4 ? 5 : c.cls), style: c.cls === 3 ? 'fill:var(--muted)' : null }, svg);
+      }
+      el('rect', { x: 0, y: yy - .5, width: w, height: rh, 'class': 'fp-band', 'data-i': i, 'data-id': b.id }, svg);
+    });
+    card.addEventListener('click', function () { toggleSel(b.id); });
+    card.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggleSel(b.id); } });
+  });
+  var byId = {}; M.bidders.forEach(function (b) { byId[b.id] = b; });
+  var lastI = null;
+  grid.addEventListener('pointermove', function (ev) {
+    var d = ev.target.dataset || {};
+    if (d.i == null) { var c = ev.target.closest ? ev.target.closest('.fp:not(.keycard)') : null; off(); if (c) { var nm = c.querySelector('.nm').textContent; var bb = M.bidders.filter(function (x) { return x.name === nm; })[0]; if (bb) bidderTip(ev, M, bb); } else hideTip(); return; }
+    if (lastI !== d.i) { off(); Array.prototype.forEach.call(grid.querySelectorAll('.fp-band[data-i="' + d.i + '"]'), function (r) { r.classList.add('on'); }); lastI = d.i; }
+    cellTip(ev, M, byId[+d.id], +d.i);
+  });
+  function off() { if (lastI == null) return; Array.prototype.forEach.call(grid.querySelectorAll('.fp-band.on'), function (r) { r.classList.remove('on'); }); lastI = null; }
+  grid.addEventListener('pointerleave', function () { off(); hideTip(); });
+}
+
+// ---------------------------------------------------------------- E. leveling map
+function drawMap(M, host, opt) {
+  opt = opt || {};
+  var W = host.clientWidth, bids = M.bidders, N = bids.length, compact = !!opt.compact;
+  var left = 58, right = 26, top = 34, plotH = compact ? 262 : 360, bottom = 46, plotW = W - left - right, laneH = compact ? 64 : 74, laneY = top + laneH / 2;
+  var svgH = top + plotH + bottom, svg = el('svg', { width: W, height: svgH, viewBox: '0 0 ' + W + ' ' + svgH, role: 'img', 'aria-label': 'Total price against scope completeness for ' + N + ' bidders' }, host);
+  var xsAll = bids.reduce(function (a, b) { return a.concat([b.asbid, b.lev]); }, [M.estTotal]);
+  var xmin = Math.min.apply(null, xsAll) * .92, xmax = Math.max.apply(null, xsAll) * 1.04;
+  var covMin = Math.min.apply(null, bids.map(function (b) { return b.cov; }).concat([1])), ymin = Math.min(.8, Math.floor(covMin * 10) / 10);
+  var X = function (v) { return left + (v - xmin) / (xmax - xmin) * plotW; }, Y = function (c) { return top + laneH + 16 + (1 - c) / (1 - ymin) * (plotH - laneH - 16); };
+  niceTicks(xmax, W < 640 ? 4 : 7).filter(function (t) { return t >= xmin; }).forEach(function (t) {
+    el('line', { x1: X(t), x2: X(t), y1: top, y2: top + plotH, stroke: 'var(--grid)' }, svg);
+    el('text', { x: X(t), y: top + plotH + 16, 'text-anchor': 'middle', 'font-size': 10.5, style: 'fill:var(--muted);font-variant-numeric:tabular-nums' }, svg, short(t).replace('.00M', 'M'));
+  });
+  el('rect', { x: left, y: top, width: plotW, height: laneH, style: 'fill:var(--surface-2)', opacity: .55 }, svg);
+  el('text', { x: left - 8, y: laneY + 4, 'text-anchor': 'end', 'font-size': 10.5, 'font-weight': 700, style: 'fill:var(--ink)' }, svg, '100%');
+  var step = (1 - ymin) > .45 ? .2 : .1;
+  for (var c = 1 - step; c >= ymin - 1e-9; c -= step) {
+    if (Math.abs(c - COV_MIN) > 0.001) el('line', { x1: left, x2: left + plotW, y1: Y(c), y2: Y(c), stroke: 'var(--grid)' }, svg);
+    el('text', { x: left - 8, y: Y(c) + 4, 'text-anchor': 'end', 'font-size': 10.5, style: 'fill:var(--muted)' }, svg, Math.round(c * 100) + '%');
+  }
+  // the policy line: below it a bidder cannot qualify
+  el('line', { x1: left, x2: left + plotW, y1: Y(COV_MIN), y2: Y(COV_MIN), stroke: 'var(--ink-2)', 'stroke-width': 1.25 }, svg);
+  el('text', { x: left + plotW - 4, y: Y(COV_MIN) + 13, 'text-anchor': 'end', 'font-size': 10.5, style: 'fill:var(--ink-2)' }, svg, 'Below this line: under ' + Math.round(COV_MIN * 100) + '% of scope priced, cannot qualify');
+  el('text', { x: left + plotW / 2, y: svgH - 8, 'text-anchor': 'middle', 'font-size': 11 }, svg, W < 640 ? 'Tick = as bid, circle = leveled, filled = qualified' : 'Total: tick = as bid, circle = leveled. Filled circle = qualified, hollow = did not qualify.');
+  el('text', { x: 0, y: 14, 'font-size': 11 }, svg, 'Scope priced by the bidder');
+  el('line', { x1: X(M.estTotal), x2: X(M.estTotal), y1: top - 3, y2: top + plotH, stroke: 'var(--muted)' }, svg);
+  el('text', { x: X(M.estTotal), y: top - 7, 'text-anchor': 'middle', 'font-size': 10.5 }, svg, 'GC estimate');
+  el('text', { x: left + 6, y: top + 12, 'font-size': 10.5, style: 'fill:var(--muted)' }, svg, 'Priced every item');
+  var pts = [], placed = [], OFF = compact ? [0, -13, 13, -25, 25] : [0, -12, 12, -24, 24, -32, 32];
+  var nQ = bids.filter(function (b) { return b.qualified; }).length;
+  var lowAs = bids.slice().sort(function (a, b) { return a.asbid - b.asbid; })[0];
+  // not-qualified first so qualified bidders are drawn on top
+  var draw = bids.slice().sort(function (a, b) { return (a.qualified - b.qualified) || (a.lev - b.lev); });
+  var labels = el('g', { 'pointer-events': 'none' }, null);
+  draw.forEach(function (b) {
+    var x1 = X(b.asbid), x2 = X(b.lev), yy = Y(b.cov), g = el('g', { 'class': b.qualified ? '' : 'faded' }, svg);
+    if (b.cov > 0.999) { // dodge inside the lane so equal-coverage bidders do not overprint
+      var lo2 = Math.min(x1, x2) - 8, hi2 = Math.max(x1, x2) + 8, o = 0;
+      for (var q = 0; q < OFF.length; q++) { o = OFF[q]; if (!placed.some(function (p) { return p.o === o && p.lo < hi2 && p.hi > lo2; })) break; }
+      placed.push({ o: o, lo: lo2, hi: hi2 }); yy = laneY + o;
+    }
+    var isRec = M.rec && b.id === M.rec.id, isSel = b.id === state.sel;
+    el('line', { x1: x1, x2: x2, y1: yy, y2: yy, stroke: b.plugs > 0 ? 'var(--plug-ink)' : 'var(--ink-2)', 'stroke-width': 2 }, g);
+    el('line', { x1: x1, x2: x1, y1: yy - 5, y2: yy + 5, stroke: 'var(--ink-2)', 'stroke-width': 2, 'stroke-linecap': 'round' }, g);
+    if (b.qualified) el('circle', { cx: x2, cy: yy, r: isRec ? 7.5 : 5.5, style: 'fill:var(--ink)', stroke: 'var(--surface)', 'stroke-width': 2 }, g);
+    else el('circle', { cx: x2, cy: yy, r: 4, style: 'fill:var(--surface)', stroke: 'var(--ink-2)', 'stroke-width': 1.5 }, g);
+    if (isSel) el('circle', { cx: x2, cy: yy, r: 10, fill: 'none', stroke: 'var(--accent)', 'stroke-width': 2 }, svg);
+    var lab = null;
+    if (isRec) lab = '★ ' + trunc(b.name, 24) + '  ' + short(b.lev);
+    else if (isSel) lab = b.code + '  ' + trunc(b.name, 22);
+    else if (b.qualified && nQ <= 16) lab = b.code;
+    else if (b === lowAs && N > 3) lab = b.code + '  lowest as bid';
+    else if (!b.qualified && N <= 8) lab = b.code;
+    if (lab) { var rightSide = isRec ? x2 - left < 210 : x2 < left + plotW - 170; el('text', { x: x2 + (rightSide ? 12 : -12), y: yy + 4, 'text-anchor': rightSide ? 'start' : 'end', 'font-size': 11, 'font-weight': b.qualified ? 700 : 400, style: 'fill:var(--' + (b.qualified ? 'ink' : 'ink-2') + ');paint-order:stroke;stroke:var(--surface);stroke-width:3.5px' }, labels, lab); }
+    pts.push({ b: b, x: x2, y: yy, x1: x1 });
+  });
+  svg.appendChild(labels);
+  var hit = el('rect', { x: left, y: top, width: plotW, height: plotH, fill: 'transparent', style: 'cursor:pointer' }, svg);
+  var ring = el('circle', { r: 10, fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1.5, visibility: 'hidden', 'pointer-events': 'none' }, svg), lastId = null;
+  function near(ev) { var bb = svg.getBoundingClientRect(), px = ev.clientX - bb.left, py = ev.clientY - bb.top, best = null, bd = 40 * 40; pts.forEach(function (p) { var d = Math.min(Math.pow(p.x - px, 2), Math.pow(p.x1 - px, 2)) + Math.pow(p.y - py, 2); if (d < bd) { bd = d; best = p; } }); return best; }
+  function show(p) { if (!p) { ring.setAttribute('visibility', 'hidden'); return; } ring.setAttribute('cx', p.x); ring.setAttribute('cy', p.y); ring.setAttribute('visibility', 'visible'); }
+  function tell(id) { if (id !== lastId) { lastId = id; if (opt.onHover) opt.onHover(id); } }
+  hit.addEventListener('pointermove', function (ev) { var p = near(ev); show(p); if (!p) { hideTip(); tell(null); return; } bidderTip(ev, M, p.b); tell(p.b.id); });
+  hit.addEventListener('pointerleave', function () { show(null); hideTip(); tell(null); });
+  hit.addEventListener('click', function (ev) { var p = near(ev); if (p) toggleSel(p.b.id); });
+  return { highlight: function (id) { show(pts.filter(function (p) { return p.b.id === id; })[0] || null); } };
+}
+
+// ---------------------------------------------------------------- chosen: leveling map above heat grid
+function drawChosen(M, host) {
+  h('div', 'sublab', host, 'Leveling map: who qualifies, and what leveling did to each total');
+  var a = h('div', '', host);
+  h('div', 'sublab', host, 'Heat grid: every scope item for every bidder').style.marginTop = '20px';
+  var b = h('div', '', host), apiG = null;
+  var apiM = drawMap(M, a, { compact: true, onHover: function (id) { if (apiG) apiG.highlight(id); } });
+  apiG = drawHeat(M, b, { onHover: function (id) { apiM.highlight(id); } });
+}
+
+// ---------------------------------------------------------------- page
+var VIEWS = [
+  { id: 'landscape', k: '★', name: 'Chosen: map + grid', draw: drawChosen,
+    what: 'The chosen design. The leveling map on top gives the award picture; the heat grid below gives every scope item. Bidders who qualify under the policy are grouped first, framed, marked ✓ and drawn solid. Bidders who did not qualify stay visible as faded, smaller marks so the field can still be read. Every data point and every scope item carries a written analysis: hover for the short version, click a cell for the full one, click a scope item name to open its analysis under the row. A dot marks the ones with something to check.',
+    good: 'Who qualified and who is recommended is readable before any number is. One scope item across every bidder, and one bidder down every item. The grid has the same rows and columns as the Bid Level table, so it can be that table’s overview mode.',
+    weak: 'Colour is binned, so differences under about 5% are not visible. Reasons for not qualifying are in the hover and the table, not on the chart.',
+    at50: 'Columns become stripes about 17 px wide; the qualified block stays framed at the left. Values print inside cells up to roughly 14 bidders on a desktop.' },
+  { id: 'spread-lanes', k: 'B', name: 'Spread lanes', draw: drawLanes,
+    what: 'Not chosen; kept for reference. One lane per scope item. Every bidder is a tick placed by its price relative to the reference; the shaded band is the middle half of bidders and the triangle is the GC estimate. The line traces one bidder through all lanes.',
+    good: 'The most precise reading of spread and outliers per item, and of how one bidder’s profile sits against the field.',
+    weak: 'Shows one bidder’s profile at a time. Dollar weight is only the small bar beside each label.',
+    at50: 'Ticks merge into a density, which is the intended reading. Picking out one bidder needs hover or selection.' },
+  { id: 'skyline', k: 'C', name: 'Skyline', draw: drawSkyline,
+    what: 'Not chosen; kept for reference. One stacked bar per bidder. Segment height is the dollars for that scope item and segment colour is its deviation from the reference. The first column is the GC estimate.',
+    good: 'Totals, ranking and where the money sits, in one picture. Large hot or cold chunks stand out immediately.',
+    weak: 'Small items are slivers. The same item sits at a different height in each bar, so comparing it across bidders needs the hover highlight.',
+    at50: 'The silhouette and large hot spots hold. Item-level reading depends on hover.' },
+  { id: 'fingerprints', k: 'D', name: 'Fingerprints', draw: drawPrints,
+    what: 'Not chosen; kept for reference. One small card per bidder. Each row is a scope item; the bar runs left when the bidder is below the reference and right when above. Hover a row to mark the same item on every card.',
+    good: 'The character of each bid at a glance: uniformly high, cheap with gaps, erratic.',
+    weak: 'Exact comparison between bidders, and dollar weight. Item names only fit on the key card.',
+    at50: 'A gallery of 50 cards; fine on a desktop, long on a phone.' }
+];
+var state = { n: 15, scope: 'small', ref: 'median', sort: 'qual', show: 'all', view: 'landscape', sel: null, cell: null, openItem: null, notes: 'on', rowMode: 'equal', skyMode: 'dollars' };
+function toggleSel(id) { state.sel = state.sel === id ? null : id; render(); }
+
+function legend(M) {
+  var L = $('legend'); L.textContent = '';
+  function key(w, svgInner, text) { var k = h('span', 'key', L); var s = el('svg', { width: w, height: 14, viewBox: '0 0 ' + w + ' 14' }, k); svgInner(s); h('span', '', k, text); }
+  key(34, function (s) { el('rect', { x: 1, y: 1, width: 14, height: 12, rx: 2, 'class': 'd1' }, s); el('rect', { x: 18, y: 1, width: 14, height: 12, rx: 2, 'class': 'd5' }, s); }, 'Qualified: solid, marked ✓');
+  key(34, function (s) { el('rect', { x: 1, y: 4, width: 14, height: 6, 'class': 'd1 nq' }, s); el('rect', { x: 18, y: 4, width: 14, height: 6, 'class': 'd5 nq' }, s); }, 'Did not qualify: faded, smaller');
+  key(18, function (s) { el('text', { x: 9, y: 12, 'text-anchor': 'middle', 'font-size': 13, style: 'fill:var(--ink)' }, s, '★'); }, 'Recommended (lowest qualified)');
+  var sc = h('span', 'scale', L); h('span', '', sc, '30%+ below');
+  var sw = h('span', 'sw', sc); for (var i = 0; i < 7; i++) { var s2 = h('i', '', sw); s2.style.background = 'var(--d' + i + ')'; }
+  h('span', '', sc, '30%+ above ' + (state.ref === 'median' && M.fallback && M.all.length < 4 ? 'the GC estimate (too few bids for a median)' : REFNAME[state.ref]) + ' (steps at 5, 15, 30%)');
+  key(18, function (s) { el('rect', { x: 1, y: 1, width: 16, height: 12, rx: 2, 'class': 'plug' }, s); }, 'Plugged by GC');
+  key(18, function (s) { el('rect', { x: 1, y: 1, width: 16, height: 12, rx: 2, 'class': 'incl' }, s); el('line', { x1: 6, x2: 12, y1: 7, y2: 7, stroke: 'var(--muted)', 'stroke-width': 1.5 }, s); }, 'Included in another line');
+  key(18, function (s) { el('rect', { x: 1, y: 1, width: 16, height: 12, rx: 2, 'class': 'd2' }, s); el('path', { d: 'M11,1H17V7Z', 'class': 't2' }, s); }, 'Quantity re-extended');
+  key(18, function (s) { el('rect', { x: 1, y: 1, width: 16, height: 12, rx: 2, 'class': 'd5' }, s); el('circle', { cx: 9, cy: 7, r: 2.4, 'class': 't5' }, s); }, 'Analysis flags a point to check');
+}
+function summary(M) {
+  var S = $('summary'); S.textContent = '';
+  function item(label, value) { var d = h('span', '', S); d.appendChild(document.createTextNode(label + ' ')); h('b', '', d, value); }
+  item('Bids received', String(M.nAll));
+  item('Qualified', M.nQual + ' of ' + M.nAll);
+  if (M.rec) item('Recommended', M.rec.code + ' ' + M.rec.name + ' at ' + money(M.rec.lev));
+  else h('span', 'note-fallback', S, 'No bidder qualifies under the policy.');
+  if (M.nQual > 1) item('Qualified range', short(M.levSorted[0]) + ' to ' + short(M.levSorted[M.levSorted.length - 1]));
+  item('GC estimate', money(M.estTotal));
+  var why = Object.keys(M.tally).sort(function (a, b) { return M.tally[b] - M.tally[a]; }).map(function (w) { return M.tally[w] + ' ' + w.charAt(0).toLowerCase() + w.slice(1); });
+  if (why.length) item('Did not qualify:', why.join(', '));
+  if (M.fallback) h('span', 'note-fallback', S, 'Fewer than 3 priced bids on some items: those are compared with the GC estimate.');
+}
+function table(M) {
+  var T = $('btable'); T.textContent = '';
+  var hr = h('tr', '', h('thead', '', T));
+  [['Rank', 0], ['Code', 0], ['Bidder', 0], ['Qualified', 0], ['As bid', 1], ['Qty adj.', 1], ['Plugs', 1], ['Leveled total', 1], ['vs GC est.', 1], ['Scope priced', 1], ['Why not qualified', 0]].forEach(function (c) { h('th', c[1] ? 'num' : '', hr, c[0]); });
+  var tb = h('tbody', '', T);
+  M.order.forEach(function (b) {
+    var tr = h('tr', '', tb);
+    h('td', '', tr, b.qualified ? String(b.rank) : '–'); h('td', '', tr, b.code); h('td', '', tr, b.name); h('td', '', tr, b.qualified ? '✓ Yes' : 'No');
+    h('td', 'num', tr, money(b.asbid)); h('td', 'num', tr, (b.adj < 0 ? '-' : '+') + money(Math.abs(b.adj))); h('td', 'num', tr, money(b.plugs)); h('td', 'num', tr, money(b.lev));
+    h('td', 'num', tr, pct(b.lev / M.estTotal - 1)); h('td', 'num', tr, Math.round(b.cov * 100) + '%'); h('td', '', tr, b.why.join('; '));
+  });
+}
+function panel(M) {
+  var P = $('detail');
+  var b = state.cell ? M.all.filter(function (x) { return x.id === state.cell.id; })[0] : null;
+  if (!b || state.cell.i >= M.items.length) { state.cell = null; P.hidden = true; document.body.classList.remove('with-panel'); return; }
+  document.body.classList.add('with-panel');
+  var i = state.cell.i, c = b.cells[i], it = M.items[i], r = M.rows[i];
+  P.textContent = ''; P.hidden = false;
+  var head = h('div', 'dh', P), tl = h('div', '', head);
+  h('div', 'sublab', tl, 'Data point').style.margin = '0 0 4px';
+  h('h3', '', tl, it.name);
+  h('p', 'dsub', tl, b.code + '  ' + b.name);
+  var x = h('button', 'dx', head, '×'); x.type = 'button'; x.id = 'detail-close'; x.setAttribute('aria-label', 'Close'); x.addEventListener('click', function () { state.cell = null; render(); });
+  h('span', 'badge' + (b.qualified ? ' q' : ''), P, b.qualified ? (b.rank === 1 ? '★ Recommended' : '✓ Qualified, rank ' + b.rank) : 'Did not qualify');
+  var t = h('table', 'facts', P);
+  function row(k, v) { var tr = h('tr', '', t); h('td', '', tr, k); h('td', '', tr, v); }
+  if (c.v != null) { row('Leveled value', money(c.v)); row('vs ' + r.refName.replace('the ', ''), pct(c.dev)); }
+  if (c.st === 'adj') row('As bid', money(c.asbid));
+  row('Status', STATUS[c.st]); row('GC estimate', money(it.est));
+  if (r.n) row('Field', r.priced.length + ' priced, ' + short(r.priced[0].v) + ' to ' + short(r.priced[r.priced.length - 1].v));
+  h('h4', '', P, 'Analysis');
+  if (c.note.flag) h('p', 'flagline', P, '● Flagged: something to check');
+  h('p', '', P, cellFull(M, b, i));
+  h('h4', '', P, 'Evidence');
+  var ul = h('ul', '', P);
+  h('li', '', ul, c.st === 'plug' ? 'Bid document: item excluded or not priced' : c.st === 'incl' ? 'Bid document: line stating the item is included elsewhere' : 'Bid document: the line that prices this item');
+  if (c.st === 'adj') h('li', '', ul, 'Quantity comparison: bid quantity against the GC takeoff');
+  if (c.st === 'plug') h('li', '', ul, 'Plug calculation: method, pool and formula from the plugging policy');
+  h('li', '', ul, 'Scope sheet: ' + it.name + ', GC estimate ' + money(it.est));
+  h('p', 'sample', P, 'Placeholder text. In the application this is the generated analysis for this data point, and each evidence line links to its source.');
+}
+function viewOpts() {
+  var V = $('viewopts'); V.textContent = '';
+  function seg(label, key, opts) {
+    var d = h('div', 'ctl', V); h('span', 'lab', d, label); var s = h('div', 'seg', d); s.setAttribute('role', 'group'); s.setAttribute('aria-label', label);
+    opts.forEach(function (o) { var b = h('button', '', s, o[1]); b.type = 'button'; b.setAttribute('aria-pressed', state[key] === o[0]); b.addEventListener('click', function () { state[key] = o[0]; render(); }); });
+  }
+  if (state.view === 'landscape') { seg('Row height', 'rowMode', [['equal', 'Equal'], ['weight', 'By dollar weight']]); seg('Scope item analysis', 'notes', [['on', 'Show'], ['off', 'Hide']]); }
+  if (state.view === 'skyline') seg('Bar height', 'skyMode', [['dollars', 'Dollars'], ['share', 'Share of bid']]);
+}
+function render() {
+  var M = buildModel(state), v = VIEWS.filter(function (x) { return x.id === state.view; })[0] || VIEWS[0];
+  if (state.sel != null && !M.bidders.some(function (b) { return b.id === state.sel; })) state.sel = null;
+  $('n').value = state.n; $('nout').textContent = state.n; $('ref').value = state.ref; $('sort').value = state.sort;
+  Array.prototype.forEach.call($('scope').children, function (b) { b.setAttribute('aria-pressed', b.dataset.v === state.scope); });
+  Array.prototype.forEach.call($('show').children, function (b) { b.setAttribute('aria-pressed', b.dataset.v === state.show); });
+  Array.prototype.forEach.call($('presets').children, function (b) { b.setAttribute('aria-pressed', +b.dataset.n === state.n); });
+  Array.prototype.forEach.call($('tabs').children, function (b) { b.setAttribute('aria-selected', b.dataset.id === v.id); });
+  summary(M); legend(M); viewOpts(); table(M); panel(M);
+  $('what').textContent = v.what;
+  var N = $('notes'); N.textContent = '';
+  [['Good at', v.good], ['Weak at', v.weak], ['At 50 bidders', v.at50]].forEach(function (x) { var d = h('div', '', N); h('h3', '', d, x[0]); h('p', '', d, x[1]); });
+  var stage = $('stage'); stage.textContent = ''; hideTip();
+  if (!M.bidders.length) { h('p', 'lede', stage, 'No bidder qualifies under the policy with this selection. Switch “Show” to all bidders to see why.'); return; }
+  v.draw(M, stage);
+}
+function init() {
+  var T = $('tabs');
+  VIEWS.forEach(function (v) { var b = h('button', '', T); b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.id = v.id; h('span', 'k', b, v.k); h('span', '', b, v.name);
+    b.addEventListener('click', function () { state.view = v.id; try { history.replaceState(null, '', '#' + v.id); } catch (e) { location.hash = v.id; } render(); }); });
+  var C = $('cmp'), R = { s: 'Strong', f: 'Fair', w: 'Weak' };
+  var hr = h('tr', '', h('thead', '', C)); ['Concept', 'Same item across bidders', 'Structure of each bid', 'Award picture', '1 to 5 bidders', '50 bidders', '40+ scope items'].forEach(function (c) { h('th', '', hr, c); });
+  var tb = h('tbody', '', C);
+  [['A  Heat grid (chosen)', 's', 'f', 'f', 's', 's', 's'], ['B  Spread lanes', 's', 'w', 'f', 'f', 's', 's'], ['C  Skyline', 'f', 's', 's', 's', 'f', 'f'], ['D  Fingerprints', 'f', 's', 'w', 's', 'f', 'f'], ['E  Leveling map (chosen)', 'w', 'f', 's', 'f', 's', 's']].forEach(function (r) {
+    var tr = h('tr', '', tb); h('td', '', tr, r[0]).style.fontWeight = 600;
+    r.slice(1).forEach(function (x) { h('span', 'rate ' + x, h('td', '', tr), R[x]); });
+  });
+  $('n').addEventListener('input', function () { state.n = +this.value; render(); });
+  $('presets').addEventListener('click', function (ev) { if (ev.target.dataset.n) { state.n = +ev.target.dataset.n; render(); } });
+  $('scope').addEventListener('click', function (ev) { if (ev.target.dataset.v) { state.scope = ev.target.dataset.v; state.sel = null; state.cell = null; state.openItem = null; render(); } });
+  $('show').addEventListener('click', function (ev) { if (ev.target.dataset.v) { state.show = ev.target.dataset.v; render(); } });
+  $('ref').addEventListener('change', function () { state.ref = this.value; render(); });
+  $('sort').addEventListener('change', function () { state.sort = this.value; render(); });
+  function fromHash() { var id = (location.hash || '').slice(1); if (VIEWS.some(function (v) { return v.id === id; })) state.view = id; }
+  window.addEventListener('hashchange', function () { fromHash(); render(); });
+  fromHash();
+  try { // local preview only: ?n=50&scope=large&ref=gc&sort=sim&theme=dark&rows=weight&sky=share&sel=3
+    var q = new URLSearchParams(location.search);
+    if (q.get('n')) state.n = Math.max(1, Math.min(50, +q.get('n')));
+    ['scope', 'ref', 'sort', 'show'].forEach(function (k) { if (q.get(k)) state[k] = q.get(k); });
+    if (q.get('rows')) state.rowMode = q.get('rows'); if (q.get('sky')) state.skyMode = q.get('sky');
+    if (q.get('sel')) state.sel = +q.get('sel'); if (q.get('view')) state.view = q.get('view');
+    if (q.get('theme')) document.documentElement.setAttribute('data-theme', q.get('theme'));
+    if (q.get('table')) $('tbl').open = true;
+    if (q.get('cell')) { var cc = q.get('cell').split('.'); state.cell = { id: +cc[0], i: +cc[1] }; }
+    if (q.get('open')) state.openItem = +q.get('open'); if (q.get('notes')) state.notes = q.get('notes');
+  } catch (e) {}
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && state.cell) { state.cell = null; render(); } });
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 120); });
+  render();
+}
+init();
+})();
+</script>

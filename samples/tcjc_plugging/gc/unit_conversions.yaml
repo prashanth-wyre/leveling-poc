@@ -1,0 +1,21 @@
+# Unit conversions used when a bid is quoted in a unit other than the GC unit.
+area_to_SF:
+  SF: 1
+  SQ: 100
+  SY: 9
+  M2: 10.7639
+  ROLL: 10
+length_to_LF:
+  LF: 1
+  FT: 1
+  PANEL: 8
+notes:
+  SQ: Roofing square = 100 SF
+  SY: Square yard = 9 SF
+  M2: Square metre = 10.7639 SF
+  ROLL: Sod roll, 2 ft x 5 ft = 10 SF unless the bid states another size
+  PANEL: Temporary fence panel = 8 LF unless the bid states another length
+  CY_and_SF: 'Bulk material by volume vs area: SF = CY x 324 / depth_in ; CY = SF x depth_in / 324. Use the depth
+    stated in the bid; if none is stated use the specified depth.'
+  depth: 'An area quoted at a depth other than the specified depth is converted to equivalent area at the specified
+    depth: SF_equivalent = SF x bid_depth / spec_depth.'

@@ -1,0 +1,991 @@
+{
+  "package": "07.50",
+  "name": "Roofing",
+  "note": "SYNTHETIC. GC scope items and quantities are from the TCJC workbook; bidders are fictional and their prices are designed (mostly real workbook unit rates re-quoted at altered quantities and units; some rates are invented to create specific cases).",
+  "rates": {
+    "textura_pct_of_base_bid": 0.2205,
+    "sdi_pct_of_subcontract_value": 1.45
+  },
+  "formulas": {
+    "base_bid_value": "bid_as_submitted + quantity_adjustments + plug_total + allowance_total",
+    "subcontract_value": "base_bid_value + textura",
+    "total_package_value": "subcontract_value + sdi"
+  },
+  "gc_items": [
+    {
+      "key": "RA1",
+      "desc": "Roof Assembly RA1 - TPO roof assembly",
+      "unit": "SF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 28803.0,
+      "rate": 27.1367,
+      "estimate": 781618.84
+    },
+    {
+      "key": "RA2",
+      "desc": "Roof Assembly RA2 - TPO roof with decorative ballast",
+      "unit": "SF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 1690.0,
+      "rate": 41.4884,
+      "estimate": 70115.45
+    },
+    {
+      "key": "FLASH",
+      "desc": "Sheet metal flashing and trim, gutters, downspouts, scuppers",
+      "unit": "LS",
+      "depth": null,
+      "source": "synthetic",
+      "qty": null,
+      "rate": null,
+      "estimate": 85000.0
+    },
+    {
+      "key": "ELD",
+      "desc": "Electronic leak detection per Section 07 54 23",
+      "unit": "SF",
+      "depth": null,
+      "source": "synthetic",
+      "qty": 30493.0,
+      "rate": 0.75,
+      "estimate": 22869.75
+    },
+    {
+      "key": "FLUTE",
+      "desc": "Acoustic flute filler at roof deck (install only)",
+      "unit": "LS",
+      "depth": null,
+      "source": "synthetic",
+      "qty": null,
+      "rate": null,
+      "estimate": 7800.0
+    },
+    {
+      "key": "TRANS",
+      "desc": "Transition strips at dissimilar roof assemblies",
+      "unit": "LS",
+      "depth": null,
+      "source": "synthetic",
+      "qty": null,
+      "rate": null,
+      "estimate": 75000.0
+    }
+  ],
+  "plug_rules": {
+    "RA1": "average_of_bidders -> gc_estimate",
+    "RA2": "ai_market_price -> average_of_bidders -> gc_estimate",
+    "FLASH": "average_of_bidders -> gc_estimate",
+    "ELD": "unit_rate_x_gc_qty (rate source: median) -> gc_estimate",
+    "FLUTE": "average_of_bidders -> gc_estimate",
+    "TRANS": "fixed_allowance ($75,000)"
+  },
+  "ai_status": "PENDING: 4 item(s) have no snapshot and no credentials are set; fallback methods used",
+  "bidders": [
+    {
+      "company": "Summit Ridge Roofing",
+      "document": "Summit Ridge Roofing - Proposal 07.50.pdf",
+      "format": "pdf",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "RA1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 27100.0,
+            "unit": "SF",
+            "unit_price": 26.17,
+            "amount": 709207.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 28803.0,
+            "unit": "SF"
+          },
+          "converted_qty": 27100.0,
+          "conversion": "same unit",
+          "variance_pct": -5.91,
+          "unit_rate_in_gc_unit": 26.17,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 753774.51,
+          "adjustment": 44567.51
+        },
+        {
+          "item": "RA2",
+          "status": "priced",
+          "as_bid": {
+            "qty": 1690.0,
+            "unit": "SF",
+            "unit_price": 25.58,
+            "amount": 43230.2,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1690.0,
+            "unit": "SF"
+          },
+          "converted_qty": 1690.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 25.58,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 43230.2,
+          "adjustment": 0.0
+        },
+        {
+          "item": "FLASH",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 137934.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 137934.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "ELD",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 19878.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 30493.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": 0.6519,
+          "action": "lump sum without quantity - flag only",
+          "leveled_value": 19878.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "FLUTE",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TRANS",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 910249.2,
+      "quantity_adjustments": 44567.51,
+      "plugs": [
+        {
+          "item": "FLUTE",
+          "reason": "excluded by bidder",
+          "method_requested": "average_of_bidders",
+          "method_used": "average_of_bidders",
+          "attempts": [
+            {
+              "method": "average_of_bidders",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Highline Roofing & Sheet Metal",
+              "value": 7800.0,
+              "unit_rate": null
+            },
+            {
+              "bidder": "Tetonview Roofing",
+              "value": 9500.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "average of $7,800.00, $9,500.00",
+          "value": 8650.0
+        },
+        {
+          "item": "TRANS",
+          "reason": "excluded by bidder",
+          "method_requested": "fixed_allowance",
+          "method_used": "fixed_allowance",
+          "attempts": [
+            {
+              "method": "fixed_allowance",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Cascade Membrane Systems",
+              "value": 60000.0,
+              "unit_rate": null
+            },
+            {
+              "bidder": "Tetonview Roofing",
+              "value": 82000.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "fixed allowance",
+          "value": 75000.0
+        }
+      ],
+      "plug_total": 83650.0,
+      "allowances": [
+        {
+          "name": "Additional flashing",
+          "amount": 50000
+        }
+      ],
+      "allowance_total": 50000.0,
+      "base_bid_value": 1088466.71,
+      "textura": 2400.07,
+      "subcontract_value": 1090866.78,
+      "sdi": 15817.57,
+      "total_package_value": 1106684.35,
+      "expected_flags": [
+        "RA1: quantity -5.9% vs GC takeoff after converting SF - re-extended, +44,567.51",
+        "ELD: lump sum with no quantity - cannot check against GC takeoff",
+        "FLUTE: excluded by bidder - plugged $8,650.00 by average_of_bidders",
+        "TRANS: excluded by bidder - plugged $75,000.00 by fixed_allowance"
+      ]
+    },
+    {
+      "company": "Highline Roofing & Sheet Metal",
+      "document": "Highline_Roofing_Bid_TCJC.xlsx",
+      "format": "xlsx",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "RA1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 288.0,
+            "unit": "SQ",
+            "unit_price": 1863.35,
+            "amount": 536644.8,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 28803.0,
+            "unit": "SF"
+          },
+          "converted_qty": 28800.0,
+          "conversion": "SQ x 100 = SF",
+          "variance_pct": -0.01,
+          "unit_rate_in_gc_unit": 18.6335,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 536644.8,
+          "adjustment": 0.0
+        },
+        {
+          "item": "RA2",
+          "status": "priced",
+          "as_bid": {
+            "qty": 17.0,
+            "unit": "SQ",
+            "unit_price": 1775.15,
+            "amount": 30177.55,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1690.0,
+            "unit": "SF"
+          },
+          "converted_qty": 1700.0,
+          "conversion": "SQ x 100 = SF",
+          "variance_pct": 0.59,
+          "unit_rate_in_gc_unit": 17.7515,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 30177.55,
+          "adjustment": 0.0
+        },
+        {
+          "item": "FLASH",
+          "status": "included",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": "Included",
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "included in other lines - no value",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "ELD",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 22000.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 30493.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": 0.7215,
+          "action": "lump sum without quantity - flag only",
+          "leveled_value": 22000.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "FLUTE",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 7800.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 7800.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TRANS",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 596622.35,
+      "quantity_adjustments": 0.0,
+      "plugs": [
+        {
+          "item": "FLASH",
+          "reason": "manual override: Flashing marked \"Included\" with no breakout; estimator judges the included scope insufficient",
+          "method_requested": "fixed_allowance",
+          "method_used": "fixed_allowance",
+          "attempts": [],
+          "pool": [],
+          "trimmed_outliers": [],
+          "formula": "manual override",
+          "value": 100000.0
+        },
+        {
+          "item": "TRANS",
+          "reason": "excluded by bidder",
+          "method_requested": "fixed_allowance",
+          "method_used": "fixed_allowance",
+          "attempts": [
+            {
+              "method": "fixed_allowance",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Cascade Membrane Systems",
+              "value": 60000.0,
+              "unit_rate": null
+            },
+            {
+              "bidder": "Tetonview Roofing",
+              "value": 82000.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "fixed allowance",
+          "value": 75000.0
+        }
+      ],
+      "plug_total": 175000.0,
+      "allowances": [
+        {
+          "name": "Additional flashing",
+          "amount": 50000
+        }
+      ],
+      "allowance_total": 50000.0,
+      "base_bid_value": 821622.35,
+      "textura": 1811.68,
+      "subcontract_value": 823434.03,
+      "sdi": 11939.79,
+      "total_package_value": 835373.82,
+      "expected_flags": [
+        "ELD: lump sum with no quantity - cannot check against GC takeoff",
+        "FLASH: manual override: Flashing marked \"Included\" with no breakout; estimator judges the included scope insufficient - plugged $100,000.00 by fixed_allowance",
+        "TRANS: excluded by bidder - plugged $75,000.00 by fixed_allowance"
+      ]
+    },
+    {
+      "company": "Cascade Membrane Systems",
+      "document": "Cascade Membrane - TCJC roofing.docx",
+      "format": "docx",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "RA1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 30530.0,
+            "unit": "SF",
+            "unit_price": 27.18,
+            "amount": 829805.4,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 28803.0,
+            "unit": "SF"
+          },
+          "converted_qty": 30530.0,
+          "conversion": "same unit",
+          "variance_pct": 6.0,
+          "unit_rate_in_gc_unit": 27.18,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 782865.54,
+          "adjustment": -46939.86
+        },
+        {
+          "item": "RA2",
+          "status": "priced",
+          "as_bid": {
+            "qty": 1725.0,
+            "unit": "SF",
+            "unit_price": 26.04,
+            "amount": 44919.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1690.0,
+            "unit": "SF"
+          },
+          "converted_qty": 1725.0,
+          "conversion": "same unit",
+          "variance_pct": 2.07,
+          "unit_rate_in_gc_unit": 26.04,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 44919.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "FLASH",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 70000.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 70000.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "ELD",
+          "status": "included",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": "Included",
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 30493.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "included in other lines - no value",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "FLUTE",
+          "status": "omitted",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - not priced",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TRANS",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 60000.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 60000.0,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 1004724.4,
+      "quantity_adjustments": -46939.86,
+      "plugs": [
+        {
+          "item": "FLUTE",
+          "reason": "not priced",
+          "method_requested": "average_of_bidders",
+          "method_used": "average_of_bidders",
+          "attempts": [
+            {
+              "method": "average_of_bidders",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Highline Roofing & Sheet Metal",
+              "value": 7800.0,
+              "unit_rate": null
+            },
+            {
+              "bidder": "Tetonview Roofing",
+              "value": 9500.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "average of $7,800.00, $9,500.00",
+          "value": 8650.0
+        }
+      ],
+      "plug_total": 8650.0,
+      "allowances": [
+        {
+          "name": "Additional flashing",
+          "amount": 50000
+        }
+      ],
+      "allowance_total": 50000.0,
+      "base_bid_value": 1016434.54,
+      "textura": 2241.24,
+      "subcontract_value": 1018675.78,
+      "sdi": 14770.8,
+      "total_package_value": 1033446.58,
+      "expected_flags": [
+        "RA1: quantity +6.0% vs GC takeoff after converting SF - re-extended, -46,939.86",
+        "FLUTE: not priced - plugged $8,650.00 by average_of_bidders"
+      ]
+    },
+    {
+      "company": "Tetonview Roofing",
+      "document": "Tetonview quote - justice center roof (metric).pdf",
+      "format": "pdf",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "RA1",
+          "status": "priced",
+          "as_bid": {
+            "qty": 2676.0,
+            "unit": "M2",
+            "unit_price": 273.63,
+            "amount": 732233.88,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 28803.0,
+            "unit": "SF"
+          },
+          "converted_qty": 28804.2,
+          "conversion": "M2 x 10.7639 = SF",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 25.4211,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 732233.88,
+          "adjustment": 0.0
+        },
+        {
+          "item": "RA2",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1690.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "FLASH",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 25000.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 25000.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "ELD",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 30493.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "FLUTE",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 9500.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 9500.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TRANS",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 82000.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 82000.0,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 848733.88,
+      "quantity_adjustments": 0.0,
+      "plugs": [
+        {
+          "item": "RA2",
+          "reason": "excluded by bidder",
+          "method_requested": "ai_market_price",
+          "method_used": "average_of_bidders",
+          "attempts": [
+            {
+              "method": "ai_market_price",
+              "result": "skipped: no AI price available (no API key or snapshot)"
+            },
+            {
+              "method": "average_of_bidders",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Summit Ridge Roofing",
+              "value": 43230.2,
+              "unit_rate": 25.58
+            },
+            {
+              "bidder": "Highline Roofing & Sheet Metal",
+              "value": 30177.55,
+              "unit_rate": 17.7515
+            },
+            {
+              "bidder": "Cascade Membrane Systems",
+              "value": 44919.0,
+              "unit_rate": 26.04
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "average of $43,230.20, $30,177.55, $44,919.00",
+          "value": 39442.25
+        },
+        {
+          "item": "ELD",
+          "reason": "excluded by bidder",
+          "method_requested": "unit_rate_x_gc_qty",
+          "method_used": "unit_rate_x_gc_qty",
+          "attempts": [
+            {
+              "method": "unit_rate_x_gc_qty",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Summit Ridge Roofing",
+              "value": 19878.0,
+              "unit_rate": 0.6519
+            },
+            {
+              "bidder": "Highline Roofing & Sheet Metal",
+              "value": 22000.0,
+              "unit_rate": 0.7215
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "median of rates $0.6519, $0.7215 = $0.6867 x 30,493 SF",
+          "value": 20939.54
+        }
+      ],
+      "plug_total": 60381.79,
+      "allowances": [
+        {
+          "name": "Additional flashing",
+          "amount": 50000
+        }
+      ],
+      "allowance_total": 50000.0,
+      "base_bid_value": 959115.67,
+      "textura": 2114.85,
+      "subcontract_value": 961230.52,
+      "sdi": 13937.84,
+      "total_package_value": 975168.36,
+      "expected_flags": [
+        "RA2: excluded by bidder - plugged $39,442.25 by average_of_bidders",
+        "ELD: excluded by bidder - plugged $20,939.54 by unit_rate_x_gc_qty"
+      ]
+    }
+  ],
+  "recommended_bidder": "Highline Roofing & Sheet Metal",
+  "ranking": [
+    {
+      "company": "Highline Roofing & Sheet Metal",
+      "total_package_value": 835373.82
+    },
+    {
+      "company": "Tetonview Roofing",
+      "total_package_value": 975168.36
+    },
+    {
+      "company": "Cascade Membrane Systems",
+      "total_package_value": 1033446.58
+    },
+    {
+      "company": "Summit Ridge Roofing",
+      "total_package_value": 1106684.35
+    }
+  ],
+  "sensitivity_by_plug_method": {
+    "policy as written": {
+      "recommended_bidder": "Highline Roofing & Sheet Metal",
+      "totals": {
+        "Summit Ridge Roofing": 1106684.35,
+        "Highline Roofing & Sheet Metal": 835373.82,
+        "Cascade Membrane Systems": 1033446.58,
+        "Tetonview Roofing": 975168.36
+      }
+    },
+    "gc_estimate": {
+      "recommended_bidder": "Highline Roofing & Sheet Metal",
+      "totals": {
+        "Summit Ridge Roofing": 1105820.12,
+        "Highline Roofing & Sheet Metal": 835373.82,
+        "Cascade Membrane Systems": 1032582.35,
+        "Tetonview Roofing": 1008317.45
+      }
+    },
+    "min_of_bidders": {
+      "recommended_bidder": "Highline Roofing & Sheet Metal",
+      "totals": {
+        "Summit Ridge Roofing": 1090569.07,
+        "Highline Roofing & Sheet Metal": 820122.76,
+        "Cascade Membrane Systems": 1032582.35,
+        "Tetonview Roofing": 964669.29
+      }
+    },
+    "average_of_bidders": {
+      "recommended_bidder": "Highline Roofing & Sheet Metal",
+      "totals": {
+        "Summit Ridge Roofing": 1102617.4,
+        "Highline Roofing & Sheet Metal": 831306.88,
+        "Cascade Membrane Systems": 1033446.58,
+        "Tetonview Roofing": 975167.81
+      }
+    },
+    "median_of_bidders": {
+      "recommended_bidder": "Highline Roofing & Sheet Metal",
+      "totals": {
+        "Summit Ridge Roofing": 1102617.4,
+        "Highline Roofing & Sheet Metal": 831306.88,
+        "Cascade Membrane Systems": 1033446.58,
+        "Tetonview Roofing": 979019.16
+      }
+    },
+    "max_of_bidders": {
+      "recommended_bidder": "Highline Roofing & Sheet Metal",
+      "totals": {
+        "Summit Ridge Roofing": 1114665.73,
+        "Highline Roofing & Sheet Metal": 842490.98,
+        "Cascade Membrane Systems": 1034310.8,
+        "Tetonview Roofing": 981814.98
+      }
+    }
+  }
+}

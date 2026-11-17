@@ -1,0 +1,610 @@
+{
+  "package": "07.50",
+  "name": "Roofing",
+  "source_workbook_tab": "07.50",
+  "cmgc_estimate": {
+    "total": 834914.0,
+    "lines": [
+      {
+        "description": "RA3 - Standing Seam Roof Assembly",
+        "qty": 244.0,
+        "unit": "sf",
+        "value": 10780.81
+      },
+      {
+        "description": "RA1 - TPO Roof Assembly",
+        "qty": 28295.0,
+        "unit": "sf",
+        "value": 767833.39
+      },
+      {
+        "description": "RA2 - TPO Roof on w/ Decorative Ballast",
+        "qty": 1357.0,
+        "unit": "sf",
+        "value": 56299.8
+      }
+    ]
+  },
+  "formulas": {
+    "base_bid_value": "sub_bid_as_submitted + gc_plug_total",
+    "subcontract_value": "base_bid_value + textura",
+    "total_package_value": "subcontract_value + sales_tax + sdi",
+    "variance": "total_package_value - cmgc_estimate.total"
+  },
+  "bidders": [
+    {
+      "company": "Pinnacle Construction",
+      "workbook_block": "D",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 1000000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": null
+      },
+      "status": "declined",
+      "documents": [
+        "Pinnacle - no bid.docx"
+      ]
+    },
+    {
+      "company": "Superior Roofing, Inc.",
+      "workbook_block": "I",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 3000000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": 2.701
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "Superior Roofing - TCJC Roofing Proposal.pdf",
+          "format": "pdf",
+          "date": "2025-11-18",
+          "role": "current bid",
+          "total_as_written": 934812.0
+        }
+      ],
+      "responsive": true,
+      "clarification": null,
+      "lines": [
+        {
+          "workbook_row": 18,
+          "scope_item": "Roof Assembly RA1",
+          "bidder_description": "Roof Assembly RA1 - TPO membrane roofing system, complete",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 753653.0
+        },
+        {
+          "workbook_row": 19,
+          "scope_item": "Roof Assembly RA2",
+          "bidder_description": "Roof Assembly RA2 - TPO membrane roofing with decorative ballast",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 43225.0
+        },
+        {
+          "workbook_row": 20,
+          "scope_item": "Flashing, gutters, downspouts, scuppers, etc",
+          "bidder_description": "Sheet metal flashing and trim, gutters, downspouts and scuppers (Section 07 62 00)",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 137934.0
+        },
+        {
+          "workbook_row": 30,
+          "scope_item": "Electronic leak detection - reference spec 075423",
+          "bidder_description": "Electronic leak detection per Section 07 54 23 (value $19,878, carried in RA1 price)",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included"
+        }
+      ],
+      "tax_treatment": "silent",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [
+        {
+          "description": "Alternate #11: Rooftop Photovoltaic System",
+          "amount": 18720.0
+        }
+      ],
+      "exclusions": [
+        "Roof deck, wood blocking and nailers",
+        "Roof drains and plumbing connections",
+        "Snow removal and temporary heat",
+        "Payment and performance bond (add 1.25% if required)"
+      ],
+      "warranty": {
+        "offered": [
+          "Manufacturer's 20-year NDL total-system warranty",
+          "2-year installer workmanship warranty"
+        ],
+        "meets_minimum": true
+      },
+      "bid_validity_days": 60,
+      "addenda_acknowledged": [
+        "Addendum 01"
+      ],
+      "expected_flags": [
+        "Sales tax status not stated (project is tax exempt) - clarify",
+        "Leak detection listed as included, with a $19,878 value shown for information only",
+        "Bond excluded; no flute filler or RA2 fully-adhered upgrade priced",
+        "Highest of four priced bids"
+      ],
+      "sub_bid_as_submitted": 934812.0,
+      "gc_plugs": [
+        {
+          "row": 33,
+          "scope_item": "Additional flashing",
+          "amt": 50000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 50000.0,
+      "base_bid_value": 984812.0,
+      "textura": 2171.36,
+      "subcontract_value": 986983.36,
+      "sales_tax": 0.0,
+      "sdi": 14311.26,
+      "total_package_value": 1001294.62,
+      "variance": 166380.62,
+      "variance_pct": 19.9
+    },
+    {
+      "company": "Rodac",
+      "workbook_block": "N",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 4000000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": 1.794
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "Rodac_Roofing_Budget_Quote_110625.pdf",
+          "format": "pdf",
+          "date": "2025-11-06",
+          "role": "superseded - do not level",
+          "total_as_written": 566700.0
+        },
+        {
+          "file": "Rodac_TCJC_Roofing_Bid_REV1.xlsx",
+          "format": "xlsx",
+          "date": "2025-11-17",
+          "role": "current bid",
+          "total_as_written": 597900.0
+        }
+      ],
+      "responsive": true,
+      "clarification": {
+        "sent": "2025-11-19",
+        "responded": true,
+        "summary": "Tax exempt confirmed. Bond available at standard rate. Flashing included; transition strips not included."
+      },
+      "lines": [
+        {
+          "workbook_row": 18,
+          "scope_item": "Roof Assembly RA1",
+          "bidder_description": "TPO Roof System - Assembly RA1",
+          "qty": 288,
+          "unit": "SQ",
+          "unit_price": null,
+          "amount": 536700.0
+        },
+        {
+          "workbook_row": 19,
+          "scope_item": "Roof Assembly RA2",
+          "bidder_description": "TPO Roof System w/ ballast - Assembly RA2",
+          "qty": 17,
+          "unit": "SQ",
+          "unit_price": null,
+          "amount": 30000.0
+        },
+        {
+          "workbook_row": 20,
+          "scope_item": "Flashing, gutters, downspouts, scuppers, etc",
+          "bidder_description": "Flashings, gutters, downspouts, scuppers",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "Included"
+        },
+        {
+          "workbook_row": 22,
+          "scope_item": "Acoustic insulation flute deck filler - supplied by steel deck",
+          "bidder_description": "Acoustic flute filler insulation at deck (material supplied by steel deck sub, install only)",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 7800.0
+        },
+        {
+          "workbook_row": 23,
+          "scope_item": "Fully adhered system for RA2",
+          "bidder_description": "Fully adhered system at RA2",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 1400.0
+        },
+        {
+          "workbook_row": 30,
+          "scope_item": "Electronic leak detection - reference spec 075423",
+          "bidder_description": "Electronic leak detection (ELD) per spec 075423",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 22000.0
+        }
+      ],
+      "tax_treatment": "excluded",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [
+        {
+          "description": "Alternate #11: Rooftop Photovoltaic System",
+          "amount": 20000.0
+        }
+      ],
+      "exclusions": [
+        "Sales tax - priced as tax exempt",
+        "Payment and performance bond (available at our standard rate)",
+        "Transition strips at dissimilar roof assemblies"
+      ],
+      "warranty": {
+        "offered": [
+          "Manufacturer's 20-year NDL total-system warranty",
+          "2-year installer workmanship warranty",
+          "20-year finish warranty on prefinished sheet metal"
+        ],
+        "meets_minimum": true
+      },
+      "bid_validity_days": 60,
+      "addenda_acknowledged": [
+        "Addendum 01"
+      ],
+      "expected_flags": [
+        "Quantities in squares, not SF",
+        "Flashing \"Included\" but workbook still carries a $100,000 CM/GC plug",
+        "Bond and transition strips excluded - plugged by CM/GC ($12,955.76 and $75,000)",
+        "Revised bid supersedes 2025-11-06 quote",
+        "Lowest leveled total; recommended in workbook"
+      ],
+      "sub_bid_as_submitted": 597900.0,
+      "gc_plugs": [
+        {
+          "row": 20,
+          "scope_item": "Flashing, gutters, downspouts, scuppers, etc",
+          "amt": 100000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        },
+        {
+          "row": 33,
+          "scope_item": "Additional flashing",
+          "amt": 50000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        },
+        {
+          "row": 35,
+          "scope_item": "Transition strips",
+          "amt": 75000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        },
+        {
+          "row": 38,
+          "scope_item": "RMP Bond",
+          "amt": 12955.76,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 237955.76,
+      "base_bid_value": 835855.76,
+      "textura": 1842.94,
+      "subcontract_value": 837698.7,
+      "sales_tax": 0.0,
+      "sdi": 12146.63,
+      "total_package_value": 849845.33,
+      "variance": 14931.33,
+      "variance_pct": 1.8
+    },
+    {
+      "company": "Elite Roofing Systems",
+      "workbook_block": "S",
+      "prequalification": {
+        "status": "Approved with conditions (safety)",
+        "single_project_limit": 2500000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": 30.758
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "ELITE_TCJC_0750.docx",
+          "format": "docx",
+          "date": "2025-11-18",
+          "role": "current bid",
+          "total_as_written": 857000.0
+        }
+      ],
+      "responsive": true,
+      "clarification": {
+        "sent": "2025-11-19",
+        "responded": true,
+        "summary": "Scope review held. All items confirmed; leak detection included. Safety mitigation plan to follow."
+      },
+      "lines": [
+        {
+          "workbook_row": 18,
+          "scope_item": "Roof Assembly RA1",
+          "bidder_description": "RA1 TPO roof assembly",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 783000.0
+        },
+        {
+          "workbook_row": 19,
+          "scope_item": "Roof Assembly RA2",
+          "bidder_description": "RA2 TPO roof assembly with decorative ballast",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 44000.0
+        },
+        {
+          "workbook_row": 20,
+          "scope_item": "Flashing, gutters, downspouts, scuppers, etc",
+          "bidder_description": "Sheet metal: flashing, gutters, downspouts, scuppers",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 70000.0
+        },
+        {
+          "workbook_row": 30,
+          "scope_item": "Electronic leak detection - reference spec 075423",
+          "bidder_description": "Electronic leak detection ($54,000 - included in RA1 and RA2 above)",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "included"
+        },
+        {
+          "workbook_row": 36,
+          "scope_item": "Tax exempt",
+          "bidder_description": "Less sales tax on materials - tax-exempt project",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": -40000.0
+        }
+      ],
+      "tax_treatment": "excluded",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [
+        {
+          "description": "Alternate #11: Rooftop Photovoltaic System",
+          "amount": 15000.0
+        }
+      ],
+      "exclusions": [
+        "Additional mobilizations beyond two",
+        "Winter protection, snow and ice removal",
+        "Structural deck repairs",
+        "Performance and payment bond"
+      ],
+      "warranty": {
+        "offered": [
+          "Manufacturer's 20-year NDL total-system warranty",
+          "5-year installer workmanship warranty"
+        ],
+        "meets_minimum": true
+      },
+      "bid_validity_days": 90,
+      "addenda_acknowledged": [
+        "Addendum 01"
+      ],
+      "expected_flags": [
+        "$40,000 tax-exempt credit shown as a separate deduct line",
+        "Leak detection value ($54,000) stated but included in assembly prices",
+        "Predicted safety incidents 30.76 - above policy threshold, needs safety approval",
+        "Workmanship warranty exceeds minimum (5 years)"
+      ],
+      "sub_bid_as_submitted": 857000.0,
+      "gc_plugs": [
+        {
+          "row": 33,
+          "scope_item": "Additional flashing",
+          "amt": 50000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 50000.0,
+      "base_bid_value": 907000.0,
+      "textura": 1999.8,
+      "subcontract_value": 908999.8,
+      "sales_tax": 0.0,
+      "sdi": 13180.5,
+      "total_package_value": 922180.3,
+      "variance": 87266.3,
+      "variance_pct": 10.5
+    },
+    {
+      "company": "MD Roofing",
+      "workbook_block": "X",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 400000,
+        "sdi_enrolled": false,
+        "predicted_safety_incidents": null
+      },
+      "status": "declined",
+      "documents": [
+        "RE_ TCJC 07.50 Roofing - bid invite.pdf"
+      ]
+    },
+    {
+      "company": "307 Imperial Roofing",
+      "workbook_block": "AC",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 1500000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": null
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "307imperial_quote_justice_center.pdf",
+          "format": "pdf",
+          "date": "2025-11-17",
+          "role": "current bid",
+          "total_as_written": 852202.0
+        }
+      ],
+      "responsive": true,
+      "clarification": {
+        "sent": "2025-11-19",
+        "responded": true,
+        "summary": "Will not break apart. PV flashing only needed with Alternate 11. No tax breakout provided."
+      },
+      "lines": [
+        {
+          "workbook_row": 18,
+          "scope_item": "Roof Assembly RA1",
+          "bidder_description": "TPO roof RA1",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 732202.0
+        },
+        {
+          "workbook_row": 19,
+          "scope_item": "Roof Assembly RA2",
+          "bidder_description": "TPO roof RA2 with ballast",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 95000.0
+        },
+        {
+          "workbook_row": 20,
+          "scope_item": "Flashing, gutters, downspouts, scuppers, etc",
+          "bidder_description": "Flashing / gutters / downspouts / scuppers",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 25000.0
+        },
+        {
+          "workbook_row": 30,
+          "scope_item": "Electronic leak detection - reference spec 075423",
+          "bidder_description": "Electronic leak detection",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "included"
+        },
+        {
+          "workbook_row": 31,
+          "scope_item": "Mold insurance required for this scope",
+          "bidder_description": "Mold insurance",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "included"
+        }
+      ],
+      "tax_treatment": "included",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [
+        {
+          "description": "Alternate #11: Rooftop Photovoltaic System",
+          "amount": 20000.0
+        }
+      ],
+      "exclusions": [
+        "Bond",
+        "Snow removal"
+      ],
+      "warranty": {
+        "offered": [
+          "Manufacturer's 15-year standard material warranty",
+          "1-year workmanship warranty"
+        ],
+        "meets_minimum": false
+      },
+      "bid_validity_days": 30,
+      "addenda_acknowledged": [],
+      "expected_flags": [
+        "Sales tax INCLUDED on a tax-exempt project, no breakout given",
+        "Warranty below minimum (15-year material-only, 1-year workmanship vs 20-year NDL / 2-year)",
+        "Will not split scopes",
+        "No addendum acknowledgement",
+        "30-day validity (policy asks 60)"
+      ],
+      "sub_bid_as_submitted": 852202.0,
+      "gc_plugs": [
+        {
+          "row": 33,
+          "scope_item": "Additional flashing",
+          "amt": 50000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 50000.0,
+      "base_bid_value": 902202.0,
+      "textura": 1989.22,
+      "subcontract_value": 904191.22,
+      "sales_tax": 0.0,
+      "sdi": 13110.77,
+      "total_package_value": 917301.99,
+      "variance": 82387.99,
+      "variance_pct": 9.9
+    }
+  ],
+  "recommended_bidder": "Rodac",
+  "award_amount": 849845.33,
+  "rationale": "Lowest responsive, responsible bidder on Total Package Value ($849,845.33).",
+  "ranking_by_total_package_value": [
+    {
+      "company": "Rodac",
+      "total_package_value": 849845.33,
+      "responsive": true
+    },
+    {
+      "company": "307 Imperial Roofing",
+      "total_package_value": 917301.99,
+      "responsive": true
+    },
+    {
+      "company": "Elite Roofing Systems",
+      "total_package_value": 922180.3,
+      "responsive": true
+    },
+    {
+      "company": "Superior Roofing, Inc.",
+      "total_package_value": 1001294.62,
+      "responsive": true
+    }
+  ],
+  "provenance": {
+    "from_workbook": "line amounts, quantities, unit prices, base bid value, Textura, SDI, sales tax, subcontract value, total package value, alternates, recommended bidder, UNRESPONSIVE marks, predicted safety incidents",
+    "inferred": "which lines are the bid and which are CM/GC plugs, for bidders other than the recommended one (the workbook only codes cost categories for the recommended bidder)",
+    "synthetic": [
+      "warranty",
+      "prequalification.status",
+      "prequalification.single_project_limit",
+      "prequalification.sdi_enrolled",
+      "clarification",
+      "bid validity, addenda, labor rates and mark-ups in the bid documents",
+      "bid dates and references",
+      "the split of Rodac into an original quote and a revised bid"
+    ]
+  }
+}

@@ -1,0 +1,957 @@
+{
+  "package": "09.67",
+  "name": "Fluid-Applied Flooring",
+  "source_workbook_tab": "09.67",
+  "cmgc_estimate": {
+    "total": 213369.0,
+    "lines": [
+      {
+        "description": "SC- SD\u00a0\u00a0-\u00a0\u00a0Concrete W/ Static Disipative Sealant",
+        "qty": 1507.0,
+        "unit": "sf",
+        "value": 7769.62
+      },
+      {
+        "description": "SC - 2 -\u00a0\u00a0Sealed Concrete w/ Liquid Densifier",
+        "qty": 8677.0,
+        "unit": "sf",
+        "value": 22368.45
+      },
+      {
+        "description": "SC - 1 Sealed Concrete",
+        "qty": 3092.0,
+        "unit": "sf",
+        "value": 7970.69
+      },
+      {
+        "description": "SC - 3 -\u00a0\u00a0Broom Finish Sealed Concrete w/ Liquid Densifier",
+        "qty": 9136.0,
+        "unit": "sf",
+        "value": 23551.16
+      },
+      {
+        "description": "PSC-1 Polished Concrete",
+        "qty": 5487.0,
+        "unit": "sf",
+        "value": 99330.43
+      },
+      {
+        "description": "Joint Sealer at Sealed Concrete",
+        "qty": 22412.0,
+        "unit": "sf",
+        "value": 32815.93
+      },
+      {
+        "description": "RN-1- Epoxy Flooring",
+        "qty": 1581.0,
+        "unit": "sf",
+        "value": 19562.73
+      }
+    ]
+  },
+  "formulas": {
+    "base_bid_value": "sub_bid_as_submitted + gc_plug_total",
+    "subcontract_value": "base_bid_value + textura",
+    "total_package_value": "subcontract_value + sales_tax + sdi",
+    "variance": "total_package_value - cmgc_estimate.total"
+  },
+  "bidders": [
+    {
+      "company": "Phaze Concrete Inc",
+      "workbook_block": "D",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 6000000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": 0.305
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "Phaze Concrete - 09.67 Bid Form.xlsx",
+          "format": "xlsx",
+          "date": "2025-11-18",
+          "role": "current bid",
+          "total_as_written": 428000.0
+        }
+      ],
+      "responsive": true,
+      "clarification": null,
+      "lines": [
+        {
+          "workbook_row": 22,
+          "scope_item": "PSC-1 polished concrete",
+          "bidder_description": "PSC-1 polished concrete",
+          "qty": 4434.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 92200.0
+        },
+        {
+          "workbook_row": 23,
+          "scope_item": "RN-1 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "RN-1 Resinous Flooring & RFB Integral Cove Base",
+          "qty": 2336.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 103600.0
+        },
+        {
+          "workbook_row": 24,
+          "scope_item": "RN-2 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "RN-2 Resinous Flooring & RFB Integral Cove Base",
+          "qty": 590.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 29000.0
+        },
+        {
+          "workbook_row": 25,
+          "scope_item": "SC-1 sealed concrete",
+          "bidder_description": "SC-1 sealed concrete",
+          "qty": 4656.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 34800.0
+        },
+        {
+          "workbook_row": 26,
+          "scope_item": "SC-2 sealed concrete w/ densifier",
+          "bidder_description": "SC-2 sealed concrete w/ densifier",
+          "qty": 8588.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 43400.0
+        },
+        {
+          "workbook_row": 27,
+          "scope_item": "SC-4 sealed concrete w/ static dissipate sealant",
+          "bidder_description": "SC-4 sealed concrete w/ static dissipative sealant",
+          "qty": 1451.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 16900.0
+        },
+        {
+          "workbook_row": 28,
+          "scope_item": "TC-1 Traffic Coating",
+          "bidder_description": "TC-1 Traffic Coating",
+          "qty": 7413.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 103100.0
+        },
+        {
+          "workbook_row": 29,
+          "scope_item": "Moisture Testing",
+          "bidder_description": "Moisture Testing",
+          "qty": 1.0,
+          "unit": "EA",
+          "unit_price": null,
+          "amount": 5000.0
+        }
+      ],
+      "tax_treatment": "excluded",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [
+        {
+          "description": "Alternate #12: Terrazzo Flooring in lieu of Polished Concrete",
+          "amount": 345000.0
+        }
+      ],
+      "exclusions": [
+        "Cement topping slab at detention showers (detail 34/AD53)",
+        "Joint filler at slab joints",
+        "Polished concrete touch-up after other trades",
+        "Sales tax"
+      ],
+      "warranty": {
+        "offered": [
+          "2-year material and labor warranty on resinous flooring",
+          "5-year warranty on traffic coating",
+          "1-year workmanship on polished and sealed concrete"
+        ],
+        "meets_minimum": false
+      },
+      "bid_validity_days": 60,
+      "addenda_acknowledged": [
+        "Addendum 01"
+      ],
+      "expected_flags": [
+        "Highest bid",
+        "Topping slab at detention showers not included",
+        "Lump sums per item with quantities but no unit prices",
+        "Resinous flooring warranty 2 years vs 5-year minimum"
+      ],
+      "sub_bid_as_submitted": 428000.0,
+      "gc_plugs": [
+        {
+          "row": 41,
+          "scope_item": "Polished concrete touch ups",
+          "amt": 25000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        },
+        {
+          "row": 42,
+          "scope_item": "Joint Sealer at sealed concrete",
+          "amt": 32000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 57000.0,
+      "base_bid_value": 485000.0,
+      "textura": 1069.35,
+      "subcontract_value": 486069.35,
+      "sales_tax": 0.0,
+      "sdi": 7048.01,
+      "total_package_value": 493117.36,
+      "variance": 279748.36,
+      "variance_pct": 131.1
+    },
+    {
+      "company": "Advanced Concrete Solutions",
+      "workbook_block": "I",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 1000000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": null
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "ACS Proposal 25-318 TCJC Fluid Applied Flooring.pdf",
+          "format": "pdf",
+          "date": "2025-11-18",
+          "role": "current bid",
+          "total_as_written": 248337.0
+        }
+      ],
+      "responsive": true,
+      "clarification": {
+        "sent": "2025-11-19",
+        "responded": true,
+        "summary": "SC-2 and moisture testing included. Housing / per diem not included."
+      },
+      "lines": [
+        {
+          "workbook_row": 22,
+          "scope_item": "PSC-1 polished concrete",
+          "bidder_description": "Polished concrete, PSC-1",
+          "qty": 4975.0,
+          "unit": "SF",
+          "unit_price": 15.0,
+          "amount": 74625.0
+        },
+        {
+          "workbook_row": 23,
+          "scope_item": "RN-1 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "Resinous flooring RN-1 with integral cove base",
+          "qty": 1872.0,
+          "unit": "SF",
+          "unit_price": 13.5,
+          "amount": 25272.0
+        },
+        {
+          "workbook_row": 24,
+          "scope_item": "RN-2 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "Resinous flooring RN-2 with integral cove base",
+          "qty": 600.0,
+          "unit": "SF",
+          "unit_price": 18.0,
+          "amount": 10800.0
+        },
+        {
+          "workbook_row": 25,
+          "scope_item": "SC-1 sealed concrete",
+          "bidder_description": "Sealed concrete SC-1 and SC-2 (liquid densifier at SC-2 areas)",
+          "qty": 14871.0,
+          "unit": "SF",
+          "unit_price": 3.5,
+          "amount": 52048.5
+        },
+        {
+          "workbook_row": 26,
+          "scope_item": "SC-2 sealed concrete w/ densifier",
+          "bidder_description": "SC-2 densifier",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "inc"
+        },
+        {
+          "workbook_row": 27,
+          "scope_item": "SC-4 sealed concrete w/ static dissipate sealant",
+          "bidder_description": "Static dissipative sealed concrete, SC-4",
+          "qty": 3357.0,
+          "unit": "SF",
+          "unit_price": 3.5,
+          "amount": 11749.5
+        },
+        {
+          "workbook_row": 28,
+          "scope_item": "TC-1 Traffic Coating",
+          "bidder_description": "Traffic coating TC-1",
+          "qty": 7452.0,
+          "unit": "SF",
+          "unit_price": 8.5,
+          "amount": 63342.0
+        },
+        {
+          "workbook_row": 29,
+          "scope_item": "Moisture Testing",
+          "bidder_description": "Moisture testing",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "inc"
+        },
+        {
+          "workbook_row": 30,
+          "scope_item": "\"Cement topping slab\" at detention showers, refer to 34/AD530",
+          "bidder_description": "Cement topping slab at detention showers, ref. 34/AD53",
+          "qty": 1.0,
+          "unit": "LS",
+          "unit_price": 10500.0,
+          "amount": 10500.0
+        }
+      ],
+      "tax_treatment": "add",
+      "sales_tax_quoted_outside_total": 3891.86,
+      "alternates": [
+        {
+          "description": "Alternate #12: Terrazzo Flooring in lieu of Polished Concrete",
+          "amount": 323375.0
+        }
+      ],
+      "exclusions": [
+        "Housing / per diem",
+        "Joint filler and joint sealer at sealed concrete",
+        "Protection of finished floors after acceptance",
+        "Polished concrete touch-ups caused by other trades"
+      ],
+      "warranty": {
+        "offered": [
+          "5-year joint manufacturer/installer warranty on resinous flooring, material and labor",
+          "5-year joint warranty on traffic coating",
+          "1-year workmanship on polished and sealed concrete"
+        ],
+        "meets_minimum": true
+      },
+      "bid_validity_days": 60,
+      "addenda_acknowledged": [
+        "Addendum 01"
+      ],
+      "expected_flags": [
+        "SC-2 priced inside the SC-1 line (\"inc\")",
+        "Only bidder pricing the detention shower topping slab",
+        "Sales tax ($3,891.86) quoted outside the total; workbook carries it under Insurance & Tax",
+        "Housing / per diem not included",
+        "Lowest RESPONSIVE bidder; recommended in workbook (4th lowest price)"
+      ],
+      "sub_bid_as_submitted": 248337.0,
+      "gc_plugs": [
+        {
+          "row": 41,
+          "scope_item": "Polished concrete touch ups",
+          "amt": 25000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        },
+        {
+          "row": 42,
+          "scope_item": "Joint Sealer at sealed concrete",
+          "amt": 32000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 57000.0,
+      "base_bid_value": 305337.0,
+      "textura": 673.22,
+      "subcontract_value": 306010.22,
+      "sales_tax": 3891.86,
+      "sdi": 4437.15,
+      "total_package_value": 314339.23,
+      "variance": 100970.23,
+      "variance_pct": 47.3
+    },
+    {
+      "company": "Stewart Specialty Services",
+      "workbook_block": "N",
+      "prequalification": {
+        "status": "Pending - financials not submitted",
+        "single_project_limit": 250000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": null
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "Stewart Specialty - Justice Center flooring.docx",
+          "format": "docx",
+          "date": "2025-11-17",
+          "role": "current bid",
+          "total_as_written": 91675.03
+        }
+      ],
+      "responsive": false,
+      "clarification": {
+        "sent": "2025-11-19",
+        "responded": false,
+        "summary": "No response by the 2025-11-21 deadline."
+      },
+      "lines": [
+        {
+          "workbook_row": 22,
+          "scope_item": "PSC-1 polished concrete",
+          "bidder_description": "Polish concrete PSC-1",
+          "qty": 4529.0,
+          "unit": "SF",
+          "unit_price": 7.5,
+          "amount": 33972.03
+        },
+        {
+          "workbook_row": 23,
+          "scope_item": "RN-1 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "Epoxy floor RN-1 with cove",
+          "qty": 2374.0,
+          "unit": "SF",
+          "unit_price": 8.0,
+          "amount": 18992.0
+        },
+        {
+          "workbook_row": 24,
+          "scope_item": "RN-2 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "Epoxy floor RN-2 with cove",
+          "qty": 641.0,
+          "unit": "SF",
+          "unit_price": 12.0,
+          "amount": 7692.0
+        },
+        {
+          "workbook_row": 25,
+          "scope_item": "SC-1 sealed concrete",
+          "bidder_description": "Seal concrete SC-1",
+          "qty": 4411.0,
+          "unit": "SF",
+          "unit_price": 0.6,
+          "amount": 2646.6
+        },
+        {
+          "workbook_row": 26,
+          "scope_item": "SC-2 sealed concrete w/ densifier",
+          "bidder_description": "Seal concrete SC-2 with densifier",
+          "qty": 8785.0,
+          "unit": "SF",
+          "unit_price": 1.5,
+          "amount": 13177.5
+        },
+        {
+          "workbook_row": 27,
+          "scope_item": "SC-4 sealed concrete w/ static dissipate sealant",
+          "bidder_description": "Seal concrete SC-4 static dissipative",
+          "qty": 883.0,
+          "unit": "SF",
+          "unit_price": 2.3,
+          "amount": 2030.9
+        },
+        {
+          "workbook_row": 31,
+          "scope_item": "Joint Filler",
+          "bidder_description": "Joint filler",
+          "qty": 2791.0,
+          "unit": "SF",
+          "unit_price": 4.0,
+          "amount": 11164.0
+        },
+        {
+          "workbook_row": 32,
+          "scope_item": "Transportation",
+          "bidder_description": "Transportation",
+          "qty": 4.0,
+          "unit": "EA",
+          "unit_price": 500.0,
+          "amount": 2000.0
+        }
+      ],
+      "tax_treatment": "silent",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [],
+      "exclusions": [
+        "Traffic coating",
+        "Moisture testing"
+      ],
+      "warranty": {
+        "offered": [
+          "1 year standard"
+        ],
+        "meets_minimum": false
+      },
+      "bid_validity_days": 30,
+      "addenda_acknowledged": [],
+      "expected_flags": [
+        "ARITHMETIC ERROR: 4,529 SF x $7.50 = $33,967.50 but the bid shows $33,972.03 (total overstated by $4.53); the workbook carries the bid as written",
+        "Traffic coating TC-1 and moisture testing excluded; topping slab not priced",
+        "Leveled total is well below the CM/GC estimate",
+        "No response to clarification questions - UNRESPONSIVE in workbook",
+        "Tax status and addenda not addressed"
+      ],
+      "sub_bid_as_submitted": 91675.03,
+      "gc_plugs": [
+        {
+          "row": 41,
+          "scope_item": "Polished concrete touch ups",
+          "amt": 25000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        },
+        {
+          "row": 42,
+          "scope_item": "Joint Sealer at sealed concrete",
+          "amt": 32000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 57000.0,
+      "base_bid_value": 148675.03,
+      "textura": 327.81,
+      "subcontract_value": 149002.84,
+      "sales_tax": 0.0,
+      "sdi": 2160.54,
+      "total_package_value": 151163.38,
+      "variance": -62205.62,
+      "variance_pct": -29.2
+    },
+    {
+      "company": "CentiMark Corporation",
+      "workbook_block": "S",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 5000000,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": 0.023
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "CentiMark_Proposal_TetonCountyJusticeCenter.pdf",
+          "format": "pdf",
+          "date": "2025-11-18",
+          "role": "current bid",
+          "total_as_written": 108967.0
+        }
+      ],
+      "responsive": false,
+      "clarification": {
+        "sent": "2025-11-19",
+        "responded": false,
+        "summary": "No response by the 2025-11-21 deadline."
+      },
+      "lines": [
+        {
+          "workbook_row": 22,
+          "scope_item": "PSC-1 polished concrete",
+          "bidder_description": "Polished concrete system (PSC-1)",
+          "qty": 4993.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 24117.0
+        },
+        {
+          "workbook_row": 23,
+          "scope_item": "RN-1 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "Resinous floor system RN-1 incl. cove base",
+          "qty": 1849.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 16117.0
+        },
+        {
+          "workbook_row": 24,
+          "scope_item": "RN-2 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "Resinous floor system RN-2 incl. cove base",
+          "qty": 593.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 10117.0
+        },
+        {
+          "workbook_row": 25,
+          "scope_item": "SC-1 sealed concrete",
+          "bidder_description": "Sealed concrete - all SC types",
+          "qty": 16218.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 18729.0
+        },
+        {
+          "workbook_row": 28,
+          "scope_item": "TC-1 Traffic Coating",
+          "bidder_description": "Traffic coating system TC-1",
+          "qty": 7434.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 39887.0
+        }
+      ],
+      "tax_treatment": "excluded",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [],
+      "exclusions": [
+        "Cement topping slab at detention showers",
+        "Joint filler",
+        "Moisture testing and moisture mitigation",
+        "LEED documentation"
+      ],
+      "warranty": {
+        "offered": [
+          "5-year single-source warranty on traffic coating",
+          "1-year warranty on resinous flooring"
+        ],
+        "meets_minimum": false
+      },
+      "bid_validity_days": 45,
+      "addenda_acknowledged": [
+        "Addendum 01"
+      ],
+      "expected_flags": [
+        "All sealed concrete types (SC-1/SC-2/SC-4) rolled into one line of 16,218 SF",
+        "Topping slab, joint filler and moisture testing excluded",
+        "LEED requirements not confirmed",
+        "Leveled total is well below the CM/GC estimate",
+        "No response to clarification questions - UNRESPONSIVE in workbook"
+      ],
+      "sub_bid_as_submitted": 108967.0,
+      "gc_plugs": [
+        {
+          "row": 41,
+          "scope_item": "Polished concrete touch ups",
+          "amt": 25000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        },
+        {
+          "row": 42,
+          "scope_item": "Joint Sealer at sealed concrete",
+          "amt": 32000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 57000.0,
+      "base_bid_value": 165967.0,
+      "textura": 365.93,
+      "subcontract_value": 166332.93,
+      "sales_tax": 0.0,
+      "sdi": 2411.83,
+      "total_package_value": 168744.76,
+      "variance": -44624.24,
+      "variance_pct": -20.9
+    },
+    {
+      "company": "Axis Solutions",
+      "workbook_block": "X",
+      "prequalification": {
+        "status": "Not prequalified - application incomplete",
+        "single_project_limit": 0,
+        "sdi_enrolled": true,
+        "predicted_safety_incidents": 9.085
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "Axis quote TCJC.docx",
+          "format": "docx",
+          "date": "2025-11-18",
+          "role": "current bid",
+          "total_as_written": 56572.0
+        }
+      ],
+      "responsive": false,
+      "clarification": {
+        "sent": "2025-11-19",
+        "responded": false,
+        "summary": "No response by the 2025-11-21 deadline."
+      },
+      "lines": [
+        {
+          "workbook_row": 23,
+          "scope_item": "RN-1 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "RN-1 resinous floor",
+          "qty": 525.0,
+          "unit": "SF",
+          "unit_price": 42.92,
+          "amount": 22533.0
+        },
+        {
+          "workbook_row": 24,
+          "scope_item": "RN-2 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "RN-2 cove base",
+          "qty": 200.0,
+          "unit": "LF",
+          "unit_price": null,
+          "amount": 16894.0
+        },
+        {
+          "workbook_row": 25,
+          "scope_item": "SC-1 sealed concrete",
+          "bidder_description": "SC-1 sealer",
+          "qty": 53.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 153.0
+        },
+        {
+          "workbook_row": 26,
+          "scope_item": "SC-2 sealed concrete w/ densifier",
+          "bidder_description": "SC-2 sealer and densifier",
+          "qty": 8538.0,
+          "unit": "SF",
+          "unit_price": null,
+          "amount": 16992.0
+        }
+      ],
+      "tax_treatment": "silent",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [],
+      "exclusions": [],
+      "warranty": {
+        "offered": [],
+        "meets_minimum": false
+      },
+      "bid_validity_days": null,
+      "addenda_acknowledged": [],
+      "expected_flags": [
+        "Quantities far off CM/GC takeoff (RN-1 525 SF vs 2,813; SC-1 53 SF vs 4,740; RN-2 priced as 200 LF)",
+        "Polished concrete, SC-4 and traffic coating not priced",
+        "No warranty, exclusions, tax or addenda stated",
+        "Not prequalified; predicted safety incidents 9.09",
+        "Workbook comment: \"incorrect quantities, missing scope, no responses\" - UNRESPONSIVE"
+      ],
+      "sub_bid_as_submitted": 56572.0,
+      "gc_plugs": [
+        {
+          "row": 41,
+          "scope_item": "Polished concrete touch ups",
+          "amt": 25000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        },
+        {
+          "row": 42,
+          "scope_item": "Joint Sealer at sealed concrete",
+          "amt": 32000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 57000.0,
+      "base_bid_value": 113572.0,
+      "textura": 250.41,
+      "subcontract_value": 113822.41,
+      "sales_tax": 0.0,
+      "sdi": 1650.42,
+      "total_package_value": 115472.83,
+      "variance": -97896.17,
+      "variance_pct": -45.9
+    },
+    {
+      "company": "Diverzify Pro, LLC",
+      "workbook_block": "AC",
+      "prequalification": {
+        "status": "Approved",
+        "single_project_limit": 5000000,
+        "sdi_enrolled": false,
+        "predicted_safety_incidents": null
+      },
+      "status": "priced",
+      "documents": [
+        {
+          "file": "Diverzify_TCJC_Div09_Resinous_LumpSum.xlsx",
+          "format": "xlsx",
+          "date": "2025-11-18",
+          "role": "current bid",
+          "total_as_written": 267925.0
+        }
+      ],
+      "responsive": true,
+      "clarification": {
+        "sent": "2025-11-19",
+        "responded": true,
+        "summary": "TC-1 excluded. Lump sum only; quantities not provided."
+      },
+      "lines": [
+        {
+          "workbook_row": 22,
+          "scope_item": "PSC-1 polished concrete",
+          "bidder_description": "PSC-1 Polished Concrete - lump sum",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 103455.0
+        },
+        {
+          "workbook_row": 23,
+          "scope_item": "RN-1 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "RN-1 Resinous Flooring with RFB cove - lump sum",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 77850.0
+        },
+        {
+          "workbook_row": 24,
+          "scope_item": "RN-2 Resinous Flooring & RFB Integral Cove Base",
+          "bidder_description": "RN-2 Resinous Flooring with RFB cove - lump sum",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 20290.0
+        },
+        {
+          "workbook_row": 25,
+          "scope_item": "SC-1 sealed concrete",
+          "bidder_description": "SC-1 Sealed Concrete - lump sum",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 13080.0
+        },
+        {
+          "workbook_row": 26,
+          "scope_item": "SC-2 sealed concrete w/ densifier",
+          "bidder_description": "SC-2 Sealed Concrete with Densifier - lump sum",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 43560.0
+        },
+        {
+          "workbook_row": 27,
+          "scope_item": "SC-4 sealed concrete w/ static dissipate sealant",
+          "bidder_description": "SC-4 Static Dissipative Sealed Concrete - lump sum",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": 9690.0
+        },
+        {
+          "workbook_row": 28,
+          "scope_item": "TC-1 Traffic Coating",
+          "bidder_description": "TC-1 Traffic Coating",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "NOT INCLUDED"
+        },
+        {
+          "workbook_row": 29,
+          "scope_item": "Moisture Testing",
+          "bidder_description": "Moisture Testing",
+          "qty": null,
+          "unit": null,
+          "unit_price": null,
+          "amount": "inc"
+        }
+      ],
+      "tax_treatment": "excluded",
+      "sales_tax_quoted_outside_total": null,
+      "alternates": [],
+      "exclusions": [
+        "TC-1 traffic coating (by others)",
+        "Cement topping slab at detention showers",
+        "Sales tax"
+      ],
+      "warranty": {
+        "offered": [
+          "10-year manufacturer material warranty on resinous flooring",
+          "5-year labor warranty on resinous flooring",
+          "1-year workmanship on polished and sealed concrete"
+        ],
+        "meets_minimum": true
+      },
+      "bid_validity_days": 60,
+      "addenda_acknowledged": [
+        "Addendum 01"
+      ],
+      "expected_flags": [
+        "Lump sums only - no quantities or unit prices",
+        "Traffic coating excluded; $63,342 plug (equal to the Advanced Concrete price) is inferred as a CM/GC plug",
+        "Workbook applies no Textura or SDI to this bidder"
+      ],
+      "sub_bid_as_submitted": 267925.0,
+      "gc_plugs": [
+        {
+          "row": 28,
+          "scope_item": "TC-1 Traffic Coating",
+          "amt": 63342.0,
+          "basis": "inferred from workbook values"
+        },
+        {
+          "row": 41,
+          "scope_item": "Polished concrete touch ups",
+          "amt": 25000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        },
+        {
+          "row": 42,
+          "scope_item": "Joint Sealer at sealed concrete",
+          "amt": 32000.0,
+          "basis": "workbook cost category 52 (contingency)"
+        }
+      ],
+      "gc_plug_total": 120342.0,
+      "base_bid_value": 388267.0,
+      "textura": 0.0,
+      "subcontract_value": 388267.0,
+      "sales_tax": 0.0,
+      "sdi": 0.0,
+      "total_package_value": 388267.0,
+      "variance": 174898.0,
+      "variance_pct": 82.0
+    }
+  ],
+  "recommended_bidder": "Advanced Concrete Solutions",
+  "award_amount": 314339.23,
+  "rationale": "Lowest responsive, responsible bidder on Total Package Value ($314,339.23). 3 lower-priced bidder(s) are UNRESPONSIVE and excluded: Axis Solutions, Stewart Specialty Services, CentiMark Corporation.",
+  "ranking_by_total_package_value": [
+    {
+      "company": "Axis Solutions",
+      "total_package_value": 115472.83,
+      "responsive": false
+    },
+    {
+      "company": "Stewart Specialty Services",
+      "total_package_value": 151163.38,
+      "responsive": false
+    },
+    {
+      "company": "CentiMark Corporation",
+      "total_package_value": 168744.76,
+      "responsive": false
+    },
+    {
+      "company": "Advanced Concrete Solutions",
+      "total_package_value": 314339.23,
+      "responsive": true
+    },
+    {
+      "company": "Diverzify Pro, LLC",
+      "total_package_value": 388267.0,
+      "responsive": true
+    },
+    {
+      "company": "Phaze Concrete Inc",
+      "total_package_value": 493117.36,
+      "responsive": true
+    }
+  ],
+  "provenance": {
+    "from_workbook": "line amounts, quantities, unit prices, base bid value, Textura, SDI, sales tax, subcontract value, total package value, alternates, recommended bidder, UNRESPONSIVE marks, predicted safety incidents",
+    "inferred": "which lines are the bid and which are CM/GC plugs, for bidders other than the recommended one (the workbook only codes cost categories for the recommended bidder)",
+    "synthetic": [
+      "warranty",
+      "prequalification.status",
+      "prequalification.single_project_limit",
+      "prequalification.sdi_enrolled",
+      "clarification",
+      "bid validity, addenda, labor rates and mark-ups in the bid documents",
+      "bid dates and references",
+      "the split of Rodac into an original quote and a revised bid"
+    ]
+  }
+}

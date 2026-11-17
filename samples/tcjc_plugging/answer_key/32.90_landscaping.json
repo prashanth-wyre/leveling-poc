@@ -1,0 +1,2000 @@
+{
+  "package": "32.90",
+  "name": "Landscaping and Irrigation",
+  "note": "SYNTHETIC. GC scope items and quantities are from the TCJC workbook; bidders are fictional and their prices are designed (mostly real workbook unit rates re-quoted at altered quantities and units; some rates are invented to create specific cases).",
+  "rates": {
+    "textura_pct_of_base_bid": 0.2205,
+    "sdi_pct_of_subcontract_value": 1.45
+  },
+  "formulas": {
+    "base_bid_value": "bid_as_submitted + quantity_adjustments + plug_total + allowance_total",
+    "subcontract_value": "base_bid_value + textura",
+    "total_package_value": "subcontract_value + sdi"
+  },
+  "gc_items": [
+    {
+      "key": "FLAG",
+      "desc": "0.3 Flag pole",
+      "unit": "LS",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": null,
+      "rate": null,
+      "estimate": 18979.93
+    },
+    {
+      "key": "BENCH47",
+      "desc": "4.7 Park bench with dividers",
+      "unit": "EA",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 1.0,
+      "rate": 4800.3397,
+      "estimate": 4800.34
+    },
+    {
+      "key": "BIKE",
+      "desc": "4.5 Bike rack",
+      "unit": "EA",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 9.0,
+      "rate": 421.7761,
+      "estimate": 3795.99
+    },
+    {
+      "key": "SILVA",
+      "desc": "0.6 Silva Cell field system",
+      "unit": "EA",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 24.0,
+      "rate": 1235.6721,
+      "estimate": 29656.13
+    },
+    {
+      "key": "TREES",
+      "desc": "5.1 / 5.13 Trees, deciduous and evergreen",
+      "unit": "EA",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 45.0,
+      "rate": 687.7294,
+      "estimate": 30947.82
+    },
+    {
+      "key": "SHRUBS",
+      "desc": "5.4 Shrubs",
+      "unit": "EA",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 168.0,
+      "rate": 68.5386,
+      "estimate": 11514.49
+    },
+    {
+      "key": "GRASS",
+      "desc": "5.5 Grasses / perennials / vines",
+      "unit": "EA",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 122.0,
+      "rate": 38.3747,
+      "estimate": 4681.72
+    },
+    {
+      "key": "MMULCH",
+      "desc": "5.6 Mineral mulch over weed barrier fabric, 3 in. depth",
+      "unit": "CY",
+      "depth": 3.0,
+      "source": "TCJC workbook estimate block",
+      "qty": 19.0,
+      "rate": 277.4843,
+      "estimate": 5272.2
+    },
+    {
+      "key": "WMULCH",
+      "desc": "5.8 Wood mulch, 3 in. depth",
+      "unit": "SF",
+      "depth": 3.0,
+      "source": "TCJC workbook estimate block",
+      "qty": 5104.0,
+      "rate": 0.9737,
+      "estimate": 4969.74
+    },
+    {
+      "key": "SOD",
+      "desc": "5.11 Sod",
+      "unit": "SF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 4133.0,
+      "rate": 0.8121,
+      "estimate": 3356.56
+    },
+    {
+      "key": "IRRIG",
+      "desc": "Irrigation system",
+      "unit": "LS",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": null,
+      "rate": null,
+      "estimate": 19660.04
+    },
+    {
+      "key": "SLEEVE",
+      "desc": "Irrigation sleeving",
+      "unit": "LF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 168.0,
+      "rate": 62.7643,
+      "estimate": 10544.4
+    },
+    {
+      "key": "PAVERS",
+      "desc": "1.1 Unit pavers, herringbone pattern",
+      "unit": "SF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 1902.0,
+      "rate": 31.6332,
+      "estimate": 60166.37
+    },
+    {
+      "key": "FENCE",
+      "desc": "5.9 Tree protection fence",
+      "unit": "LF",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": 120.0,
+      "rate": 42.1776,
+      "estimate": 5061.31
+    },
+    {
+      "key": "DRAIN",
+      "desc": "Drainage rock at site planter / retaining walls",
+      "unit": "LS",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": null,
+      "rate": null,
+      "estimate": 2583.38
+    },
+    {
+      "key": "MAINT",
+      "desc": "One year additional maintenance",
+      "unit": "LS",
+      "depth": null,
+      "source": "TCJC workbook estimate block",
+      "qty": null,
+      "rate": null,
+      "estimate": 4006.87
+    }
+  ],
+  "plug_rules": {
+    "FLAG": "average_of_bidders -> gc_estimate",
+    "BENCH47": "median_of_bidders -> gc_estimate",
+    "BIKE": "average_of_bidders -> gc_estimate",
+    "SILVA": "ai_market_price -> median_of_bidders -> gc_estimate",
+    "TREES": "average_of_bidders -> gc_estimate",
+    "SHRUBS": "average_of_bidders -> gc_estimate",
+    "GRASS": "average_of_bidders -> gc_estimate",
+    "MMULCH": "average_of_bidders -> gc_estimate",
+    "WMULCH": "average_of_bidders -> gc_estimate",
+    "SOD": "average_of_bidders -> gc_estimate",
+    "IRRIG": "average_of_bidders -> gc_estimate",
+    "SLEEVE": "average_of_bidders -> gc_estimate",
+    "PAVERS": "ai_market_price -> unit_rate_x_gc_qty (rate source: average) -> gc_estimate",
+    "FENCE": "average_of_bidders -> gc_estimate",
+    "DRAIN": "average_of_bidders -> gc_estimate",
+    "MAINT": "max_of_bidders -> gc_estimate"
+  },
+  "ai_status": "PENDING: 4 item(s) have no snapshot and no credentials are set; fallback methods used",
+  "bidders": [
+    {
+      "company": "Aspen Hollow Landscapes",
+      "document": "Aspen Hollow - 32.90 Bid Form.xlsx",
+      "format": "xlsx",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "FLAG",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 9944.86,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 9944.86,
+          "adjustment": 0.0
+        },
+        {
+          "item": "BENCH47",
+          "status": "omitted",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1.0,
+            "unit": "EA"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - not priced",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "BIKE",
+          "status": "priced",
+          "as_bid": {
+            "qty": 7.0,
+            "unit": "EA",
+            "unit_price": 868.83,
+            "amount": 6081.81,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 9.0,
+            "unit": "EA"
+          },
+          "converted_qty": 7.0,
+          "conversion": "same unit",
+          "variance_pct": -22.22,
+          "unit_rate_in_gc_unit": 868.83,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 7819.47,
+          "adjustment": 1737.66
+        },
+        {
+          "item": "SILVA",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 24493.31,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 24.0,
+            "unit": "EA"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": 1020.5546,
+          "action": "lump sum without quantity - flag only",
+          "leveled_value": 24493.31,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TREES",
+          "status": "priced",
+          "as_bid": {
+            "qty": 46.0,
+            "unit": "EA",
+            "unit_price": 1025.16,
+            "amount": 47157.36,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 45.0,
+            "unit": "EA"
+          },
+          "converted_qty": 46.0,
+          "conversion": "same unit",
+          "variance_pct": 2.22,
+          "unit_rate_in_gc_unit": 1025.16,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 47157.36,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SHRUBS",
+          "status": "priced",
+          "as_bid": {
+            "qty": 190.0,
+            "unit": "EA",
+            "unit_price": 79.72,
+            "amount": 15146.8,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 168.0,
+            "unit": "EA"
+          },
+          "converted_qty": 190.0,
+          "conversion": "same unit",
+          "variance_pct": 13.1,
+          "unit_rate_in_gc_unit": 79.72,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 13392.96,
+          "adjustment": -1753.84
+        },
+        {
+          "item": "GRASS",
+          "status": "priced",
+          "as_bid": {
+            "qty": 192.0,
+            "unit": "EA",
+            "unit_price": 40.08,
+            "amount": 7695.36,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 122.0,
+            "unit": "EA"
+          },
+          "converted_qty": 192.0,
+          "conversion": "same unit",
+          "variance_pct": 57.38,
+          "unit_rate_in_gc_unit": 40.08,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 4889.76,
+          "adjustment": -2805.6
+        },
+        {
+          "item": "MMULCH",
+          "status": "priced",
+          "as_bid": {
+            "qty": 2052.0,
+            "unit": "SF",
+            "unit_price": 5.02,
+            "amount": 10301.04,
+            "stated_depth_in": 3.0
+          },
+          "gc": {
+            "qty": 19.0,
+            "unit": "CY"
+          },
+          "converted_qty": 19.0,
+          "conversion": "SF x 3 in. / 324 = CY",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 542.16,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 10301.04,
+          "adjustment": 0.0
+        },
+        {
+          "item": "WMULCH",
+          "status": "priced",
+          "as_bid": {
+            "qty": 47.0,
+            "unit": "CY",
+            "unit_price": 160.11,
+            "amount": 7525.17,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 5104.0,
+            "unit": "SF"
+          },
+          "converted_qty": 5076.0,
+          "conversion": "CY x 324 / 3 in. = SF",
+          "variance_pct": -0.55,
+          "unit_rate_in_gc_unit": 1.4825,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 7525.17,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SOD",
+          "status": "priced",
+          "as_bid": {
+            "qty": 459.0,
+            "unit": "SY",
+            "unit_price": 27.33,
+            "amount": 12544.47,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 4133.0,
+            "unit": "SF"
+          },
+          "converted_qty": 4131.0,
+          "conversion": "SY x 9 = SF",
+          "variance_pct": -0.05,
+          "unit_rate_in_gc_unit": 3.0367,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 12544.47,
+          "adjustment": 0.0
+        },
+        {
+          "item": "IRRIG",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 42940.63,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 42940.63,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SLEEVE",
+          "status": "priced",
+          "as_bid": {
+            "qty": 160.0,
+            "unit": "FT",
+            "unit_price": 52.34,
+            "amount": 8374.4,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 168.0,
+            "unit": "LF"
+          },
+          "converted_qty": 160.0,
+          "conversion": "same length unit",
+          "variance_pct": -4.76,
+          "unit_rate_in_gc_unit": 52.34,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 8374.4,
+          "adjustment": 0.0
+        },
+        {
+          "item": "PAVERS",
+          "status": "priced",
+          "as_bid": {
+            "qty": 2150.0,
+            "unit": "SF",
+            "unit_price": 30.71,
+            "amount": 66026.5,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1902.0,
+            "unit": "SF"
+          },
+          "converted_qty": 2150.0,
+          "conversion": "same unit",
+          "variance_pct": 13.04,
+          "unit_rate_in_gc_unit": 30.71,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 58410.42,
+          "adjustment": -7616.08
+        },
+        {
+          "item": "FENCE",
+          "status": "priced",
+          "as_bid": {
+            "qty": 15.0,
+            "unit": "PANEL",
+            "unit_price": 649.78,
+            "amount": 9746.7,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 120.0,
+            "unit": "LF"
+          },
+          "converted_qty": 120.0,
+          "conversion": "PANEL x 8 = LF",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 81.2225,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 9746.7,
+          "adjustment": 0.0
+        },
+        {
+          "item": "DRAIN",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "MAINT",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 267978.41,
+      "quantity_adjustments": -10437.86,
+      "plugs": [
+        {
+          "item": "BENCH47",
+          "reason": "not priced",
+          "method_requested": "median_of_bidders",
+          "method_used": "median_of_bidders",
+          "attempts": [
+            {
+              "method": "median_of_bidders",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Elkhorn Grounds & Irrigation",
+              "value": 4141.79,
+              "unit_rate": 4141.79
+            },
+            {
+              "bidder": "Cutthroat Creek Nursery",
+              "value": 5548.0,
+              "unit_rate": 5548.0
+            }
+          ],
+          "trimmed_outliers": [
+            {
+              "bidder": "Wind River Site Works",
+              "value": 9451.72,
+              "unit_rate": 9451.72
+            }
+          ],
+          "formula": "median of $4,141.79, $5,548.00",
+          "value": 4844.9
+        },
+        {
+          "item": "DRAIN",
+          "reason": "excluded by bidder",
+          "method_requested": "average_of_bidders",
+          "method_used": "gc_estimate",
+          "attempts": [
+            {
+              "method": "average_of_bidders",
+              "result": "skipped: only 1 comparable price(s), 2 required"
+            },
+            {
+              "method": "gc_estimate",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Wind River Site Works",
+              "value": 3200.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "GC lump sum estimate",
+          "value": 2583.38
+        },
+        {
+          "item": "MAINT",
+          "reason": "excluded by bidder",
+          "method_requested": "max_of_bidders",
+          "method_used": "max_of_bidders",
+          "attempts": [
+            {
+              "method": "max_of_bidders",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Cutthroat Creek Nursery",
+              "value": 4000.0,
+              "unit_rate": null
+            },
+            {
+              "bidder": "Wind River Site Works",
+              "value": 6500.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "max of $4,000.00, $6,500.00",
+          "value": 6500.0
+        }
+      ],
+      "plug_total": 13928.28,
+      "allowances": [],
+      "allowance_total": 0.0,
+      "base_bid_value": 271468.83,
+      "textura": 598.59,
+      "subcontract_value": 272067.42,
+      "sdi": 3944.98,
+      "total_package_value": 276012.4,
+      "expected_flags": [
+        "BIKE: quantity -22.2% vs GC takeoff after converting EA - re-extended, +1,737.66",
+        "SHRUBS: quantity +13.1% vs GC takeoff after converting EA - re-extended, -1,753.84",
+        "GRASS: quantity +57.4% vs GC takeoff after converting EA - re-extended, -2,805.60",
+        "PAVERS: quantity +13.0% vs GC takeoff after converting SF - re-extended, -7,616.08",
+        "SILVA: lump sum with no quantity - cannot check against GC takeoff",
+        "BENCH47: not priced - plugged $4,844.90 by median_of_bidders",
+        "DRAIN: excluded by bidder - plugged $2,583.38 by gc_estimate",
+        "MAINT: excluded by bidder - plugged $6,500.00 by max_of_bidders"
+      ]
+    },
+    {
+      "company": "Elkhorn Grounds & Irrigation",
+      "document": "Elkhorn Grounds Proposal - Justice Center.pdf",
+      "format": "pdf",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "FLAG",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 22600.32,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 22600.32,
+          "adjustment": 0.0
+        },
+        {
+          "item": "BENCH47",
+          "status": "priced",
+          "as_bid": {
+            "qty": 1.0,
+            "unit": "EA",
+            "unit_price": 4141.79,
+            "amount": 4141.79,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1.0,
+            "unit": "EA"
+          },
+          "converted_qty": 1.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 4141.79,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 4141.79,
+          "adjustment": 0.0
+        },
+        {
+          "item": "BIKE",
+          "status": "priced",
+          "as_bid": {
+            "qty": 9.0,
+            "unit": "EA",
+            "unit_price": 1474.07,
+            "amount": 13266.63,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 9.0,
+            "unit": "EA"
+          },
+          "converted_qty": 9.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 1474.07,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 13266.63,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SILVA",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 24.0,
+            "unit": "EA"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TREES",
+          "status": "priced",
+          "as_bid": {
+            "qty": 45.0,
+            "unit": "EA",
+            "unit_price": 1306.0,
+            "amount": 58770.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 45.0,
+            "unit": "EA"
+          },
+          "converted_qty": 45.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 1306.0,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 58770.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SHRUBS",
+          "status": "priced",
+          "as_bid": {
+            "qty": 168.0,
+            "unit": "EA",
+            "unit_price": 74.7,
+            "amount": 12549.6,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 168.0,
+            "unit": "EA"
+          },
+          "converted_qty": 168.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 74.7,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 12549.6,
+          "adjustment": 0.0
+        },
+        {
+          "item": "GRASS",
+          "status": "priced",
+          "as_bid": {
+            "qty": 122.0,
+            "unit": "EA",
+            "unit_price": 385.13,
+            "amount": 46985.86,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 122.0,
+            "unit": "EA"
+          },
+          "converted_qty": 122.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 385.13,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 46985.86,
+          "adjustment": 0.0
+        },
+        {
+          "item": "MMULCH",
+          "status": "priced",
+          "as_bid": {
+            "qty": 19.0,
+            "unit": "CY",
+            "unit_price": 288.62,
+            "amount": 5483.78,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 19.0,
+            "unit": "CY"
+          },
+          "converted_qty": 19.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 288.62,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 5483.78,
+          "adjustment": 0.0
+        },
+        {
+          "item": "WMULCH",
+          "status": "priced",
+          "as_bid": {
+            "qty": 5104.0,
+            "unit": "SF",
+            "unit_price": 1.55,
+            "amount": 7911.2,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 5104.0,
+            "unit": "SF"
+          },
+          "converted_qty": 5104.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 1.55,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 7911.2,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SOD",
+          "status": "priced",
+          "as_bid": {
+            "qty": 4133.0,
+            "unit": "SF",
+            "unit_price": 7.05,
+            "amount": 29137.65,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 4133.0,
+            "unit": "SF"
+          },
+          "converted_qty": 4133.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 7.05,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 29137.65,
+          "adjustment": 0.0
+        },
+        {
+          "item": "IRRIG",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 66922.37,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 66922.37,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SLEEVE",
+          "status": "included",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": "Included",
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 168.0,
+            "unit": "LF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "included in other lines - no value",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "PAVERS",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 148718.97,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1902.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": 78.1908,
+          "action": "lump sum without quantity - flag only",
+          "leveled_value": 148718.97,
+          "adjustment": 0.0
+        },
+        {
+          "item": "FENCE",
+          "status": "priced",
+          "as_bid": {
+            "qty": 120.0,
+            "unit": "LF",
+            "unit_price": 14.31,
+            "amount": 1717.2,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 120.0,
+            "unit": "LF"
+          },
+          "converted_qty": 120.0,
+          "conversion": "same length unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 14.31,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 1717.2,
+          "adjustment": 0.0
+        },
+        {
+          "item": "DRAIN",
+          "status": "omitted",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - not priced",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "MAINT",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 418205.37,
+      "quantity_adjustments": 0.0,
+      "plugs": [
+        {
+          "item": "SILVA",
+          "reason": "excluded by bidder",
+          "method_requested": "ai_market_price",
+          "method_used": "median_of_bidders",
+          "attempts": [
+            {
+              "method": "ai_market_price",
+              "result": "skipped: no AI price available (no API key or snapshot)"
+            },
+            {
+              "method": "median_of_bidders",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Aspen Hollow Landscapes",
+              "value": 24493.31,
+              "unit_rate": 1020.5546
+            },
+            {
+              "bidder": "Cutthroat Creek Nursery",
+              "value": 28125.12,
+              "unit_rate": 1171.88
+            }
+          ],
+          "trimmed_outliers": [
+            {
+              "bidder": "Wind River Site Works",
+              "value": 94120.56,
+              "unit_rate": 3921.69
+            }
+          ],
+          "formula": "median of $24,493.31, $28,125.12",
+          "value": 26309.22
+        },
+        {
+          "item": "DRAIN",
+          "reason": "not priced",
+          "method_requested": "average_of_bidders",
+          "method_used": "gc_estimate",
+          "attempts": [
+            {
+              "method": "average_of_bidders",
+              "result": "skipped: only 1 comparable price(s), 2 required"
+            },
+            {
+              "method": "gc_estimate",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Wind River Site Works",
+              "value": 3200.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "GC lump sum estimate",
+          "value": 2583.38
+        },
+        {
+          "item": "MAINT",
+          "reason": "excluded by bidder",
+          "method_requested": "max_of_bidders",
+          "method_used": "max_of_bidders",
+          "attempts": [
+            {
+              "method": "max_of_bidders",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Cutthroat Creek Nursery",
+              "value": 4000.0,
+              "unit_rate": null
+            },
+            {
+              "bidder": "Wind River Site Works",
+              "value": 6500.0,
+              "unit_rate": null
+            }
+          ],
+          "trimmed_outliers": [],
+          "formula": "max of $4,000.00, $6,500.00",
+          "value": 6500.0
+        }
+      ],
+      "plug_total": 35392.6,
+      "allowances": [],
+      "allowance_total": 0.0,
+      "base_bid_value": 453597.97,
+      "textura": 1000.18,
+      "subcontract_value": 454598.15,
+      "sdi": 6591.67,
+      "total_package_value": 461189.82,
+      "expected_flags": [
+        "PAVERS: lump sum with no quantity - cannot check against GC takeoff",
+        "SILVA: excluded by bidder - plugged $26,309.22 by median_of_bidders",
+        "DRAIN: not priced - plugged $2,583.38 by gc_estimate",
+        "MAINT: excluded by bidder - plugged $6,500.00 by max_of_bidders"
+      ]
+    },
+    {
+      "company": "Cutthroat Creek Nursery",
+      "document": "Cutthroat Creek Nursery bid - landscape.docx",
+      "format": "docx",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "FLAG",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 3200.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 3200.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "BENCH47",
+          "status": "priced",
+          "as_bid": {
+            "qty": 1.0,
+            "unit": "EA",
+            "unit_price": 5548.0,
+            "amount": 5548.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1.0,
+            "unit": "EA"
+          },
+          "converted_qty": 1.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 5548.0,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 5548.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "BIKE",
+          "status": "priced",
+          "as_bid": {
+            "qty": 6.0,
+            "unit": "EA",
+            "unit_price": 600.0,
+            "amount": 3600.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 9.0,
+            "unit": "EA"
+          },
+          "converted_qty": 6.0,
+          "conversion": "same unit",
+          "variance_pct": -33.33,
+          "unit_rate_in_gc_unit": 600.0,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 5400.0,
+          "adjustment": 1800.0
+        },
+        {
+          "item": "SILVA",
+          "status": "priced",
+          "as_bid": {
+            "qty": 24.0,
+            "unit": "EA",
+            "unit_price": 1171.88,
+            "amount": 28125.12,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 24.0,
+            "unit": "EA"
+          },
+          "converted_qty": 24.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 1171.88,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 28125.12,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TREES",
+          "status": "priced",
+          "as_bid": {
+            "qty": 40.0,
+            "unit": "EA",
+            "unit_price": 688.89,
+            "amount": 27555.6,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 45.0,
+            "unit": "EA"
+          },
+          "converted_qty": 40.0,
+          "conversion": "same unit",
+          "variance_pct": -11.11,
+          "unit_rate_in_gc_unit": 688.89,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 31000.05,
+          "adjustment": 3444.45
+        },
+        {
+          "item": "SHRUBS",
+          "status": "priced",
+          "as_bid": {
+            "qty": 168.0,
+            "unit": "EA",
+            "unit_price": 76.19,
+            "amount": 12799.92,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 168.0,
+            "unit": "EA"
+          },
+          "converted_qty": 168.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 76.19,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 12799.92,
+          "adjustment": 0.0
+        },
+        {
+          "item": "GRASS",
+          "status": "priced",
+          "as_bid": {
+            "qty": 122.0,
+            "unit": "EA",
+            "unit_price": 30.66,
+            "amount": 3740.52,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 122.0,
+            "unit": "EA"
+          },
+          "converted_qty": 122.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 30.66,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 3740.52,
+          "adjustment": 0.0
+        },
+        {
+          "item": "MMULCH",
+          "status": "priced",
+          "as_bid": {
+            "qty": 21.0,
+            "unit": "CY",
+            "unit_price": 130.0,
+            "amount": 2730.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 19.0,
+            "unit": "CY"
+          },
+          "converted_qty": 21.0,
+          "conversion": "same unit",
+          "variance_pct": 10.53,
+          "unit_rate_in_gc_unit": 130.0,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 2470.0,
+          "adjustment": -260.0
+        },
+        {
+          "item": "WMULCH",
+          "status": "priced",
+          "as_bid": {
+            "qty": 5104.0,
+            "unit": "SF",
+            "unit_price": 0.65,
+            "amount": 3317.6,
+            "stated_depth_in": 2.0
+          },
+          "gc": {
+            "qty": 5104.0,
+            "unit": "SF"
+          },
+          "converted_qty": 3402.67,
+          "conversion": "same unit; 2 in. depth vs 3 in. specified: x 2/3",
+          "variance_pct": -33.33,
+          "unit_rate_in_gc_unit": 0.975,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 4976.4,
+          "adjustment": 1658.8
+        },
+        {
+          "item": "SOD",
+          "status": "priced",
+          "as_bid": {
+            "qty": 400.0,
+            "unit": "ROLL",
+            "unit_price": 7.5,
+            "amount": 3000.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 4133.0,
+            "unit": "SF"
+          },
+          "converted_qty": 4000.0,
+          "conversion": "ROLL x 10 = SF",
+          "variance_pct": -3.22,
+          "unit_rate_in_gc_unit": 0.75,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 3000.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "IRRIG",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 18145.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 18145.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SLEEVE",
+          "status": "priced",
+          "as_bid": {
+            "qty": 168.0,
+            "unit": "LF",
+            "unit_price": 20.83,
+            "amount": 3499.44,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 168.0,
+            "unit": "LF"
+          },
+          "converted_qty": 168.0,
+          "conversion": "same length unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 20.83,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 3499.44,
+          "adjustment": 0.0
+        },
+        {
+          "item": "PAVERS",
+          "status": "priced",
+          "as_bid": {
+            "qty": 239.0,
+            "unit": "SY",
+            "unit_price": 270.0,
+            "amount": 64530.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1902.0,
+            "unit": "SF"
+          },
+          "converted_qty": 2151.0,
+          "conversion": "SY x 9 = SF",
+          "variance_pct": 13.09,
+          "unit_rate_in_gc_unit": 30.0,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 57060.0,
+          "adjustment": -7470.0
+        },
+        {
+          "item": "FENCE",
+          "status": "priced",
+          "as_bid": {
+            "qty": 120.0,
+            "unit": "LF",
+            "unit_price": 37.5,
+            "amount": 4500.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 120.0,
+            "unit": "LF"
+          },
+          "converted_qty": 120.0,
+          "conversion": "same length unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 37.5,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 4500.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "DRAIN",
+          "status": "included",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": "Included",
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "included in other lines - no value",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "MAINT",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 4000.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 4000.0,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 188291.2,
+      "quantity_adjustments": -826.75,
+      "plugs": [],
+      "plug_total": 0.0,
+      "allowances": [],
+      "allowance_total": 0.0,
+      "base_bid_value": 187464.45,
+      "textura": 413.36,
+      "subcontract_value": 187877.81,
+      "sdi": 2724.23,
+      "total_package_value": 190602.04,
+      "expected_flags": [
+        "BIKE: quantity -33.3% vs GC takeoff after converting EA - re-extended, +1,800.00",
+        "TREES: quantity -11.1% vs GC takeoff after converting EA - re-extended, +3,444.45",
+        "MMULCH: quantity +10.5% vs GC takeoff after converting CY - re-extended, -260.00",
+        "WMULCH: quantity -33.3% vs GC takeoff after converting SF - re-extended, +1,658.80",
+        "PAVERS: quantity +13.1% vs GC takeoff after converting SY - re-extended, -7,470.00"
+      ]
+    },
+    {
+      "company": "Wind River Site Works",
+      "document": "WIND RIVER SITE WORKS - ESTIMATE.xlsx",
+      "format": "xlsx",
+      "responsive": true,
+      "lines": [
+        {
+          "item": "FLAG",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 12740.88,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 12740.88,
+          "adjustment": 0.0
+        },
+        {
+          "item": "BENCH47",
+          "status": "priced",
+          "as_bid": {
+            "qty": 1.0,
+            "unit": "EA",
+            "unit_price": 9451.72,
+            "amount": 9451.72,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1.0,
+            "unit": "EA"
+          },
+          "converted_qty": 1.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 9451.72,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 9451.72,
+          "adjustment": 0.0
+        },
+        {
+          "item": "BIKE",
+          "status": "priced",
+          "as_bid": {
+            "qty": 9.0,
+            "unit": "EA",
+            "unit_price": 1250.6,
+            "amount": 11255.4,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 9.0,
+            "unit": "EA"
+          },
+          "converted_qty": 9.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 1250.6,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 11255.4,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SILVA",
+          "status": "priced",
+          "as_bid": {
+            "qty": 24.0,
+            "unit": "EA",
+            "unit_price": 3921.69,
+            "amount": 94120.56,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 24.0,
+            "unit": "EA"
+          },
+          "converted_qty": 24.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 3921.69,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 94120.56,
+          "adjustment": 0.0
+        },
+        {
+          "item": "TREES",
+          "status": "priced",
+          "as_bid": {
+            "qty": 45.0,
+            "unit": "EA",
+            "unit_price": 808.06,
+            "amount": 36362.7,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 45.0,
+            "unit": "EA"
+          },
+          "converted_qty": 45.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 808.06,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 36362.7,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SHRUBS",
+          "status": "priced",
+          "as_bid": {
+            "qty": 150.0,
+            "unit": "EA",
+            "unit_price": 96.3,
+            "amount": 14445.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 168.0,
+            "unit": "EA"
+          },
+          "converted_qty": 150.0,
+          "conversion": "same unit",
+          "variance_pct": -10.71,
+          "unit_rate_in_gc_unit": 96.3,
+          "action": "re-extended at GC quantity",
+          "leveled_value": 16178.4,
+          "adjustment": 1733.4
+        },
+        {
+          "item": "GRASS",
+          "status": "priced",
+          "as_bid": {
+            "qty": 122.0,
+            "unit": "EA",
+            "unit_price": 58.34,
+            "amount": 7117.48,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 122.0,
+            "unit": "EA"
+          },
+          "converted_qty": 122.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 58.34,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 7117.48,
+          "adjustment": 0.0
+        },
+        {
+          "item": "MMULCH",
+          "status": "priced",
+          "as_bid": {
+            "qty": 19.0,
+            "unit": "CY",
+            "unit_price": 414.91,
+            "amount": 7883.29,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 19.0,
+            "unit": "CY"
+          },
+          "converted_qty": 19.0,
+          "conversion": "same unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 414.91,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 7883.29,
+          "adjustment": 0.0
+        },
+        {
+          "item": "WMULCH",
+          "status": "priced",
+          "as_bid": {
+            "qty": 47.0,
+            "unit": "CY",
+            "unit_price": 203.76,
+            "amount": 9576.72,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 5104.0,
+            "unit": "SF"
+          },
+          "converted_qty": 5076.0,
+          "conversion": "CY x 324 / 3 in. = SF",
+          "variance_pct": -0.55,
+          "unit_rate_in_gc_unit": 1.8867,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 9576.72,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SOD",
+          "status": "priced",
+          "as_bid": {
+            "qty": 4335.0,
+            "unit": "SF",
+            "unit_price": 1.36,
+            "amount": 5895.6,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 4133.0,
+            "unit": "SF"
+          },
+          "converted_qty": 4335.0,
+          "conversion": "same unit",
+          "variance_pct": 4.89,
+          "unit_rate_in_gc_unit": 1.36,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 5895.6,
+          "adjustment": 0.0
+        },
+        {
+          "item": "IRRIG",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 63222.29,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 63222.29,
+          "adjustment": 0.0
+        },
+        {
+          "item": "SLEEVE",
+          "status": "priced",
+          "as_bid": {
+            "qty": 168.0,
+            "unit": "LF",
+            "unit_price": 31.23,
+            "amount": 5246.64,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 168.0,
+            "unit": "LF"
+          },
+          "converted_qty": 168.0,
+          "conversion": "same length unit",
+          "variance_pct": 0.0,
+          "unit_rate_in_gc_unit": 31.23,
+          "action": "carried as bid (within threshold)",
+          "leveled_value": 5246.64,
+          "adjustment": 0.0
+        },
+        {
+          "item": "PAVERS",
+          "status": "excluded",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": null,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 1902.0,
+            "unit": "SF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "gap - excluded by bidder",
+          "leveled_value": null,
+          "adjustment": 0.0
+        },
+        {
+          "item": "FENCE",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 7500.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": 120.0,
+            "unit": "LF"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": 62.5,
+          "action": "lump sum without quantity - flag only",
+          "leveled_value": 7500.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "DRAIN",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 3200.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 3200.0,
+          "adjustment": 0.0
+        },
+        {
+          "item": "MAINT",
+          "status": "ls_noqty",
+          "as_bid": {
+            "qty": null,
+            "unit": null,
+            "unit_price": null,
+            "amount": 6500.0,
+            "stated_depth_in": null
+          },
+          "gc": {
+            "qty": null,
+            "unit": "LS"
+          },
+          "converted_qty": null,
+          "conversion": null,
+          "variance_pct": null,
+          "unit_rate_in_gc_unit": null,
+          "action": "lump sum item - carried as bid",
+          "leveled_value": 6500.0,
+          "adjustment": 0.0
+        }
+      ],
+      "bid_as_submitted": 294518.28,
+      "quantity_adjustments": 1733.4,
+      "plugs": [
+        {
+          "item": "PAVERS",
+          "reason": "excluded by bidder",
+          "method_requested": "ai_market_price",
+          "method_used": "unit_rate_x_gc_qty",
+          "attempts": [
+            {
+              "method": "ai_market_price",
+              "result": "skipped: no AI price available (no API key or snapshot)"
+            },
+            {
+              "method": "unit_rate_x_gc_qty",
+              "result": "used"
+            }
+          ],
+          "pool": [
+            {
+              "bidder": "Aspen Hollow Landscapes",
+              "value": 58410.42,
+              "unit_rate": 30.71
+            },
+            {
+              "bidder": "Cutthroat Creek Nursery",
+              "value": 57060.0,
+              "unit_rate": 30.0
+            }
+          ],
+          "trimmed_outliers": [
+            {
+              "bidder": "Elkhorn Grounds & Irrigation",
+              "value": 148718.97,
+              "unit_rate": 78.1908
+            }
+          ],
+          "formula": "average of rates $30.7100, $30.0000 = $30.3550 x 1,902 SF",
+          "value": 57735.21
+        }
+      ],
+      "plug_total": 57735.21,
+      "allowances": [],
+      "allowance_total": 0.0,
+      "base_bid_value": 353986.89,
+      "textura": 780.54,
+      "subcontract_value": 354767.43,
+      "sdi": 5144.13,
+      "total_package_value": 359911.56,
+      "expected_flags": [
+        "SHRUBS: quantity -10.7% vs GC takeoff after converting EA - re-extended, +1,733.40",
+        "FENCE: lump sum with no quantity - cannot check against GC takeoff",
+        "PAVERS: excluded by bidder - plugged $57,735.21 by unit_rate_x_gc_qty"
+      ]
+    }
+  ],
+  "recommended_bidder": "Cutthroat Creek Nursery",
+  "ranking": [
+    {
+      "company": "Cutthroat Creek Nursery",
+      "total_package_value": 190602.04
+    },
+    {
+      "company": "Aspen Hollow Landscapes",
+      "total_package_value": 276012.4
+    },
+    {
+      "company": "Wind River Site Works",
+      "total_package_value": 359911.56
+    },
+    {
+      "company": "Elkhorn Grounds & Irrigation",
+      "total_package_value": 461189.82
+    }
+  ],
+  "sensitivity_by_plug_method": {
+    "policy as written": {
+      "recommended_bidder": "Cutthroat Creek Nursery",
+      "totals": {
+        "Aspen Hollow Landscapes": 276012.4,
+        "Elkhorn Grounds & Irrigation": 461189.82,
+        "Cutthroat Creek Nursery": 190602.04,
+        "Wind River Site Works": 359911.56
+      }
+    },
+    "gc_estimate": {
+      "recommended_bidder": "Cutthroat Creek Nursery",
+      "totals": {
+        "Aspen Hollow Landscapes": 273432.23,
+        "Elkhorn Grounds & Irrigation": 462057.9,
+        "Cutthroat Creek Nursery": 190602.04,
+        "Wind River Site Works": 362383.41
+      }
+    },
+    "min_of_bidders": {
+      "recommended_bidder": "Cutthroat Creek Nursery",
+      "totals": {
+        "Aspen Hollow Landscapes": 273382.62,
+        "Elkhorn Grounds & Irrigation": 457428.63,
+        "Cutthroat Creek Nursery": 190602.04,
+        "Wind River Site Works": 359225.05
+      }
+    },
+    "average_of_bidders": {
+      "recommended_bidder": "Cutthroat Creek Nursery",
+      "totals": {
+        "Aspen Hollow Landscapes": 275368.41,
+        "Elkhorn Grounds & Irrigation": 460545.85,
+        "Cutthroat Creek Nursery": 190602.04,
+        "Wind River Site Works": 359911.56
+      }
+    },
+    "median_of_bidders": {
+      "recommended_bidder": "Cutthroat Creek Nursery",
+      "totals": {
+        "Aspen Hollow Landscapes": 275368.41,
+        "Elkhorn Grounds & Irrigation": 460545.85,
+        "Cutthroat Creek Nursery": 190602.04,
+        "Wind River Site Works": 359911.56
+      }
+    },
+    "max_of_bidders": {
+      "recommended_bidder": "Cutthroat Creek Nursery",
+      "totals": {
+        "Aspen Hollow Landscapes": 277354.21,
+        "Elkhorn Grounds & Irrigation": 463663.06,
+        "Cutthroat Creek Nursery": 190602.04,
+        "Wind River Site Works": 360598.07
+      }
+    }
+  }
+}
