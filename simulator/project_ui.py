@@ -11,6 +11,49 @@ import core
 import project as pr
 
 
+def large_builder(models):
+    st.header("Generate a large TCJC bid set")
+    st.write(
+        "Generate all 45 packages together. 42 trades receive subcontractor proposals, two carry GC costs and one has a scope withdrawal."
+    )
+    a, b = st.columns(2)
+    items = a.number_input("Bid items per solicited trade", 4, 30, 12)
+    firms = b.number_input("Bidding firms per solicited trade", 2, 20, 8)
+    project = pr.large_starter(items, firms)
+    trades = [p for p in project["packages"] if p.get("treatment", pr.BID) == pr.BID]
+    n = len(trades)
+    st.write(
+        f"**{n * items:,} bid items · {n * firms:,} current proposals · {n * (firms + 2):,} subcontractor documents.** Each trade also receives one superseded quote and one regret letter."
+    )
+    st.caption(
+        "Scope lines are illustrative. Larger item counts divide work into releases. Package budgets come from the TCJC starter."
+    )
+    if st.button("Generate all 45 packages", type="primary"):
+        with st.spinner("Generating the project documents and tester’s key"):
+            st.session_state.selected = pr.generate(project, models, False)
+        st.session_state.open_answers = True
+        st.rerun()
+    st.subheader("Preview the trades and bid items")
+    st.dataframe(
+        [
+            {
+                "Trade": p["code"],
+                "Package": p["trade"],
+                "Bid items": len(p["items"]),
+                "Bidding firms": firms,
+            }
+            for p in trades
+        ],
+        hide_index=True,
+    )
+    trade = st.selectbox(
+        "Preview scope for trade",
+        trades,
+        format_func=lambda p: p["code"] + " · " + p["trade"],
+    )
+    st.dataframe(trade["items"], hide_index=True)
+
+
 def builder(models, saved=None):
     if "project_draft" not in st.session_state:
         st.session_state.project_draft = pr.starter()

@@ -1,0 +1,43 @@
+code,scope_items
+01.35,Crane erection | Crane dismantling | Hoist landing gates | Load testing | Mast ties | Signal personnel | Crane inspections | Power supply to hoist
+01.90,Interior glazing clean | Floor scrubbing | Millwork wipe-down | Restroom fixture cleaning | High-level dusting | Adhesive removal | Carpet vacuuming | Final punch cleaning
+02.45,Temporary partitions | Saw cutting | Salvage signage | Remove paving | Remove foundations | Disconnect abandoned services | Haul demolition debris | Disposal fees
+03.30,Reinforcing steel | Formwork | Concrete pumping | Equipment pads | Stair pan fill | Construction joints | Embed plates | Curing and protection
+04.20,Reinforced bond beams | Mortar joints | Masonry lintels | Cavity flashing | Weep vents | Movement joints | Masonry anchors | Final masonry cleaning
+05.00,Steel columns | Steel beams | Base plates | Steel decking | Anchor rods | Shop primer | Field welding | Erection lifts
+06.10,Wall blocking | Roof nailers | Plywood backing | Equipment curbs | Door opening backing | Parapet blocking | Platform framing | Fire-retardant sheathing
+06.40,Casework boxes | Cabinet hardware | Scribe panels | Wood trim | Reception counter | Courtroom lectern | Millwork shop finish | Field touch-up
+07.10,Below-grade membrane | Protection board | Drainage mat | Penetration seals | Waterstops | Transition strips | Termination bars | Flood testing
+07.20,Acoustic batt infill | Rigid roof-edge insulation | Thermal breaks | Insulation fasteners | Joint tape | Perimeter gap sealing | Vapor retarder | Insulation protection
+07.41,Panel subframing | Corner trims | Base flashings | Expansion joints | Soffit panels | Penetration trims | Isolation pads | Panel mock-up
+07.42,Starter strips | Wall furring | Outside corners | Inside corners | Window returns | Joint covers | Sill flashings | Cut-edge coating
+07.50,Cover board | Tapered insulation | Vapor barrier | Roof drains | Pipe boots | Parapet caps | Walkway pads | Electronic leak detection
+07.80,Substrate cleaning | Primer adhesion tests | Beam fireproofing | Column fireproofing | Deck fireproofing | Thickness checks | Overspray masking | Access lifts
+08.12,Frame anchorage | Door closers | Panic hardware | Thresholds | Weatherstripping | Access control coordination | Keying | Door adjustment
+08.33,Door guides | Barrel assemblies | Motor operators | Safety edges | Limit switches | Wall stations | Hood enclosures | Operational testing
+08.34,Headbox assemblies | Smoke seals | Side guides | Control panels | Alarm interface | Power connections | Access panels | Acceptance testing
+08.40,Storefront framing | Insulating glass units | Exterior entry doors | Perimeter sealants | Sill pans | Pressure plates | Thermal breaks | Field water testing
+09.21,Deflection tracks | Shaft walls | Moisture-resistant board | Access openings | Corner beads | Joint finishing | Head-of-wall seals | Impact-resistant board
+09.51,Main runners | Cross tees | Perimeter angles | Seismic restraints | Hanger wires | Tegular tiles | Access tiles | Ceiling transitions
+09.60,Moisture testing | Floor patching | Primer | Transitions | Stair nosings | Resilient base installation | Adhesives | Floor protection
+09.67,Surface grinding | Crack treatment | Moisture mitigation | Primer coat | Broadcast aggregate | Cove base termination | Topcoat | Slip resistance testing
+09.90,Substrate preparation | Block filler | Metal primer | Door painting | Frame painting | Anti-graffiti coating | Floor striping | Final touch-up
+10.00,Grab bars | Toilet accessories | Mirrors | Paper dispensers | Lockers | Marker boards | Corner guards | Door protection plates
+10.14,Room identification signs | ADA tactile signs | Directional signs | Evacuation maps | Exterior lettering | Mounting templates | Sign foundations | Vinyl graphics
+10.56,Mobile shelf tracks | Shelf uprights | End panels | Evidence racks | Locking mechanisms | Anti-tip hardware | Anchoring | Load labels
+11.40,Walk-in refrigeration | Exhaust hood | Cooking equipment | Dishwashing equipment | Stainless worktables | Equipment anchorage | Utility connections | Start-up training
+11.98,Detention benches | Security bunks | Dayroom tables | Detention accessories | Security fasteners | Frame grouting | Equipment anchorage | Operational checks
+12.20,Shade brackets | Motor controls | Fascia and end caps | Blackout fabric | Guide channels | Control wiring | Limit setting | Functional testing
+12.60,Seat standards | Folding seats | Armrests | Tablet arms | Aisle end panels | Row identification | Floor anchors | Layout survey
+14.20,Guide rails | Car enclosure | Landing doors | Drive equipment | Controllers | Pit ladders | Cab finishes | Acceptance testing
+21.00,Branch piping | Sprinkler heads | Zone valves | Inspector test connections | Fire department connection | Pipe bracing | Flushing | Hydrostatic testing
+22.00,Domestic cold water | Domestic hot water | Sanitary waste | Vent piping | Storm piping | Plumbing fixtures | Pipe insulation | Pressure testing
+26.00,Emergency distribution | Branch circuits | Lighting controls | Panelboards | Grounding | Cable trays | Temporary lighting | Functional testing
+27.30,Copper cabling | Fiber backbone | Patch panels | Equipment racks | Cable management | Terminations | Outlet labeling | Cable certification
+31.00,Site stripping | Structural excavation | Trench backfill | Rough grading | Subgrade compaction | Export spoils | Perimeter drains | Proof rolling
+31.40,Shoring design | Soldier piles | Timber lagging | Tiebacks | Monitoring points | Temporary guardrail | Pile extraction | Void grouting
+32.12,Aggregate base | Tack coat | Binder course | Surface course | Asphalt joints | Utility cut patching | Pavement markings | Traffic control
+32.13,Aggregate base | Reinforcing mesh | Sidewalk forms | Detectable warnings | Expansion joints | Curing compound | Saw-cut joints | Concrete aprons
+32.31,Fence posts | Post footings | Chain-link fabric | Privacy slats | Gate operators | Gate loops | Grounding | Gate commissioning
+32.90,Tree planting | Shrub planting | Soil amendments | Mulch | Irrigation mains | Drip laterals | Irrigation controllers | Establishment watering
+33.00,Water mains | Sanitary mains | Fire service connections | Catch basins | Manholes | Pipe bedding | Leakage testing | Surface restoration

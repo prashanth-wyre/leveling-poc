@@ -12,6 +12,10 @@ uv python install 3.12
 
 Open http://localhost:8501. Stop with Ctrl-C. Repeatable fixture generation works locally. For Gemini-assisted scenarios and proposal wording, set GEMINI_KEY, GEMINI_MODEL and optionally GEMINI_HIGHER_MODEL in the repository-root .env before starting. Install LibreOffice for paginated Word previews. The built-in text preview is available without it.
 
+## Generate a large TCJC bid set
+
+Open **Create bid set → Large TCJC bid set**. Choose the number of bid items and bidding firms per solicited trade. Preview any trade, then click **Generate all 45 packages**. The default creates 504 bid items across 42 solicited trades and 420 bidder documents: 336 current proposals, 42 superseded proposals and 42 regret letters. The remaining packages produce GC records. Download the ZIP and the separate Excel answer key on **Expected answers**. This mode uses repeatable local generation.
+
 ## Generate a whole project
 
 1. Choose **Whole project**. New drafts start with all 45 coded packages from the TCJC Estimate Summary. Type a package code or name in **Trade package** to find it. **Project estimate summary** shows the budgets, included SDI and a document completion allowance calculated at 1% of active package estimates. The bundled catalog supplies the original budgets. Scope items are representative and the item allocations, bidders and proposals are test fixtures. Package 13.49 was removed in the workbook and generates a GC scope withdrawal. General Conditions (99.10) and Winter Conditions Allowance (99.15) generate GC cost estimates. Change **Package treatment** to solicit subcontract bids for any of these. To restore the full catalog in an existing session, open **Choose a project starter**, select **TCJC · 45 packages**, and click **Replace draft with selected starter**. This replaces unsaved draft edits. The three-package School Expansion example remains available there.

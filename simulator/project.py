@@ -161,6 +161,73 @@ def starter():
     )
 
 
+def large_starter(item_count=12, bidder_count=8):
+    """Build a repeatable multi-trade project with independent pricing lines."""
+    if not 4 <= item_count <= 30 or not 2 <= bidder_count <= 20:
+        raise ValueError(
+            "Choose 4–30 items and 2–20 bidding firms per solicited trade."
+        )
+    project = starter()
+    with (
+        Path(__file__)
+        .with_name("tcjc_additional_items.csv")
+        .open(encoding="utf-8") as f
+    ):
+        extra = {r["code"]: r["scope_items"].split(" | ") for r in csv.DictReader(f)}
+    firms = (
+        "Alder Birch Cedar Dune Elm Fir Garnet Harbor Iron Juniper Keystone Linden "
+        "Mesa Northstar Oak Pine Quartz Ridge Summit Timber"
+    ).split()
+    for index, pkg in enumerate(project["packages"]):
+        if pkg.get("treatment", BID) != BID:
+            continue
+        names = [i["description"] for i in pkg["items"]]
+        for name in extra[pkg["code"]]:
+            if name.casefold() not in {n.casefold() for n in names}:
+                names.append(name)
+        names = names[:item_count]
+        # When the requested count exceeds the catalog, divide work into releases.
+        # Keep the original item order so preconfigured scenarios still address it.
+        counts = [
+            item_count // len(names) + (j < item_count % len(names))
+            for j in range(len(names))
+        ]
+        labels = [
+            name if count == 1 else f"{name} (release 1 of {count})"
+            for name, count in zip(names, counts)
+        ]
+        labels.extend(
+            f"{name} (release {k} of {count})"
+            for name, count in zip(names, counts)
+            for k in range(2, count + 1)
+        )
+        estimate = package_estimate(pkg)
+        each = round(estimate / item_count, 2)
+        specs = [(name, 1, "LS", each) for name in labels[:-1]]
+        specs.append((labels[-1], 1, "LS", estimate - each * (item_count - 1)))
+        trade = pkg["trade"].split()[0].strip(",")
+        companies = [f"{firms[j]} {trade}" for j in range(bidder_count)]
+        expanded = package(pkg["code"], pkg["trade"], specs, companies)
+        items = expanded["items"]
+        for j, b in enumerate(expanded["bidders"][1:], 1):
+            cells = b["coverage_map"]
+            for k in range(j % 3 + 1, len(items), 4):
+                cell = cells[items[k]["id"]]
+                state = ("Excluded", "Included", "Not mentioned")[(j - 1) % 3]
+                cell["status"] = state
+                if state == "Included":
+                    carrier = cells[items[0]["id"]]
+                    cell["carrying"] = items[0]["id"]
+                    carrier["amount"] = round(carrier["amount"] + cell["amount"], 2)
+        expanded["bidders"][-1]["response"] = "Revised"
+        decline = new_bidder(f"Willow {trade}", items)
+        decline["response"] = "Regret"
+        expanded["bidders"].append(decline)
+        project["packages"][index] = expanded
+    project["name"] = "Teton County Justice Center – large bid set"
+    return project
+
+
 def package_estimate(pkg):
     return (
         0.0

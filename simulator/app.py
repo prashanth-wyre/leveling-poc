@@ -437,10 +437,12 @@ def awards():
 try:
     if page == "Create bid set":
         mode = st.radio(
-            "Bid set type", ["Whole project", "Single trade"], horizontal=True
+            "Bid set type", ["Whole project", "Large TCJC bid set", "Single trade"], horizontal=True
         )
         if mode == "Whole project":
             project_ui.builder(models, run)
+        elif mode == "Large TCJC bid set":
+            project_ui.large_builder(models)
         else:
             builder()
     elif run and "project" in run:
