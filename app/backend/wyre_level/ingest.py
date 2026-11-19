@@ -44,30 +44,34 @@ def _xlsx_text(path, max_rows=400, max_cols=40):
     from openpyxl import load_workbook
     wb = load_workbook(str(path), data_only=True, read_only=True)
     out = []
-    for ws in wb.worksheets:
-        if ws.sheet_state != 'visible':
-            continue
-        out.append(f'## Sheet: {ws.title}')
-        for r, row in enumerate(ws.iter_rows(values_only=True), 1):
-            if r > max_rows:
-                out.append('... (rows truncated)')
-                break
-            cells = []
-            for c, v in enumerate(row[:max_cols], 1):
-                if v is None or v == '':
-                    continue
-                if hasattr(v, 'strftime'):
-                    v = v.strftime('%Y-%m-%d')
-                elif isinstance(v, float):
-                    v = f'{v:.4f}'.rstrip('0').rstrip('.')
-                col = ''
-                n = c
-                while n:
-                    n, rem = divmod(n - 1, 26)
-                    col = chr(65 + rem) + col
-                cells.append(f'{col}{r}={v}')
-            if cells:
-                out.append(' | '.join(cells))
+    try:
+        for ws in wb.worksheets:
+            if ws.sheet_state != 'visible':
+                continue
+            out.append(f'## Sheet: {ws.title}')
+            for r, row in enumerate(ws.iter_rows(values_only=True), 1):
+                if r > max_rows:
+                    out.append('... (rows truncated)')
+                    break
+                cells = []
+                for c, v in enumerate(row[:max_cols], 1):
+                    if v is None or v == '':
+                        continue
+                    if hasattr(v, 'strftime'):
+                        v = v.strftime('%Y-%m-%d')
+                    elif isinstance(v, float):
+                        v = f'{v:.4f}'.rstrip('0').rstrip('.')
+                    col = ''
+                    n = c
+                    while n:
+                        n, rem = divmod(n - 1, 26)
+                        col = chr(65 + rem) + col
+                    cells.append(f'{col}{r}={v}')
+                if cells:
+                    out.append(' | '.join(cells))
+    finally:
+        # read_only workbooks keep the file open until closed; Windows then blocks moving the folder (WinError 32)
+        wb.close()
     return '\n'.join(out)
 
 
