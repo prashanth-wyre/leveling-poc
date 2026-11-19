@@ -115,6 +115,7 @@ def preset(name):
             match="Partial",
             scope="Membrane materials",
             plug=50000,
+            plug_basis="Installation and remaining roof assembly work",
         )
         bidders[2]["response"] = "Withdrawn"
         bidders[3]["response"] = "Silent"
@@ -158,7 +159,8 @@ def validate(s):
         not s["name"].strip()
         or not s["scope"].strip()
         or not math.isfinite(float(s["estimate"]))
-        or s["estimate"] <= 0
+        or s["estimate"] < 0
+        or (s["estimate"] == 0 and not s.get("scope_lines"))
     ):
         raise ValueError("Enter a name, a scope and a positive estimate.")
     firms = set()
@@ -211,16 +213,17 @@ def write_document(path, title, rows):
         SimpleDocTemplate(str(path)).build(flow)
 
 
-def generate(s, models, draft):
+def generate(s, models, draft, output_root=None):
+    output_root = output_root or RUNS
     validate(s)
-    with tempfile.TemporaryDirectory(dir=RUNS) as work:
+    with tempfile.TemporaryDirectory(dir=output_root) as work:
         folder = Path(work) / "package"
         folder.mkdir()
         files = []
 
         def emit(kind, title, rows, ext, firm="", expected=None):
             file = f"{len(files) + 1:02d}-{kind}.{ext}"
-            write_document(folder / file, title, [["Synthetic test document"], *rows])
+            write_document(folder / file, title, rows)
             text = ingest.read(folder / file)["text"]
             if firm and firm not in text:
                 raise ValueError(f"Bidder missing from {file}")
@@ -237,16 +240,19 @@ def generate(s, models, draft):
                 dict(file=file, title=title, kind=kind, firm=firm, expected=expected)
             )
 
-        scope_rows = [
-            [x[k] for k in ("description", "quantity", "unit", "estimate")]
-            for x in s.get("scope_lines", [])
-        ]
+        scope_header = ["Scope", "Quantity", "Unit", "GC estimate"]
+        fields = ["description", "quantity", "unit", "estimate"]
+        if s.get("include_scope_ids"):
+            scope_header.append("Item ID")
+            fields.append("id")
+        scope_rows = [[x[k] for k in fields] for x in s.get("scope_lines", [])]
         emit(
             "scope_sheet",
             s["trade"] + " scope sheet",
             [
-                ["Scope", "Quantity", "Unit", "GC estimate"],
+                scope_header,
                 *(scope_rows or [[s["scope"], 1, "LS", s["estimate"]]]),
+                *s.get("instructions", []),
             ],
             "xlsx",
         )
@@ -256,13 +262,92 @@ def generate(s, models, draft):
             [[b["firm"], s["trade"]] for b in s["bidders"]],
             "xlsx",
         )
+        if s.get("commitment_records"):
+            emit(
+                "supporting",
+                "GC commitment and change register",
+                [["Date", "Record", "USD", "Disposition"], *s["commitment_records"]],
+                "xlsx",
+            )
+        adjustments = [["Bidder", "Scope / adjustment basis", "Amount (USD)"]]
+        for bidder in s["bidders"]:
+            if bidder.get("coverage_map"):
+                for item in s["scope_lines"]:
+                    entry = bidder["coverage_map"][item["id"]]
+                    if entry["status"] == "Excluded" and bidder["match"] != "Unrelated":
+                        value = entry.get("allowance")
+                        adjustments.append(
+                            [
+                                bidder["firm"],
+                                item["description"],
+                                "Unresolved"
+                                if entry.get("unresolved")
+                                else item["estimate"]
+                                if value is None
+                                else value,
+                            ]
+                        )
+            elif bidder["plug"]:
+                adjustments.append(
+                    [
+                        bidder["firm"],
+                        bidder.get("plug_basis")
+                        or bidder["terms"]
+                        or "GC scope allowance",
+                        bidder["plug"],
+                    ]
+                )
+            for field, label in (
+                ("post_bid", "Post-bid adjustment"),
+                ("tax", "Sales tax"),
+                ("completion", "GC costs to complete"),
+                ("sdi", "Subcontractor default insurance"),
+            ):
+                if bidder.get(field):
+                    adjustments.append([bidder["firm"], label, bidder[field]])
+        if len(adjustments) > 1:
+            emit(
+                "supporting",
+                "GC leveling allowances and adjustments",
+                adjustments,
+                "xlsx",
+            )
         for b in s["bidders"]:
             response = b["response"]
             if response == "Silent":
                 continue
-            amount = round(s["estimate"] * b["multiplier"], 2)
+            amount = b.get("submitted", round(s["estimate"] * b["multiplier"], 2))
             firm = b["firm"]
             head = [[firm], ["Package", s["trade"]]]
+            if response == "Revised":
+                reference = f"Q-{len(files) + 1:03d}"
+                old = round(amount * 1.15, 2)
+                emit(
+                    "bid",
+                    firm + " • Original proposal",
+                    head
+                    + [
+                        ["Quotation", reference],
+                        ["Revision", 0],
+                        ["Issued", "2026-01-12"],
+                        ["We offer to perform the following work."],
+                        ["Scope offered", b["scope"]],
+                        ["Submitted total USD", old],
+                    ],
+                    "pdf",
+                    firm,
+                    dict(stated_total=old, doc_type="bid", revision=0, effective=False),
+                )
+                head.extend(
+                    [
+                        ["Quotation", reference],
+                        ["Revision", 1],
+                        ["Issued", "2026-01-15"],
+                        [
+                            "Revision 1 supersedes the entire quotation dated 2026-01-12."
+                        ],
+                    ]
+                )
             if response == "Regret":
                 emit(
                     "bid",
@@ -278,11 +363,27 @@ def generate(s, models, draft):
                 ["Submitted total USD", amount],
                 [
                     "Warranty",
-                    f"{b['years']} years, {b['coverage']}. Deductible USD {b['deductible']}. Cap USD {b['cap']}.",
+                    (
+                        (
+                            "Durations as itemized"
+                            if "component_years" in b
+                            else f"{b['years']} years"
+                        )
+                        + f", {b['coverage']}. Deductible USD {b['deductible']}. Cap USD {b['cap']}."
+                    ),
                 ],
                 ["Duration", f"{b['days']} days"],
                 ["Terms", b["terms"]],
+                *b.get("statements", []),
             ]
+            for alt in b.get("alternates", []):
+                current.append(
+                    [
+                        "Optional alternate (outside submitted total)",
+                        alt["description"],
+                        alt["amount"],
+                    ]
+                )
             for offer in b.get("offers", []):
                 current.append(
                     ["All-or-nothing offer", ", ".join(offer["lots"]), offer["price"]]
@@ -307,17 +408,6 @@ def generate(s, models, draft):
                     },
                 )
                 head.append([intro["paragraph"]])
-            if response == "Revised":
-                old = round(amount * 1.15, 2)
-                emit(
-                    "bid",
-                    firm + " • Original",
-                    head + [["Original offer", old]],
-                    "pdf",
-                    firm,
-                    dict(stated_total=old),
-                )
-                head.append(["Revision 1 replaces our original offer in full."])
             if response == "Partial regret":
                 head.append(["We decline the remaining scope."])
             emit(
@@ -326,7 +416,15 @@ def generate(s, models, draft):
                 head + current,
                 b["format"],
                 firm,
-                dict(stated_total=amount, doc_type="bid"),
+                dict(
+                    stated_total=amount,
+                    doc_type="budget" if response == "Budget" else "bid",
+                    **(
+                        {"revision": 1, "effective": True}
+                        if response == "Revised"
+                        else {}
+                    ),
+                ),
             )
             bid_file = folder / files[-1]["file"]
             layout = b.get("layout", "Standard")
@@ -387,32 +485,53 @@ def generate(s, models, draft):
                 drafting="Gemini" if draft else "Fixture",
             ),
         )
-        folder.rename(RUNS / key)
+        folder.rename(output_root / key)
         return key
 
 
 def evaluate(s, p):
     rows = []
     for b in s["bidders"]:
-        amount = round(s["estimate"] * b["multiplier"], 2)
-        leveled = amount + b["plug"]
+        amount = b.get("submitted", round(s["estimate"] * b["multiplier"], 2))
+        leveled = round(
+            amount
+            + b["plug"]
+            + b.get("post_bid", 0)
+            + b.get("tax", 0)
+            + b.get("sdi", 0),
+            2,
+        )
         active = b["response"] not in ("Regret", "Silent", "Withdrawn", "Budget")
         reason = ""
         if not active:
             reason = b["response"]
         elif b["match"] == "Unrelated":
             reason = "Unrelated scope"
+        elif s["estimate"] == 0:
+            reason = "Clarify zero GC estimate"
         elif not p["low"] <= b["multiplier"] <= p["high"]:
             reason = "Clarify price"
-        elif b["years"] < p["min_years"]:
+        elif b.get("pending") and p["template"] != "Split or combined packages":
+            reason = "Clarify scope"
+        elif any(v is None for v in b.get("component_years", {}).values()):
+            reason = "Clarify component warranty"
+        elif any(
+            v < b["component_min"][k] for k, v in b.get("component_years", {}).items()
+        ):
+            reason = "Component warranty minimum"
+        elif min(b.get("component_years", {"General": b["years"]}).values()) < p[
+            "min_years"
+        ] or (p["min_years"] > 0 and b["coverage"] == "None"):
             reason = "Warranty minimum"
         elif p["template"] == "Budget ceiling" and leveled > p["budget"]:
             reason = "Over budget"
         elif p["template"] == "Schedule priority" and b["days"] > p["deadline"]:
             reason = "Schedule minimum"
+        duration = b.get("component_years", {}).get(b.get("loss_component"), b["years"])
         covered = (
             b["coverage"] in (p["event_coverage"], "Labor and materials")
-            and b["years"] >= p["event_year"]
+            and duration is not None
+            and duration >= p["event_year"]
         )
         recovery = (
             min(b["cap"], max(0, p["repair"] - b["deductible"])) if covered else 0
@@ -423,9 +542,20 @@ def evaluate(s, p):
                 Bidder=b["firm"],
                 Status=reason or "Eligible",
                 Submitted=amount if active else None,
+                Plug=b["plug"] if active else None,
                 Leveled=leveled if active else None,
-                Exposure=round(exposure, 2) if active else None,
-                Adjusted=round(leveled + exposure, 2) if active else None,
+                **(
+                    {
+                        "Exposure": round(exposure, 2)
+                        if active and duration is not None
+                        else None,
+                        "Adjusted": round(leveled + exposure, 2)
+                        if active and duration is not None
+                        else None,
+                    }
+                    if p["template"] == "Warranty-adjusted cost"
+                    else {}
+                ),
                 Days=b["days"],
             )
         )

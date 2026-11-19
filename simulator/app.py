@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 
 import core as c
+import project_ui
 from award_policy import policy_text
 from ranking import rank_bids
 
@@ -15,14 +16,16 @@ if st.session_state.pop("open_answers", False):
     st.session_state.bid_set_id = st.session_state.selected
 page = st.sidebar.radio(
     "Workspace",
-    ["Create bid set", "Expected answers"], key="workspace",
+    ["Create bid set", "Expected answers"],
+    key="workspace",
 )
 ids = sorted(
     [p.name for p in c.RUNS.iterdir() if (p / "run.json").exists()], reverse=True
 )
 rid = st.sidebar.selectbox(
     "Saved bid set",
-    options=ids, key="bid_set_id",
+    options=ids,
+    key="bid_set_id",
     index=ids.index(st.session_state.selected)
     if st.session_state.get("selected") in ids
     else 0,
@@ -53,10 +56,12 @@ def builder():
         "Split award",
     ]
     source = st.selectbox(
-        "Starting point", names + (["Clone selected bid day"] if run else [])
+        "Starting point",
+        names + (["Clone selected bid day"] if run and "scenario" in run else []),
     )
     key = (source, rid if source.startswith("Clone") else "")
     if st.session_state.get("source") != key:
+        st.session_state.assumptions = []
         st.session_state.source = key
         st.session_state.spec = json.dumps(
             run["scenario"] if source.startswith("Clone") else c.preset(source),
@@ -71,7 +76,7 @@ def builder():
                 models,
                 "Return a JSON string containing a scenario with exactly this structure. "
                 + json.dumps(sample)
-                + " Allowed responses: "
+                + " For unspecified numeric terms, omit the field. Include plug_basis describing each nonzero allowance. Allowed responses: "
                 + str(c.RESPONSES)
                 + "; formats: "
                 + str(c.FORMS)
@@ -84,8 +89,64 @@ def builder():
                 },
             )
             parsed = json.loads(result["scenario"])
+            assumptions = []
+            defaults = dict(
+                years=10, deductible=10000, cap=100000, days=45, multiplier=1, plug=0
+            )
+            # Ask separately which numerical terms the user actually provided.
+            evidence = c.ask(
+                "scenario",
+                models,
+                "For each bidder and field below, quote the shortest verbatim passage in the user instructions that specifies that value for that bidder (including shared instructions). Omit unsupported fields. "
+                + json.dumps(
+                    {
+                        "bidders": [b["firm"] for b in parsed["bidders"]],
+                        "fields": list(defaults),
+                        "instructions": prompt,
+                    }
+                ),
+                {
+                    "type": "object",
+                    "properties": {
+                        "facts": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    k: {"type": "string"}
+                                    for k in ("firm", "field", "quote")
+                                },
+                                "required": ["firm", "field", "quote"],
+                            },
+                        }
+                    },
+                    "required": ["facts"],
+                },
+            )
+            supplied = {
+                (x["firm"], x["field"])
+                for x in evidence["facts"]
+                if x["quote"].strip() and x["quote"].casefold() in prompt.casefold()
+            }
+            for b in parsed["bidders"]:
+                for field, default in defaults.items():
+                    if (b["firm"], field) not in supplied or b.get(field) is None:
+                        b[field] = default
+                        assumptions.append(
+                            {
+                                "Firm": b["firm"],
+                                "Assumed field": field,
+                                "Value": default,
+                            }
+                        )
+            st.session_state.assumptions = assumptions
             c.validate(parsed)
             st.session_state.spec = json.dumps(parsed, indent=2)
+    if st.session_state.get("assumptions"):
+        st.info(
+            "The description omitted these terms. Review the assumed values and edit them in the bidder grid before generating."
+        )
+        st.dataframe(st.session_state.assumptions, hide_index=True)
     with st.expander("Choice catalog and advanced scenario editor"):
         query = st.text_input("Search choices")
         for label, values in {
@@ -173,8 +234,8 @@ def builder():
         st.rerun()
 
 
-def documents():
-    docs = run["files"]
+def documents(docs=None):
+    docs = docs or run["files"]
     d = st.selectbox("Artifact", docs, format_func=lambda x: x["title"])
     path = folder / d["file"]
     original = folder / d.get("original", d["file"])
@@ -185,7 +246,7 @@ def documents():
         wb = c.load_workbook(path, read_only=True)
         sheet = st.selectbox("Sheet", wb.sheetnames)
         ws = wb[sheet]
-        st.dataframe(pd.DataFrame(ws.values).fillna(""), hide_index=True)
+        st.dataframe(pd.DataFrame(ws.values).fillna("").astype(str), hide_index=True)
         addr = st.text_input("Inspect cell", "A1")
         st.write("Stored formula or value", ws[addr].value)
         wb.close()
@@ -199,11 +260,21 @@ def documents():
         else:
             st.caption("Word content preview · install LibreOffice for pagination.")
             st.text(c.ingest.read(path)["text"])
-def policy_form():
-    existing = sorted(folder.glob("award-*.json"))
-    choice = st.selectbox("Start from", ["New policy"] + [p.name for p in existing])
-    defaults = {} if choice == "New policy" else c.read(folder / choice)["policy"]
-    key = rid + choice
+
+
+def policy_form(package_code=None, initial=None):
+    existing = sorted(
+        folder.glob(f"award-{package_code}-*.json" if package_code else "award-*.json")
+    )
+    choice = st.selectbox(
+        "Start from",
+        ["New policy"] + [p.name for p in existing],
+        key=f"{rid}-{package_code}-start",
+    )
+    defaults = (
+        (initial or {}) if choice == "New policy" else c.read(folder / choice)["policy"]
+    )
+    key = rid + str(package_code) + choice
     template = st.selectbox(
         "Award template",
         c.POLICIES,
@@ -218,7 +289,7 @@ def policy_form():
         controls = [
             ("low", "Minimum price multiplier", 0.05),
             ("high", "Maximum price multiplier", 10.0),
-            ("min_years", "Minimum warranty (years)", 0.0),
+            ("min_years", "Minimum warranty (years)", 1.0),
             ("budget", "Budget ceiling (USD)", 550000.0),
             ("deadline", "Schedule limit (days)", 60.0),
             ("window", "Best-value window (%)", 3.0),
@@ -259,20 +330,41 @@ def awards():
     rows, outcome = c.evaluate(s, p)
     st.metric("Expected award", outcome)
     basis = rank_bids(rows, p["template"])
-    ordered = sorted(rows, key=lambda r: r["Rank"] if isinstance(r["Rank"], int) else float("inf"))
-    table = pd.DataFrame(ordered, columns=["Rank", "Bidder", "Status", "Submitted", "Leveled", "Exposure", "Adjusted", "Days"] + (["Score"] if basis == "Score" else []))
+    ordered = sorted(
+        rows, key=lambda r: r["Rank"] if isinstance(r["Rank"], int) else float("inf")
+    )
+    table = pd.DataFrame(
+        ordered,
+        columns=[
+            "Rank",
+            "Bidder",
+            "Status",
+            "Submitted",
+            "Plug",
+            "Leveled",
+            *(["Exposure", "Adjusted"] if basis == "Adjusted" else []),
+            "Days",
+        ]
+        + (["Score"] if basis == "Score" else []),
+    )
     table["Rank"] = table["Rank"].astype(str)
+
     def rank_color(value):
         if value == "1":
             return "background-color: #c4ead4; color: #12452a"
         if value.isdigit():
             return "background-color: #deecfa; color: #193f64"
         return "background-color: #edf0f2; color: #35414b"
+
     st.dataframe(table.style.map(rank_color, subset=["Rank"]), hide_index=True)
     if p["template"] == "Split or combined packages":
-        st.caption("Package offers are evaluated together. The expected award lists the selected combination.")
+        st.caption(
+            "Package offers are evaluated together. The expected award lists the selected combination."
+        )
     else:
-        st.caption(f"Rank 1 leads on {basis.lower()}. Tied bids share a rank. Status explains each unranked bid.")
+        st.caption(
+            f"Rank 1 leads on {basis.lower()}. Tied bids share a rank. Status explains each unranked bid."
+        )
 
     policy_document = policy_text(p)
     zip_buffer = BytesIO()
@@ -280,20 +372,55 @@ def awards():
         for doc in run["files"]:
             archive.write(folder / doc["file"], doc["file"])
         archive.writestr("GC-award-policy.txt", policy_document)
-    answer = [s["name"], "Bid set " + rid, policy_document, "Expected award: " + outcome, "", "Bidder checks (USD)"]
+    answer = [
+        s["name"],
+        "Bid set " + rid,
+        policy_document,
+        "Expected award: " + outcome,
+        "",
+        "Bidder checks (USD)",
+    ]
     for bidder, row in zip(s["bidders"], rows):
-        answer.extend(["", bidder["firm"] + " — " + row["Status"],
-            f"Response: {bidder['response']}. Scope offered: {bidder['scope']}. Scope relationship: {bidder['match']}." if bidder["response"] not in ("Silent","Regret") else "Response: "+bidder["response"],
-            " | ".join(f"{k}: {v}" for k,v in row.items() if k not in ("Bidder","Status") and v is not None)])
+        answer.extend(
+            [
+                "",
+                bidder["firm"] + " — " + row["Status"],
+                f"Response: {bidder['response']}. Scope offered: {bidder['scope']}. Scope relationship: {bidder['match']}."
+                if bidder["response"] not in ("Silent", "Regret")
+                else "Response: " + bidder["response"],
+                " | ".join(
+                    f"{k}: {v}"
+                    for k, v in row.items()
+                    if k not in ("Bidder", "Status") and v is not None
+                ),
+            ]
+        )
         if row["Leveled"] is not None:
-            answer.append(f"Warranty: {bidder['coverage']}, {bidder['years']} years; deductible {bidder['deductible']}, cap {bidder['cap']}.")
+            answer.append(
+                f"Warranty: {bidder['coverage']}, {bidder['years']} years; deductible {bidder['deductible']}, cap {bidder['cap']}."
+            )
     answer.extend(["", "Document checks"])
     for doc in run["files"]:
-        answer.append(doc["file"]+" — "+doc["title"]+" "+json.dumps(doc.get("expected") or {}))
-    left,right = st.columns(2)
-    left.download_button("Download bid set (ZIP)",zip_buffer.getvalue(),rid+"-bid-set.zip",mime="application/zip")
-    right.download_button("Download expected answers", "\n".join(answer),rid+"-expected-answers.txt")
-    st.caption("Use the ZIP as the test input. Give the separate answer key to the tester.")
+        answer.append(
+            doc["file"]
+            + " — "
+            + doc["title"]
+            + " "
+            + json.dumps(doc.get("expected") or {})
+        )
+    left, right = st.columns(2)
+    left.download_button(
+        "Download bid set (ZIP)",
+        zip_buffer.getvalue(),
+        rid + "-bid-set.zip",
+        mime="application/zip",
+    )
+    right.download_button(
+        "Download expected answers", "\n".join(answer), rid + "-expected-answers.txt"
+    )
+    st.caption(
+        "Use the ZIP as the test input. Give the separate answer key to the tester."
+    )
     with st.expander("Preview bid documents"):
         documents()
     if st.button("Save policy version", type="primary"):
@@ -309,10 +436,23 @@ def awards():
 
 try:
     if page == "Create bid set":
-        builder()
+        mode = st.radio(
+            "Bid set type", ["Whole project", "Single trade"], horizontal=True
+        )
+        if mode == "Whole project":
+            project_ui.builder(models, run)
+        else:
+            builder()
+    elif run and "project" in run:
+        project_ui.answers(folder, run, policy_form, documents)
     elif run:
+        st.caption(
+            "Single-trade scenario · item coverage unspecified in saved scenario"
+        )
         awards()
     else:
-        st.info("Open Create bid set and click Generate bid set to see its expected answers.")
+        st.info(
+            "Open Create bid set and click Generate bid set to see its expected answers."
+        )
 except Exception as exc:
     st.error(str(exc))

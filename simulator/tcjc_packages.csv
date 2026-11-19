@@ -1,0 +1,46 @@
+code,trade,estimate_usd,representative_scope_items
+01.35,Temporary Cranes and Hoists,881763.7768713571,Crane | Generator | Operator | Mobilization
+01.90,Final Cleaning - Interiors,169388.3543796352,"Interior Clean (3 mobilizations, 1 per floor) | Exterior Building Clean (1 time) | Site Clean (1 time) | Powder Puff Clean Entire Building (1 mobilization, 1 time)"
+02.45,Selective Site and Building Demolition,526914.9016837042,"Demo Existing Courthouse Building (Including all interiors, structure, foundations) Phase 1 | Existing Detention Center Structure (Including all interiors, structure, foundations) Phase 2 (After CO of New Courthouse) | Site Demo"
+03.30,Cast-In-Place Concrete (Turnkey),4808779.1346,Foundations (including stem walls and board formed foundation walls) | Slab on Grade | Slab on Metal Deck | Crane Pad
+04.20,Masonry,3146618.3412507516,CMU at 4 Bed Cells | Set and grout all HM/Steel door and window frames in CMU walls | Exterior Brick Unit Masonry Veneer BRK-1 | Scaffolding
+05.00,Structural Steel (Turnkey),5338604.924978655,3221 – Bollards | Tube steel and steel angles for Level 2 indoor/outdoor rec room overhead door | 532 – Steel Bent Plate
+06.10,Rough Carpentry,499077.56,Interior Rough Carpentry | Exterior Rough Carpentry | Roof Rough Carpentry
+06.40,Architectural Woodwork and Finish Carpentry,3025519.335273602,"WDW-1 Interior Wood Slat Wall | Courtroom Pony Walls (including ballistic paneling and work notes 604, 606, 616), complete | Courtroom Benches, complete (work notes 601, 605 and refer to IP drawings) | QZ-1 Quartz Countertops and aprons"
+07.10,Dampproofing and Waterproofing,981391.9988975746,Dampproofing at WA10 | Air Barrier | Joint Sealants | Waterproofing
+07.20,Building Insulation,452309.0241811986,Interior sound batt insulation | Spray foam insulation - foundations | Glass-fiber blanket insulation at exterior framed walls
+07.41,Metal Wall Panels,2502398.82420926,"Metal Panel MP-1, hat channel, flashings | Metal Panel MP-2, steel mounting angles and expansion bolts | Metal Panel MP-4, metal panel clip, hat channel/subframing, flashings"
+07.42,Siding,666957.3812387253,"WA1 Wall Assembly: FCS-1 siding, hat channel, clips, flashings | WA1 Wall Assembly: 2” PIC-1 Board Insulation & Joint tape | SA1 Soffit Assembly: FCS-1 siding, panel clip, hat channel, flashings"
+07.50,Roofing,849845.3326622786,"Roof Assembly RA1 | Roof Assembly RA2 | Flashing, gutters, downspouts, scuppers, etc"
+07.80,Fireproofing,236485.9252,Spray Applied Fireproofing | Patch & Repair Fireproofing | Mobilizations
+08.12,"Doors, Frames and Hardware (Install)",1881235.1597793,Wood Doors | Hollow Metal Doors | HM Frames | Hardware
+08.33,Coiling Doors and Grilles,171815.30517137703,OS-1 Door Type | OS-2 Door Type | OS-3 Door Type | OC-1 Door Type
+08.34,Elevator Smoke Curtains,72715.44738424533,Elevator Smoke Containment Curtains – Elevator 1 | Elevator Smoke Containment Curtains – Elevator 2 | Elevator Smoke Containment Curtains – Elevator 3 | Elevator Smoke Containment Curtains – Elevator 4
+08.40,"Entrances, Storefronts, and Curtain Walls",2457207.2821023935,"Exterior Curtainwall (CW) | Exterior storefront (SF) | Exterior Storefront Doors, Frames, Hardware | Ballistic Rated Storefront (BSF)"
+09.21,Drywall and Framing,3745473.07214973,"Exterior walls: Framing, sheathing, interior drywall | Interior Walls: Framing/hat channel, drywall, sealants | Interior gypsum ceilings / soffits / bulkheads / coves | Ballistic rated paneling in walls (ref: Arch finish plans)"
+09.51,Acoustical Ceilings,1086046.8029539988,SAP-1 Acoustic Wall Covering | APC-1 Acoustic Panel Ceilings | WDC-1 Suspended wood ceilings
+09.60,Resilient Flooring and Carpet,1003181.9850142312,CPT-1 Carpet Tile | LVT-1 Luxury Vinyl Tile | RT-2 Rubber Stair Treads and Risers | RB-1 Resilient base
+09.67,Fluid-Applied Flooring,314339.23071557423,PSC-1 polished concrete | RN-1 Resinous Flooring & RFB Integral Cove Base | SC-1 sealed concrete | Moisture Testing
+09.90,Painting and Staining,919554.7704950892,Interior Paint & high performance coatings | Exterior Paint & high performance coatings | Paint at Sitework | Stencil Painted Door Numbering
+10.00,Specialties,662401.535625,"Toilet Partitions / Urinal Screens | Fire Extinguishers / Cabinets | Wall Protection / Corner Guards | Toilet, Bath, Laundry Accessories"
+10.14,Signage and Wayfinding,156577.4704349569,Monument Signs | Code Required Signage | Adhesive Vinyl Signage | Exterior Building Mounted Signage
+10.56,Storage Assemblies,386702.0212627781,High Density Mobile Storage – Evidence Storage 1037 | High Density Mobile Storage – Active File Storage 2023 | EQ-18 Metal Storage Shelving w/ Rain Gutter & Frame Mounted Doors | EQ-19/19a Metal Storage Shelving – Open Shelving
+11.40,Food Service Equipment,323313.1584485869,K-1 Dry Storage Shelving | K-2 Walk-in Cooler Box | K-5 Reach-in Freezer: Double Section | K-6 Wall Mount Stainless Steel Hand Sink
+11.98,Detention Equipment,5137302.0995350005,Detention Equipment | Steel column cover plates | Detention Furniture | Detention Accessories
+12.20,Window Treatment,126757.66738324314,WT-1J Manual Single Roller Shades | WT-3 Motorized Single Roller Shades | WT-4 Motorized Double Roller Shades
+12.60,Multiple Seating,68896.5724594107,Fixed seating – supply | Fixed seating – install | Delivery
+13.49,X-Ray Shielding Systems,0,RF Shielding Complete | RF shielding allowance
+14.20,Elevators,868177.0861344959,Elevator 1: Main Public Elevator Stops | Elevator 2: Roof Access Elevator Stops | Elevator 3 Stops | Elevator 4 Stops
+21.00,Fire Suppression,1472337.32,"New Building – wet systems | New Building – dry systems | New Building – pre-action system | New Building – standpipes, hose valves & cabinets"
+22.00,Plumbing,12140326.828,Plumbing | HVAC | Backflow preventer and certification | Firestopping
+26.00,Electrical,10245545.7505,"Building Site Electrical and Lighting + Technology conduits | Normal Power Distribution - One Line | BDA / First Responder DAS testing and rough-in | Fire Alarm, Smoke Control, Monitored 2-Way Communication System"
+27.30,Voice Communication Systems,1054567.6583483664,Telecommunications (Communications Cabling System) | Audiovisual Systems | Public Address System | In-Building Wireless System
+31.00,Earthwork,1735656.4865,Fine grading at site pavement | Engineered Fill Import | Structural excavation for new foundations | Backfill
+31.40,Shoring and Underpinning,628618.0534175185,Simpson Street Lag-shoring | Alley Lag-shoring | King Street Lag-shoring | Engineering
+32.12,Flexible Paving (Asphalt Paving),683302.6057326117,"Asphalt Paving Parking Lots & Drive Lanes | Striping at new asphalt | Asphalt Patching at New Curb and Utility cuts - S. Willow St., E. Simpson Ave. and S. King St | Traffic Control"
+32.13,Rigid Paving (Concrete Paving),816958.976067641,Curb & Gutter Including Valley Gutters | Sidewalks & Concrete Paving | Site Stairs and Ramp | New ADA Pedestrian Ramps
+32.31,Fences and Gates,401556.64876340504,Chain Link Fencing & Gates | Wood Fencing | 3212 / 3238 / 3239– Bi-Parting high speed electronic security gate | 3222 - Impact Resistant Fence with privacy panels
+32.90,Landscaping and Irrigation,342640.308679094,Site furnishings | Planting and grading | Irrigation sleeving | New irrigation
+33.00,Site Utilities,1229787.3805451996,"Excavate, backfill, asphalt restoration at Pearl and Willow - refer to I-100 | Perforated storm drain lines shown on C3.0 to Silva cells | Storm Line | Sanitary Sewer Line"
+99.10,General Conditions,7163205,90% CD General Conditions | Rental Lot
+99.15,Winter Conditions Allowance,797907,90% CD Winter Conditions Allowance | Masonry scaffolding tenting
