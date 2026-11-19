@@ -122,6 +122,15 @@ def _limit_flags(items, rows, bidders, row_share=0.34, cell_share=0.12):
 
 
 def level_package(pid, force_extract=False):
+    settings = db.one('SELECT settings FROM packages WHERE id=?', (pid,))['settings'] or {}
+    token = llm.stage_models.set(settings.get('stage_models', {}))
+    try:
+        return _level_package(pid, force_extract)
+    finally:
+        llm.stage_models.reset(token)
+
+
+def _level_package(pid, force_extract=False):
     t0 = time.time()
     calls0 = dict(llm.stats)
     pkg = db.one('SELECT * FROM packages WHERE id=?', (pid,))
@@ -134,11 +143,11 @@ def level_package(pid, force_extract=False):
     sh = scope_hash(items)
 
     # 1. extraction ------------------------------------------------------------------------------------
-    todo = [d for d in docs if d['kind'] == 'bid' and d.get('path') and (force_extract or not d.get('extraction') or d['extraction'].get('scope_hash') != sh)]
+    todo = [d for d in docs if d['kind'] == 'bid' and d.get('path') and (force_extract or d.get('status')=='error' or not d.get('extraction') or d['extraction'].get('scope_hash') != sh)]
     _set(pid, step=STEPS[0], stepIndex=0, done=0, total=len(todo), message=f'{len(todo)} to read' if todo else 'Using earlier readings')
 
     def do_extract(d):
-        ext = extract.extract_bid(d['path'], items)
+        ext = extract.extract_bid(d['path'], items, use_cache=not force_extract)
         ext['scope_hash'] = sh
         return ext
     done = [0]
@@ -148,7 +157,7 @@ def level_package(pid, force_extract=False):
         _set(pid, done=done[0])
     for d, ext in zip(todo, llm.run_parallel(do_extract, todo, tick)):
         if isinstance(ext, Exception):
-            db.update('documents', d['id'], status='error', error=str(ext)[:400])
+            db.update('documents', d['id'], status='error', error=str(ext)[:400], extraction=None)
         else:
             st = {'bid': 'extracted', 'decline': 'declined'}.get(ext.get('doc_type'), 'not_a_bid')
             db.update('documents', d['id'], status=st, error=None, extraction=ext)
@@ -284,7 +293,7 @@ def level_package(pid, force_extract=False):
                     'flaggedCells': sum(1 for b in bidders for c in b['cells'].values() if c['note']['flag']),
                     'cells': len(bidders) * len(items)},
         'run': {'seconds': round(time.time() - t0, 1), 'llmCalls': llm.stats['calls'] - calls0['calls'], 'llmCached': llm.stats['cached'] - calls0['cached'],
-                'llmErrors': llm.stats['errors'] - calls0['errors'], 'text': 'ai' if use_ai else 'template', 'model': llm.config.GEMINI_MODEL},
+                'llmErrors': llm.stats['errors'] - calls0['errors'], 'text': 'ai' if use_ai else 'template', 'model': llm.model_for('extract_bid'), 'stageModels': llm.stage_models.get()},
     }
     db.update('packages', pid, result=result, last_leveled_at=result['leveledAt'])
     return result

@@ -127,11 +127,11 @@ def scope_block(items):
     return '\n'.join(lines)
 
 
-def extract_bid(path, items):
+def extract_bid(path, items, use_cache=True):
     """Returns the extraction dict (BID_SCHEMA) with `cells` keyed by scope key added for convenience."""
     doc = ingest.read(path)
     body = '' if doc['files'] else f"\nDOCUMENT TEXT:\n{doc['text'][:120000]}"
-    out = llm.generate_json(BID_PROMPT.format(scope=scope_block(items), doc=body), BID_SCHEMA, files=doc['files'], kind='extract_bid')
+    out = llm.generate_json(BID_PROMPT.format(scope=scope_block(items), doc=body), BID_SCHEMA, files=doc['files'], kind='extract_bid', use_cache=use_cache)
     keys = {it['key'] for it in items}
     cells = {}
     for e in out.get('items') or []:

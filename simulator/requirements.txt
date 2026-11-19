@@ -1,0 +1,6 @@
+streamlit[pdf]>=1.50,<2
+reportlab>=4,<5
+pymupdf>=1.25,<2
+requests>=2.32,<3
+pandas>=2.1,<4
+jinja2>=3.1,<4

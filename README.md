@@ -12,3 +12,7 @@ AI-native construction bid leveling proof of concept.
 | `docs/bid-landscape-visualization.md` | Specification of the leveling map and heat grid |
 | `prototypes/bid-landscape/` | The visualization prototype the spec was written from |
 | `data/` | The source TCJC workbook |
+
+## Streamlit bid day simulator
+
+[Installation and first run](simulator/README.md) · [Illustrated usage guide (PDF)](docs/Bid-Leveling-Simulator-User-Guide.pdf)

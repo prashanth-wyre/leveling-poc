@@ -3,6 +3,7 @@
 Every response is cached by a hash of (model, prompt, schema, file bytes), so re-leveling only calls the
 model for inputs that changed and the app keeps working offline once a package has been leveled.
 """
+from contextvars import ContextVar, copy_context
 import hashlib
 import json
 import re
@@ -11,6 +12,15 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 from . import config
+
+stage_models = ContextVar('stage_models', default={})
+
+
+def model_for(kind):
+    stage = {'policy': 'policy', 'award_rule': 'policy', 'assess': 'reconciliation',
+             'extract_bid': 'extraction', 'extract_scope': 'extraction'}.get(kind, kind)
+    return stage_models.get().get(stage, config.GEMINI_MODEL)
+
 
 _client = None
 _lock = threading.Lock()
@@ -40,7 +50,7 @@ def client():
 
 def _key(kind, prompt, schema, files, extra=''):
     h = hashlib.sha256()
-    for part in (kind, config.GEMINI_MODEL, prompt, json.dumps(schema, sort_keys=True) if schema else '', extra):
+    for part in (kind, model_for(kind), prompt, json.dumps(schema, sort_keys=True) if schema else '', extra):
         h.update(part.encode())
         h.update(b'\x00')
     for mime, data in files or []:
@@ -89,7 +99,7 @@ def generate_json(prompt, schema, files=None, kind='json', use_cache=True, retri
     for attempt in range(retries + 1):
         try:
             stats['calls'] += 1
-            resp = client().models.generate_content(model=config.GEMINI_MODEL, contents=parts, config=cfg)
+            resp = client().models.generate_content(model=model_for(kind), contents=parts, config=cfg)
             out = _parse_json(resp.text)
             _cache_put(key, out)
             return out
@@ -113,7 +123,7 @@ def generate_grounded_json(prompt, kind='grounded', use_cache=True):
     try:
         stats['calls'] += 1
         resp = client().models.generate_content(
-            model=config.GEMINI_MODEL, contents=prompt,
+            model=model_for(kind), contents=prompt,
             config=types.GenerateContentConfig(temperature=0, tools=[types.Tool(google_search=types.GoogleSearch())]))
         data = _parse_json(resp.text)
         sources = []
@@ -141,5 +151,7 @@ def run_parallel(fn, items, on_done=None):
         if on_done:
             on_done(i)
     with ThreadPoolExecutor(max_workers=config.LLM_WORKERS) as ex:
-        list(ex.map(work, range(len(items))))
+        futures = [ex.submit(copy_context().run, work, i) for i in range(len(items))]
+        for future in futures:
+            future.result()
     return out

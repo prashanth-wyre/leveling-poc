@@ -106,7 +106,11 @@ def generate_scope(pid: str):
     if not doc:
         raise HTTPException(400, 'Upload a scope sheet first')
     try:
-        items = extract.extract_scope(doc['path'])
+        token = llm.stage_models.set((_pkg(pid).get('settings') or {}).get('stage_models', {}))
+        try:
+            items = extract.extract_scope(doc['path'])
+        finally:
+            llm.stage_models.reset(token)
     except llm.LLMError as e:
         raise HTTPException(502, f'The model could not read the scope sheet: {e}')
     db.update('packages', pid, scope={'items': items})
@@ -186,7 +190,11 @@ def get_policy(pid: str):
 @app.post('/api/packages/{pid}/policy/generate')
 def gen_policy(pid: str):
     _pkg(pid)
-    return {'policy': runner.generate_policy(pid)}
+    token = llm.stage_models.set((_pkg(pid).get('settings') or {}).get('stage_models', {}))
+    try:
+        return {'policy': runner.generate_policy(pid)}
+    finally:
+        llm.stage_models.reset(token)
 
 
 @app.put('/api/packages/{pid}/policy')
@@ -201,7 +209,13 @@ def put_policy(pid: str, body: dict = Body(...)):
 @app.put('/api/packages/{pid}/settings')
 def put_settings(pid: str, body: dict = Body(...)):
     p = _pkg(pid)
-    s = {**(p.get('settings') or {}), **{k: v for k, v in body.items() if k in ('threshold_pct', 'ai_auto', 'ai_web_search', 'ai_text', 'default', 'items', 'allowances')}}
+    if 'stage_models' in body:
+        import os
+        allowed = {config.GEMINI_MODEL, os.getenv('GEMINI_HIGHER_MODEL'), os.getenv('GEMINI_HIGHEST_MODEL')}
+        routes = body['stage_models']
+        if not isinstance(routes, dict) or any(not isinstance(m, str) or m not in allowed for m in routes.values()):
+            raise HTTPException(400, 'Choose configured Gemini model IDs.')
+    s = {**(p.get('settings') or {}), **{k: v for k, v in body.items() if k in ('threshold_pct', 'ai_auto', 'ai_web_search', 'ai_text', 'default', 'items', 'allowances', 'stage_models')}}
     db.update('packages', pid, settings=s)
     return {'settings': engine.merged_settings(s) | {'ai_text': s.get('ai_text', True)}}
 
