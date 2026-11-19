@@ -14,7 +14,12 @@ Open http://localhost:8501. Stop with Ctrl-C. Repeatable fixture generation work
 
 ## Generate a large TCJC bid set
 
-Open **Create bid set → Large TCJC bid set**. Choose the number of bid items and bidding firms per solicited trade. Preview any trade, then click **Generate all 45 packages**. The default creates 504 bid items across 42 solicited trades and 420 bidder documents: 336 current proposals, 42 superseded proposals and 42 regret letters. The remaining packages produce GC records. Download the ZIP and the separate Excel answer key on **Expected answers**. This mode uses repeatable local generation.
+1. Open **Create bid set → Large TCJC bid set**. Set **Bid items per solicited trade** (4–30) and **Bidding firms per solicited trade** (2–20). These counts apply to all 42 solicited trades.
+2. Select a package under **Preview scope for trade**. The preview shows its individual items. Click **Generate all 45 packages** to create the full set locally.
+3. At the defaults (12 items and eight firms), expect **504 bid items**, **336 current proposals**, **42 superseded quotes** and **42 regret letters**. The two GC-carried packages and the removed scope produce GC records.
+4. On **Expected answers**, choose a package and compare coverage for one item. Download the **project ZIP** for the leveling app and the **Excel answer key** for the tester. For the default Electrical example, filter **Item Coverage** to **26.00 / I03 / Birch Electrical** and trace the exclusion to the proposal listed under **Evidence**.
+
+[Illustrated large-set walkthrough and simulator guide (PDF)](../docs/Bid-Leveling-Simulator-User-Guide.pdf)
 
 ## Generate a whole project
 
@@ -33,7 +38,6 @@ Open **Create bid set → Large TCJC bid set**. Choose the number of bid items a
 4. Use **Preview bid documents** to inspect an artifact. Use **Save policy version** to keep your rules for another session. Changing the template and downloading again pairs the same bids with the new policy.
 5. Give the ZIP to the person running the test and the key to the person checking results. Select an earlier set in **Saved bid set** to revisit it.
 
-[Illustrated usage guide](../docs/Bid-Leveling-Simulator-User-Guide.pdf)
 
 ## Exercise optional project scenarios
 
