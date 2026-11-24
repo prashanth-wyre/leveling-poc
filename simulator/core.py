@@ -18,6 +18,8 @@ from openpyxl import Workbook, load_workbook
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 
+import styles
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "app/backend"))
 from wyre_level import config, ingest, llm
@@ -142,6 +144,7 @@ def preset(name):
         )
     for b in bidders:
         b.setdefault("layout", "Standard")
+        b.setdefault("style", styles.AUTO)
         b.setdefault("attachments", [])
     return dict(
         name=name,
@@ -163,6 +166,8 @@ def validate(s):
         or (s["estimate"] == 0 and not s.get("scope_lines"))
     ):
         raise ValueError("Enter a name, a scope and a positive estimate.")
+    if s.get("proposal_styles", "Standard") not in styles.MIXES:
+        raise ValueError("Choose Standard or Realistic mix proposal styles.")
     firms = set()
     for b in s["bidders"]:
         if not b["firm"].strip() or b["firm"].casefold() in firms:
@@ -174,6 +179,7 @@ def validate(s):
             or b["match"] not in ["Full", "Partial", "Unrelated"]
         ):
             raise ValueError("Unknown document format, response or scope relationship.")
+        styles.check(b)
         for k in ("years", "deductible", "cap", "days", "plug", "multiplier"):
             if not math.isfinite(float(b[k])) or float(b[k]) < 0:
                 raise ValueError(f"Invalid {k} for {b['firm']}")
@@ -221,24 +227,37 @@ def generate(s, models, draft, output_root=None):
         folder.mkdir()
         files = []
 
-        def emit(kind, title, rows, ext, firm="", expected=None):
+        def emit(kind, title, rows, ext, firm="", expected=None, styled=None):
+            """Write a document and confirm its firm and amounts read back.
+
+            styled is (style, renderer) for a non-Standard proposal layout. The
+            renderer returns extraction notes and the amounts that must be
+            readable in the document."""
             file = f"{len(files) + 1:02d}-{kind}.{ext}"
-            write_document(folder / file, title, rows)
+            required = []
+            if styled:
+                notes, required = styled[1](folder / file)
+            else:
+                write_document(folder / file, title, rows)
             text = ingest.read(folder / file)["text"]
             if firm and firm not in text:
                 raise ValueError(f"Bidder missing from {file}")
+            found = styles.amounts(text)
             if (
                 expected
                 and "stated_total" in expected
-                and format(float(expected["stated_total"]), ".2f")
-                .rstrip("0")
-                .rstrip(".")
-                not in text
+                and round(float(expected["stated_total"]), 2) not in found
             ):
                 raise ValueError(f"Quoted amount missing from {file}")
-            files.append(
-                dict(file=file, title=title, kind=kind, firm=firm, expected=expected)
+            for amount in required:
+                if round(float(amount), 2) not in found:
+                    raise ValueError(f"Line amount {amount} missing from {file}")
+            entry = dict(
+                file=file, title=title, kind=kind, firm=firm, expected=expected
             )
+            if styled:
+                entry.update(style=styled[0], notes=notes)
+            files.append(entry)
 
         scope_header = ["Scope", "Quantity", "Unit", "GC estimate"]
         fields = ["description", "quantity", "unit", "estimate"]
@@ -319,6 +338,8 @@ def generate(s, models, draft, output_root=None):
             amount = b.get("submitted", round(s["estimate"] * b["multiplier"], 2))
             firm = b["firm"]
             head = [[firm], ["Package", s["trade"]]]
+            revision = None
+            intro = ""
             if response == "Revised":
                 reference = f"Q-{len(files) + 1:03d}"
                 old = round(amount * 1.15, 2)
@@ -338,14 +359,17 @@ def generate(s, models, draft, output_root=None):
                     firm,
                     dict(stated_total=old, doc_type="bid", revision=0, effective=False),
                 )
+                revision = dict(
+                    reference=reference,
+                    issued="2026-01-15",
+                    supersedes="Revision 1 supersedes the entire quotation dated 2026-01-12.",
+                )
                 head.extend(
                     [
                         ["Quotation", reference],
                         ["Revision", 1],
-                        ["Issued", "2026-01-15"],
-                        [
-                            "Revision 1 supersedes the entire quotation dated 2026-01-12."
-                        ],
+                        ["Issued", revision["issued"]],
+                        [revision["supersedes"]],
                     ]
                 )
             if response == "Regret":
@@ -358,20 +382,18 @@ def generate(s, models, draft, output_root=None):
                     dict(doc_type="decline"),
                 )
                 continue
+            warranty = (
+                (
+                    "Durations as itemized"
+                    if "component_years" in b
+                    else f"{b['years']} years"
+                )
+                + f", {b['coverage']}. Deductible USD {b['deductible']}. Cap USD {b['cap']}."
+            )
             current = [
                 ["Scope offered", b["scope"]],
                 ["Submitted total USD", amount],
-                [
-                    "Warranty",
-                    (
-                        (
-                            "Durations as itemized"
-                            if "component_years" in b
-                            else f"{b['years']} years"
-                        )
-                        + f", {b['coverage']}. Deductible USD {b['deductible']}. Cap USD {b['cap']}."
-                    ),
-                ],
+                ["Warranty", warranty],
                 ["Duration", f"{b['days']} days"],
                 ["Terms", b["terms"]],
                 *b.get("statements", []),
@@ -407,9 +429,43 @@ def generate(s, models, draft, output_root=None):
                         "required": ["paragraph"],
                     },
                 )
-                head.append([intro["paragraph"]])
+                intro = intro["paragraph"]
+                head.append([intro])
             if response == "Partial regret":
                 head.append(["We decline the remaining scope."])
+            style = styles.resolve(s, b)
+            b["rendered_style"] = style
+            styled = None
+            if style != styles.STANDARD:
+                facts = dict(
+                    firm=firm,
+                    project=s["name"],
+                    code=s.get("code", ""),
+                    trade=s["trade"],
+                    response=response,
+                    scope=b["scope"],
+                    total=amount,
+                    tax=b.get("tax", 0),
+                    warranty=warranty,
+                    days=b["days"],
+                    terms=b["terms"],
+                    statements=[
+                        " ".join(map(str, row[1:] or row))
+                        for row in b.get("statements", [])
+                    ],
+                    alternates=b.get("alternates", []),
+                    offers=b.get("offers", []),
+                    lines=b.get("lines", []),
+                    scope_lines=s.get("scope_lines", []),
+                    intro=intro,
+                    revision=revision,
+                )
+                styled = (
+                    style,
+                    lambda path, style=style, facts=facts: styles.render(
+                        style, path, facts
+                    ),
+                )
             emit(
                 "bid",
                 firm + " • " + response,
@@ -425,9 +481,18 @@ def generate(s, models, draft, output_root=None):
                         else {}
                     ),
                 ),
+                styled,
             )
             bid_file = folder / files[-1]["file"]
             layout = b.get("layout", "Standard")
+            if styles.scanned(s, b, style):
+                layout = "Scanned"
+            if layout == "Scanned" and bid_file.suffix == ".pdf" and styled:
+                files[-1]["scanned"] = True
+                notes = files[-1]["notes"]
+                notes["price_location"] = (
+                    "Scanned image with no text layer. " + notes["price_location"]
+                )
             if layout == "Scanned" and bid_file.suffix == ".pdf":
                 import pymupdf
 
