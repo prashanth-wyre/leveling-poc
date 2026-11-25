@@ -16,6 +16,7 @@ from openpyxl.utils import get_column_letter
 
 import complications
 import core
+import styles
 from award_policy import policy_text
 from ranking import rank_bids
 
@@ -442,6 +443,10 @@ def generate(project, models, draft):
         dest.mkdir()
         for pkg in packages:
             s = prepare(pkg, project["name"])
+            s.update(
+                code=pkg["code"],
+                proposal_styles=project.get("proposal_styles", "Standard"),
+            )
             if project.get("complications"):
                 s["include_scope_ids"] = True
             code = pkg["code"]
@@ -565,6 +570,11 @@ def results(run, policies):
             )
             if b["response"] in ("Withdrawn", "Clarified") and docs:
                 source += "; " + docs[-1]["file"]
+            # A lump-sum style states no line prices, so its priced and included
+            # items read as included in the lump sum.
+            itemized = styles.ITEMIZED.get(
+                b.get("rendered_style", styles.STANDARD), True
+            )
             for i in s["scope_lines"]:
                 v = b["coverage_map"][i["id"]]
                 status = (
@@ -572,6 +582,9 @@ def results(run, policies):
                     if active and b["match"] != "Unrelated"
                     else (b["response"] if not active else "Unrelated scope")
                 )
+                carrying = v["carrying"]
+                if not itemized and status in ("Priced", "Included"):
+                    status, carrying = "Included", "Lump sum"
                 priced = status == "Priced"
                 coverage.append(
                     {
@@ -586,7 +599,7 @@ def results(run, policies):
                         if priced and i["quantity"]
                         else None,
                         "Value": v["amount"] if priced else None,
-                        "Included in": v["carrying"] if status == "Included" else "",
+                        "Included in": carrying if status == "Included" else "",
                         "Allowance": (
                             v["allowance"]
                             if v.get("allowance") is not None
@@ -631,6 +644,24 @@ def results(run, policies):
             }
         )
     return summary, coverage, tallies
+
+
+def extraction_notes(run):
+    """One row per styled proposal: where its facts are and what to watch for."""
+    return [
+        {
+            "Package": d.get("package", ""),
+            "Firm": d["firm"],
+            "File": d["file"],
+            "Style": d["style"],
+            "Price location": d["notes"]["price_location"],
+            "Line prices shown": d["notes"]["line_prices"],
+            "Numbers that are not prices": d["notes"]["not_prices"],
+            "Watch for": d["notes"]["watch_for"],
+        }
+        for d in run["files"]
+        if d.get("style")
+    ]
 
 
 def exports(folder, run, policies, summary, coverage, tallies):
@@ -688,6 +719,9 @@ def exports(folder, run, policies, summary, coverage, tallies):
                 )
     if extra:
         records(wb.create_sheet("Alternates"), extra)
+    notes = extraction_notes(run)
+    if notes:
+        records(wb.create_sheet("Extraction notes"), notes)
     records(
         wb.create_sheet("Policies"),
         [

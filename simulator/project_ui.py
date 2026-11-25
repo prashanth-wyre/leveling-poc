@@ -9,6 +9,25 @@ import streamlit as st
 import complications as comp
 import core
 import project as pr
+import styles
+
+
+def style_choice(key, current="Standard"):
+    choice = st.radio(
+        "Proposal styles",
+        styles.MIXES,
+        index=styles.MIXES.index(current),
+        horizontal=True,
+        key=key,
+    )
+    st.caption(
+        "Standard prints every proposal in the same simple layout. Realistic mix gives "
+        "each bidder a layout like real proposals: GC bid form, formal letter, "
+        "structured quote, technical scope list, informal estimate (some scanned) or "
+        "vague lump sum. The choice is repeatable for the same names. The answer key "
+        "adds an Extraction notes sheet."
+    )
+    return choice
 
 
 def large_builder(models):
@@ -28,6 +47,7 @@ def large_builder(models):
     st.caption(
         "Scope lines are illustrative. Larger item counts divide work into releases. Package budgets come from the TCJC starter."
     )
+    project["proposal_styles"] = style_choice("large-styles")
     if st.button("Generate all 45 packages", type="primary"):
         with st.spinner("Generating the project documents and tester’s key"):
             st.session_state.selected = pr.generate(project, models, False)
@@ -234,6 +254,13 @@ def builder(models, saved=None):
             fmt = st.selectbox(
                 "Document format", core.FORMS, index=core.FORMS.index(b["format"])
             )
+            style = st.selectbox(
+                "Proposal style",
+                styles.STYLES,
+                index=styles.STYLES.index(styles.chosen(b)),
+                help="Auto follows the project's Proposal styles setting. Formats: "
+                + "; ".join(f"{k}: {', '.join(v)}" for k, v in styles.FORMATS.items()),
+            )
             lump = st.number_input(
                 "Priced lump sum (USD)",
                 min_value=0.0,
@@ -253,11 +280,13 @@ def builder(models, saved=None):
                     x is not b and x["firm"].lower() == name.lower() for x in bidders
                 ):
                     raise ValueError("Enter a distinct company name.")
+                styles.check(dict(b, firm=name, format=fmt, style=style))
                 b.update(
                     firm=name,
                     lump_sum=lump,
                     response=response,
                     format=fmt,
+                    style=style,
                     post_bid=amounts[0],
                     tax=amounts[1],
                     sdi=amounts[2],
@@ -372,6 +401,9 @@ def builder(models, saved=None):
                 pr.prepare(p, parsed["name"])
             st.session_state.project_draft = parsed
             apply()
+    project["proposal_styles"] = style_choice(
+        f"project-styles{version}", project.get("proposal_styles", "Standard")
+    )
     draft = st.radio(
         "Document drafting", ["Repeatable fixture", "Gemini"], horizontal=True
     )

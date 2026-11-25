@@ -6,6 +6,7 @@ import streamlit as st
 
 import core as c
 import project_ui
+import styles
 from award_policy import policy_text
 from ranking import rank_bids
 
@@ -197,6 +198,7 @@ def builder():
     ]
     lines = {b["firm"]: b.get("lines", []) for b in s["bidders"]}
     options = {
+        "style": styles.STYLES,
         "layout": ["Standard", "Scanned", "Late total", "Uncached formula"],
         "response": c.RESPONSES,
         "format": c.FORMS,
@@ -224,6 +226,9 @@ def builder():
         )
         for b in edited.to_dict("records")
     ]
+    s["proposal_styles"] = project_ui.style_choice(
+        f"styles{version}", s.get("proposal_styles", "Standard")
+    )
     mode = st.radio(
         "Document drafting", ["Gemini", "Repeatable fixture"], horizontal=True
     )
@@ -408,6 +413,21 @@ def awards():
             + " "
             + json.dumps(doc.get("expected") or {})
         )
+    styled = [doc for doc in run["files"] if doc.get("style")]
+    if styled:
+        answer.extend(["", "Extraction notes"])
+        for doc in styled:
+            notes = doc["notes"]
+            answer.extend(
+                [
+                    "",
+                    f"{doc['file']} — {doc['firm']} — {doc['style']}",
+                    "Price location: " + notes["price_location"],
+                    "Line prices shown: " + notes["line_prices"],
+                    "Numbers that are not prices: " + notes["not_prices"],
+                    "Watch for: " + notes["watch_for"],
+                ]
+            )
     left, right = st.columns(2)
     left.download_button(
         "Download bid set (ZIP)",

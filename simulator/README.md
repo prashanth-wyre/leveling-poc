@@ -39,6 +39,27 @@ Open http://localhost:8501. Stop with Ctrl-C. Repeatable fixture generation work
 5. Give the ZIP to the person running the test and the key to the person checking results. Select an earlier set in **Saved bid set** to revisit it.
 
 
+## Choose proposal styles
+
+Real proposals rarely look alike. **Proposal styles**, next to **Document drafting** in all three workflows, controls how bidder proposals are laid out.
+
+- **Standard** prints every proposal in the same simple layout. Existing bid sets keep this layout.
+- **Realistic mix** gives each bidder one of these layouts, picked from the project, trade and firm names, so the same set regenerates the same way:
+
+| Style | Formats | What makes it hard to read | Line prices |
+|---|---|---|---|
+| **GC bid form** | pdf | A multi-page GC "Attachment 2" filled in by the bidder. Filled values are a separate text layer, as in a flattened PDF form, so text extraction returns them apart from their labels. The form also has the GC's own scope list, labor rates and blank or N/A fields. A blank price cell means the item is not mentioned. | Yes |
+| **Formal** | pdf, docx | The price is in a sentence ("All for the net sum of …"), with an optional bond add, long exclusion lists and a terms page full of numbers that are not prices. | No |
+| **Structured quote** | pdf, docx, xlsx | A quote table with section subtotals, a "Total with add alternates" row and a sales tax line. The xlsx version has a summary block, merged cells and two empty sheets. | Yes |
+| **Technical** | pdf, docx | A long list of scope bullets and general notes with one total, plus labor rates. | No |
+| **Informal** | pdf | An estimate-tool printout. Layered header text reads back as duplicated fragments, and the validity date has the wrong year. Realistic mix delivers about 3 in 10 as scans with no text layer. | Yes |
+| **Vague** | pdf, docx | A short letter with scope bullets, exclusions and one lump sum. In the pdf the total is a separate text layer. | No |
+| **Standard** | docx, xlsx, pdf | Today's simple layout | Yes |
+
+To fix one bidder's layout, set **Proposal style** under **Manage invitees and bid terms** (Whole project) or the `style` column (Single trade). **Auto** follows the project setting. Each style lists the formats it supports. The Late total and Uncached formula layouts work only with the Standard style.
+
+Styles change the layout, not the bid. Expected awards and package values are the same as with Standard. When a style shows no line prices, the key shows that bidder's priced items as **Included** in **Lump sum**. Use Standard when you need item-level prices. Formal and Structured quote say the price excludes sales tax, at the rate on the GC adjustments sheet, only when the bidder has a **Sales tax** adder. Without one, they say the price includes tax. Regret letters, superseded quotes and follow-up letters stay in the Standard layout. When any proposal is styled, the answer key adds an **Extraction notes** sheet. It lists each styled document's style, where the price is, whether line prices are shown, which numbers are not prices, and what to watch for. Scanned documents are marked there.
+
 ## Exercise optional project scenarios
 
 Open **Scenario complications** on the Whole project page. Every scenario starts off. Select any combination and review the package codes and item IDs before generating. Use the TCJC starter for the supplied examples. The generator applies your scenario settings to a copy of the draft. Conflicting item references must be resolved before generation.
